@@ -1,0 +1,40 @@
+logger:
+  file: /open5gs/install/var/log/open5gs/smf.log
+
+smf:
+  sbi:
+    - name: smf.open5gs.org
+      port: 80
+  pfcp:
+    - name: smf.open5gs.org
+  gtpc:
+    - name: smf.open5gs.org
+  gtpu:
+    - name: smf.open5gs.org
+  metrics:
+      name: smf.open5gs.org
+      port: 9090
+  subnet:
+    - addr: 10.45.0.1/16
+  dns:
+    - 8.8.8.8
+    - 8.8.4.4
+  mtu: 1400
+  ctf:
+    enabled: auto
+  freeDiameter: /open5gs/install/etc/freeDiameter/smf.conf
+
+nrf:
+  sbi:
+    - name: nrf.open5gs.org
+      port: 80
+
+upf:
+  pfcp:
+    - name: upf.open5gs.org
+
+parameter:
+
+max:
+
+time:

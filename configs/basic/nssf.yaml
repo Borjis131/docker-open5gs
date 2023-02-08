@@ -1,0 +1,23 @@
+logger:
+  file: /open5gs/install/var/log/open5gs/nssf.log
+
+nssf:
+  sbi:
+    - name: nssf.open5gs.org
+      port: 80
+  nsi:
+    - name: nrf.open5gs.org
+      port: 80
+      s_nssai:
+        sst: 1
+
+nrf:
+  sbi:
+    - name: nrf.open5gs.org
+      port: 80
+
+parameter:
+
+max:
+
+time:
