@@ -6,7 +6,9 @@ This repository contains the Dockerfiles and docker compose files used to deploy
 
 The repository uses the same release version tags as Open5GS, so to use an specific Open5GS version just select the appropiate tag.
 
-The Docker images are available in DockerHub: `borieher/<nf_name>:<open5gs_version>`
+The Docker images are available: 
+- in DockerHub `borieher/<nf_name>:<open5gs_version>`
+- in GitHub Container Registry `ghcr.io/borjis131/<nf_name>:<open5gs_version>`
 
 ## Use it
 
