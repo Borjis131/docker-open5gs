@@ -32,6 +32,7 @@ You can override the command being run in the container by using the command sec
   nssf:
     ...
     command: "-c /open5gs/config/nssf.yaml"
+    ...
 ```
 
 ## The `basic` Docker compose deployment

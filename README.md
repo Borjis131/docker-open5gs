@@ -4,6 +4,10 @@ Open5GS 5G Core Network Functions images ready for Docker.
 
 This repository contains the Dockerfiles and docker compose files used to deploy a configurable 5G Core.
 
+The repository uses the same release version tags as Open5GS, so to use an specific Open5GS version just select the appropiate tag.
+
+The Docker images are available in DockerHub: `borieher/<nf_name>:<open5gs_version>`
+
 ## Use it
 
 All the images depend on the base image. So first, update the `.env` file with the desired values to use:
@@ -45,7 +49,7 @@ docker compose -f compose-files/basic-v3/docker-compose.yaml --env-file=.env up 
 docker-compose -f compose-files/basic-v2/docker-compose.yaml up -d
 ```
 
-## Use it
+## Manage it
 ```bash
 # Run the basic deployment with docker compose (v2)
 docker compose -f compose-files/basic-v3/docker-compose.yaml --env-file=.env up -d
