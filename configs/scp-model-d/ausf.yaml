@@ -1,0 +1,18 @@
+logger:
+  file: /open5gs/install/var/log/open5gs/ausf.log
+
+ausf:
+  sbi:
+    - name: ausf.open5gs.org
+      port: 80
+
+scp:
+  sbi:
+    - name: scp.open5gs.org
+      port: 80
+
+parameter:
+
+max:
+
+time:

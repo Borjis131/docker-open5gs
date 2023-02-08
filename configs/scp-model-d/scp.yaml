@@ -1,0 +1,20 @@
+db_uri: mongodb://localhost/open5gs
+
+logger:
+  file: /open5gs/install/var/log/open5gs/scp.log
+
+scp:
+  sbi:
+    - addr: scp.open5gs.org
+      port: 80
+
+nrf:
+  sbi:
+    - addr: nrf.open5gs.org
+      port: 80
+
+parameter:
+
+max:
+
+time:

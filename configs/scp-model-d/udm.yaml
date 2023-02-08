@@ -1,0 +1,18 @@
+logger:
+  file: /open5gs/install/var/log/open5gs/udm.log
+
+udm:
+  sbi:
+    - name: udm.open5gs.org
+      port: 80
+
+scp:
+  sbi:
+    - name: scp.open5gs.org
+      port: 80
+
+parameter:
+
+max:
+
+time:
