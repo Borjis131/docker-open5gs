@@ -8,14 +8,14 @@ ARG UBUNTU_VERSION="focal"
 FROM ubuntu:${UBUNTU_VERSION} AS builder
 
 # build-time arguments for builder
-ARG OPEN5GS_VERSION="v2.5.6"
+ARG OPEN5GS_VERSION="v2.5.8"
 ARG DEBIAN_FRONTEND="noninteractive"
 
 # install dependencies
 RUN apt-get update && apt-get install python3-pip python3-setuptools python3-wheel ninja-build build-essential \
 	flex bison git libsctp-dev libgnutls28-dev libgcrypt-dev libssl-dev libidn11-dev libmongoc-dev \
 	libbson-dev libyaml-dev libnghttp2-dev libmicrohttpd-dev libcurl4-gnutls-dev \
-	libtins-dev libtalloc-dev meson -y
+	libtins-dev libtalloc-dev meson cmake -y
 
 # clone the specific open5gs version and install it
 RUN git clone --depth 1 --branch=${OPEN5GS_VERSION} https://github.com/open5gs/open5gs \
