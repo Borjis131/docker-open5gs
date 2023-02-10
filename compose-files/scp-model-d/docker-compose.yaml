@@ -30,8 +30,6 @@ services:
           - nrf.open5gs.org
     volumes:
       - ../../configs/scp-model-d/nrf.yaml:/open5gs/config/nrf.yaml
-    depends_on:
-      - scp
 
   scp:
     container_name: scp
