@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 
 # global build-time arguments for FROM statements
-ARG OPEN5GS_VERSION="v2.5.8"
+ARG OPEN5GS_VERSION="v2.6.0"
 ARG UBUNTU_VERSION="focal"
 
 FROM base:${OPEN5GS_VERSION} AS builder
@@ -24,8 +24,8 @@ WORKDIR /open5gs
 # copy executable, default config and libs
 COPY --from=builder /open5gs/install/bin/open5gs-smfd /open5gs/install/bin/open5gs-smfd
 COPY --from=builder /open5gs/install/etc/open5gs/smf.yaml /open5gs/install/etc/open5gs/smf.yaml
-COPY --from=builder /open5gs/install/etc/freeDiameter/smf.conf /open5gs/install/etc/freeDiameter/cacert.pem /open5gs/install/etc/freeDiameter/smf.cert.pem \
-/open5gs/install/etc/freeDiameter/smf.key.pem /open5gs/install/etc/freeDiameter/
+COPY --from=builder /open5gs/install/etc/freeDiameter/smf.conf /open5gs/install/etc/freeDiameter/
+COPY --from=builder /open5gs/install/etc/open5gs/tls/ca.crt /open5gs/install/etc/open5gs/tls/smf.crt /open5gs/install/etc/open5gs/tls/smf.key /open5gs/install/etc/open5gs/tls/
 COPY --from=builder /open5gs/install/lib/x86_64-linux-gnu/freeDiameter/ /open5gs/install/lib/x86_64-linux-gnu/freeDiameter/
 COPY --from=builder /open5gs/install/lib/x86_64-linux-gnu/libogscrypt.so.2 /open5gs/install/lib/x86_64-linux-gnu/libogsproto.so.2 \
 /open5gs/install/lib/x86_64-linux-gnu/libogscore.so.2 /open5gs/install/lib/x86_64-linux-gnu/libogssbi.so.2 /open5gs/install/lib/x86_64-linux-gnu/libogsapp.so.2 \
@@ -35,7 +35,7 @@ COPY --from=builder /open5gs/install/lib/x86_64-linux-gnu/libogscrypt.so.2 /open
 /open5gs/install/lib/x86_64-linux-gnu/libogsdiameter-gx.so.2 /open5gs/install/lib/x86_64-linux-gnu/libogsdiameter-common.so.2 \
 /open5gs/install/lib/x86_64-linux-gnu/libogsdiameter-gy.so.2 /open5gs/install/lib/x86_64-linux-gnu/libogsdiameter-s6b.so.2 /open5gs/install/lib/x86_64-linux-gnu/libogsdiameter-rx.so.2 \
 /open5gs/install/lib/x86_64-linux-gnu/libogspfcp.so.2 /open5gs/install/lib/x86_64-linux-gnu/libogsgtp.so.2 /open5gs/install/lib/x86_64-linux-gnu/libogsipfw.so.2 \
-/open5gs/install/lib/x86_64-linux-gnu/libfdcore.so.7 /open5gs/install/lib/x86_64-linux-gnu/libfdproto.so.7 \
+/open5gs/install/lib/x86_64-linux-gnu/libfdcore.so.7 /open5gs/install/lib/x86_64-linux-gnu/libfdproto.so.7 /open5gs/install/lib/x86_64-linux-gnu/libcm_prom.so \
 /open5gs/install/lib/x86_64-linux-gnu/
 
 # create directory to store the logs

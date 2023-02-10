@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 
 # global build-time arguments for FROM statements
-ARG OPEN5GS_VERSION="v2.5.8"
+ARG OPEN5GS_VERSION="v2.6.0"
 ARG UBUNTU_VERSION="focal"
 
 FROM base:${OPEN5GS_VERSION} AS builder
@@ -24,6 +24,7 @@ WORKDIR /open5gs
 # copy executable, default config and libs
 COPY --from=builder /open5gs/install/bin/open5gs-udmd /open5gs/install/bin/open5gs-udmd
 COPY --from=builder /open5gs/install/etc/open5gs/udm.yaml /open5gs/install/etc/open5gs/udm.yaml
+COPY --from=builder /open5gs/install/etc/open5gs/tls/ca.crt /open5gs/install/etc/open5gs/tls/udm.crt /open5gs/install/etc/open5gs/tls/udm.key /open5gs/install/etc/open5gs/tls/
 COPY --from=builder /open5gs/install/lib/x86_64-linux-gnu/libogscrypt.so.2 /open5gs/install/lib/x86_64-linux-gnu/libogsproto.so.2 \
 /open5gs/install/lib/x86_64-linux-gnu/libogscore.so.2 /open5gs/install/lib/x86_64-linux-gnu/libogssbi.so.2 /open5gs/install/lib/x86_64-linux-gnu/libogsapp.so.2 \
 /open5gs/install/lib/x86_64-linux-gnu/libogssbi-openapi.so.2 /open5gs/install/lib/x86_64-linux-gnu/
