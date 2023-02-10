@@ -1,0 +1,18 @@
+# Docker Open5GS backwards compatibility between versions
+
+After downloading the project, you probably want to checkout to an specific Open5GS version. It is advised to use the commit id where each release tag points to. That release tag points to the version used to build the images that are published in DockerHub and GitHub Container Registry.
+
+>Example: To build Open5GS Release v2.5.6 just checkout to the docker-open5gs tag v2.5.6.
+
+In other obscure cases, you want to checkout to a commit where release has been published but build the containers using a different Open5GS release by changing the `OPEN5GS_VERSION` environment variable in the `.env` file. That is not advised, because between releases some build dependencies change and some the paths to the generated files can change too, causing the project to crash.
+
+>Example: Checkout to docker-open5gs tag v2.5.8 but build Open5GS Release v2.5.6.
+
+Why will you want that? Because maybe in the docker-open5gs release a feature has been published and you want it applied to an older Open5GS Release.
+
+Sometimes it will work, sometimes it will not. It will be hard to test the interoperability between the releases published but here it is a compatibility table between versions:
+
+| docker-open5gs version | Open5GS version | backwards compatible |
+| --- | --- | --- |
+| v2.5.8 | v2.5.6 | yes |
+| v2.6.0 | v2.5.8 | no |

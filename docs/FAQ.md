@@ -34,3 +34,9 @@ docker compose -f compose-files/basic/docker-compose.yaml --env-file=.env up -d
 # Example using the basic deployment with docker-compose (v1)
 docker-compose -f compose-files/basic/docker-compose.yaml --env-file=.env up -d
 ```
+
+## mongo version > 5 Docker image not working
+
+If the Docker image for mongo is higher than the 5.0 and it is crashing with a message regarding illegal AVX instruction and your host running Docker is running on a VM, specify the CPU type of the VM as the same CPU of the host.
+
+> source: [docker-library/mongo GitHub issue](https://github.com/docker-library/mongo/issues/485#issuecomment-1028308997)

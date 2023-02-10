@@ -6,7 +6,7 @@ This repository contains the Dockerfiles and docker compose files used to deploy
 
 The repository uses the same release version tags as Open5GS, so to use an specific Open5GS version just select the appropiate tag.
 
-The Docker images are available: 
+The Docker images are available:
 - in DockerHub `borieher/<nf_name>:<open5gs_version>`
 - in GitHub Container Registry `ghcr.io/borjis131/<nf_name>:<open5gs_version>`
 
@@ -17,7 +17,7 @@ All the images depend on the base image. So first, update the `.env` file with t
 `OPEN5GS_VERSION` is the version of Open5GS to use.
 - Accepted values are the tags, branches or commit IDs used in the Open5GS project
 - Default value: v2.5.8
-- Tested values: v2.5.5, v2.5.6, v2.5.8
+- Tested values: v2.5.5, v2.5.6, v2.5.8, v2.6.0
 
 `UBUNTU_VERSION` is the version of the ubuntu Docker image used as base for the containers.
 - Accepted values are the tags used by Ubuntu in Docker Hub
@@ -27,7 +27,7 @@ All the images depend on the base image. So first, update the `.env` file with t
 `MONGODB_VERSION` is the version of the mongo Docker image used as database for Open5GS.
 - Accepted values are the tags used by MongoDB in Docker Hub
 - Default value: The one specified in the `.env` file
-- Tested values: 3.6.8, 4.2
+- Tested values: 3.6.8, 4.2, 6.0
 
 `DOCKER_HOST_IP` is the IP address of the host running Docker. This modifies the `advertise` field in the `upf.yaml` config file for this to work when exposing the Docker containers network.
 
