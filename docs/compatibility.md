@@ -8,7 +8,7 @@ In other obscure cases, you want to checkout to a commit where release has been 
 
 >Example: Checkout to docker-open5gs tag v2.5.8 but build Open5GS Release v2.5.6.
 
-Why will you want that? Because maybe in the docker-open5gs release a feature has been published and you want it applied to an older Open5GS Release.
+Why would you want that? Because the docker-open5gs could have a release feature that you want to apply to an older Open5GS Release.
 
 Sometimes it will work, sometimes it will not. It will be hard to test the interoperability between the releases published but here it is a compatibility table between versions:
 
