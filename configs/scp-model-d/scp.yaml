@@ -3,6 +3,18 @@ db_uri: mongodb://localhost/open5gs
 logger:
   file: /open5gs/install/var/log/open5gs/scp.log
 
+sbi:
+  server:
+    no_tls: true
+    cacert: /open5gs/install/etc/open5gs/tls/ca.crt
+    key: /open5gs/install/etc/open5gs/tls/scp.key
+    cert: /open5gs/install/etc/open5gs/tls/scp.crt
+  client:
+    no_tls: true
+    cacert: /open5gs/install/etc/open5gs/tls/ca.crt
+    key: /open5gs/install/etc/open5gs/tls/scp.key
+    cert: /open5gs/install/etc/open5gs/tls/scp.crt
+
 scp:
   sbi:
     - addr: scp.open5gs.org

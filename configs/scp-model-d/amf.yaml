@@ -1,6 +1,18 @@
 logger:
   file: /open5gs/install/var/log/open5gs/amf.log
 
+sbi:
+  server:
+    no_tls: true
+    cacert: /open5gs/install/etc/open5gs/tls/ca.crt
+    key: /open5gs/install/etc/open5gs/tls/amf.key
+    cert: /open5gs/install/etc/open5gs/tls/amf.crt
+  client:
+    no_tls: true
+    cacert: /open5gs/install/etc/open5gs/tls/ca.crt
+    key: /open5gs/install/etc/open5gs/tls/amf.key
+    cert: /open5gs/install/etc/open5gs/tls/amf.crt
+
 amf:
   sbi:
     - name: amf.open5gs.org

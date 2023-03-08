@@ -3,6 +3,18 @@ db_uri: mongodb://db.open5gs.org/open5gs
 logger:
   file: /open5gs/install/var/log/open5gs/bsf.log
 
+sbi:
+  server:
+    no_tls: true
+    cacert: /open5gs/install/etc/open5gs/tls/ca.crt
+    key: /open5gs/install/etc/open5gs/tls/bsf.key
+    cert: /open5gs/install/etc/open5gs/tls/bsf.crt
+  client:
+    no_tls: true
+    cacert: /open5gs/install/etc/open5gs/tls/ca.crt
+    key: /open5gs/install/etc/open5gs/tls/bsf.key
+    cert: /open5gs/install/etc/open5gs/tls/bsf.crt
+
 bsf:
   sbi:
     - name: bsf.open5gs.org

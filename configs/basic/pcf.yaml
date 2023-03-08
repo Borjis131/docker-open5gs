@@ -3,6 +3,18 @@ db_uri: mongodb://db.open5gs.org/open5gs
 logger:
   file: /open5gs/install/var/log/open5gs/pcf.log
 
+sbi:
+  server:
+    no_tls: true
+    cacert: /open5gs/install/etc/open5gs/tls/ca.crt
+    key: /open5gs/install/etc/open5gs/tls/pcf.key
+    cert: /open5gs/install/etc/open5gs/tls/pcf.crt
+  client:
+    no_tls: true
+    cacert: /open5gs/install/etc/open5gs/tls/ca.crt
+    key: /open5gs/install/etc/open5gs/tls/pcf.key
+    cert: /open5gs/install/etc/open5gs/tls/pcf.crt
+
 pcf:
   sbi:
     - name: pcf.open5gs.org
