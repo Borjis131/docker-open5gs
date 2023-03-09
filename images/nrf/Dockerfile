@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 
 # global build-time arguments for FROM statements
-ARG OPEN5GS_VERSION="v2.6.0"
+ARG OPEN5GS_VERSION="v2.6.1"
 ARG UBUNTU_VERSION="focal"
 
 FROM base:${OPEN5GS_VERSION} AS builder

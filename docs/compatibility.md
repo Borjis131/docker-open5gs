@@ -15,4 +15,4 @@ Sometimes it will work, sometimes it will not. It will be hard to test the inter
 | docker-open5gs version | Open5GS version | backwards compatible |
 | --- | --- | --- |
 | v2.5.8 | v2.5.6 | yes |
-| v2.6.0 | v2.5.8 | no |
+| v2.6.1 | v2.5.8 | no |
