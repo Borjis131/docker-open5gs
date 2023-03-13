@@ -1,5 +1,3 @@
-db_uri: mongodb://db.open5gs.org/open5gs
-
 logger:
   file: /open5gs/install/var/log/open5gs/bsf.log
 
