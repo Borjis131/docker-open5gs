@@ -10,13 +10,13 @@ The Docker images are available:
 - in DockerHub `borieher/<nf_name>:<open5gs_version>`
 - in GitHub Container Registry `ghcr.io/borjis131/<nf_name>:<open5gs_version>`
 
-## Use it
+## Configure it
 
 All the images depend on the base image. So first, update the `.env` file with the desired values to use:
 
 `OPEN5GS_VERSION` is the version of Open5GS to use.
 - Accepted values are the tags, branches or commit IDs used in the Open5GS project
-- Default value: v2.5.8
+- Default value: v2.6.1
 - Tested values: v2.5.5, v2.5.6, v2.5.8, v2.6.1
 
 `UBUNTU_VERSION` is the version of the ubuntu Docker image used as base for the containers.
@@ -51,7 +51,7 @@ docker compose -f compose-files/basic-v3/docker-compose.yaml --env-file=.env up 
 docker-compose -f compose-files/basic-v2/docker-compose.yaml up -d
 ```
 
-## Manage it
+## Use it
 ```bash
 # Run the basic deployment with docker compose (v2)
 docker compose -f compose-files/basic-v3/docker-compose.yaml --env-file=.env up -d
