@@ -42,29 +42,29 @@ This will take a while, after this you will have the base image, tagged with the
 
 After this you can run the following to create the Network Functions images:
 ```bash
-# Example using the basic deployment with docker compose (v2)
+# Example using the basic deployment with docker compose (V2)
 docker compose -f compose-files/basic-v3/docker-compose.yaml --env-file=.env up -d
 
 # or
 
-# Example using the basic deployment with docker-compose (v1)
+# Example using the basic deployment with docker-compose (V1)
 docker-compose -f compose-files/basic-v2/docker-compose.yaml up -d
 ```
 
 ## Use it
 ```bash
-# Run the basic deployment with docker compose (v2)
+# Run the basic deployment with docker compose (V2)
 docker compose -f compose-files/basic-v3/docker-compose.yaml --env-file=.env up -d
 
-# Tear down the basic deployment with docker compose (v2)
+# Tear down the basic deployment with docker compose (V2)
 docker compose -f compose-files/basic-v3/docker-compose.yaml --env-file=.env down
 
 # or
 
-# Run the basic deployment with docker-compose (v1)
+# Run the basic deployment with docker-compose (V1)
 docker-compose -f compose-files/basic-v2/docker-compose.yaml up -d
 
-# Tear down the basic deployment with docker-compose (v1)
+# Tear down the basic deployment with docker-compose (V1)
 docker-compose -f compose-files/basic-v2/docker-compose.yaml down
 ```
 
