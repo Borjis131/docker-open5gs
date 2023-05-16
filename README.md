@@ -16,13 +16,13 @@ All the images depend on the base image. So first, update the `.env` file with t
 
 `OPEN5GS_VERSION` is the version of Open5GS to use.
 - Accepted values are the tags, branches or commit IDs used in the Open5GS project
-- Default value: v2.6.1
-- Tested values: v2.5.5, v2.5.6, v2.5.8, v2.6.1
+- Default value: v2.6.2
+- Tested values: v2.5.5, v2.5.6, v2.5.8, v2.6.1, v2.6.2
 
 `UBUNTU_VERSION` is the version of the ubuntu Docker image used as base for the containers.
 - Accepted values are the tags used by Ubuntu in Docker Hub
-- Default value: focal
-- Tested values: focal
+- Default value: jammy
+- Tested values: focal, jammy
 
 `MONGODB_VERSION` is the version of the mongo Docker image used as database for Open5GS.
 - Accepted values are the tags used by MongoDB in Docker Hub

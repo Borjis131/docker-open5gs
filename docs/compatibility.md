@@ -10,9 +10,4 @@ In other obscure cases, you want to checkout to a commit where release has been 
 
 Why would you want that? Because the docker-open5gs could have a release feature that you want to apply to an older Open5GS Release.
 
-Sometimes it will work, sometimes it will not. It will be hard to test the interoperability between the releases published but here it is a compatibility table between versions:
-
-| docker-open5gs version | Open5GS version | backwards compatible |
-| --- | --- | --- |
-| v2.5.8 | v2.5.6 | yes |
-| v2.6.1 | v2.5.8 | no |
+Sometimes it will work, sometimes it will not.

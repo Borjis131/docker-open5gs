@@ -1,8 +1,8 @@
 # syntax=docker/dockerfile:1
 
 # global build-time arguments for FROM statements
-ARG OPEN5GS_VERSION="v2.6.1"
-ARG UBUNTU_VERSION="focal"
+ARG OPEN5GS_VERSION="v2.6.2"
+ARG UBUNTU_VERSION="jammy"
 
 FROM base:${OPEN5GS_VERSION} AS builder
 
@@ -30,7 +30,7 @@ COPY --from=builder /open5gs/install/lib/x86_64-linux-gnu/libogscrypt.so.2 /open
 /open5gs/install/lib/x86_64-linux-gnu/libogssbi-openapi.so.2 /open5gs/install/lib/x86_64-linux-gnu/libogsmetrics.so.2 \
 /open5gs/install/lib/x86_64-linux-gnu/libogssctp.so.2 /open5gs/install/lib/x86_64-linux-gnu/libogsngap.so.2 /open5gs/install/lib/x86_64-linux-gnu/libogsasn1c-ngap.so.2 \
 /open5gs/install/lib/x86_64-linux-gnu/libogsasn1c-common.so.2 /open5gs/install/lib/x86_64-linux-gnu/libogsasn1c-util.so.2 \
-/open5gs/install/lib/x86_64-linux-gnu/libogsnas-5gs.so.2 /open5gs/install/lib/x86_64-linux-gnu/libogsnas-common.so.2 /open5gs/install/lib/x86_64-linux-gnu/libcm_prom.so \
+/open5gs/install/lib/x86_64-linux-gnu/libogsnas-5gs.so.2 /open5gs/install/lib/x86_64-linux-gnu/libogsnas-common.so.2 /open5gs/install/lib/x86_64-linux-gnu/libprom.so \
 /open5gs/install/lib/x86_64-linux-gnu/
 
 # copy entrypoint script

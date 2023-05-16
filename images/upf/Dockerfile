@@ -1,8 +1,8 @@
 # syntax=docker/dockerfile:1
 
 # global build-time arguments for FROM statements
-ARG OPEN5GS_VERSION="v2.6.1"
-ARG UBUNTU_VERSION="focal"
+ARG OPEN5GS_VERSION="v2.6.2"
+ARG UBUNTU_VERSION="jammy"
 
 FROM base:${OPEN5GS_VERSION} AS builder
 
@@ -31,7 +31,7 @@ COPY --from=builder /open5gs/install/etc/open5gs/upf.yaml /open5gs/install/etc/o
 COPY --from=builder /open5gs/install/lib/x86_64-linux-gnu/libogsproto.so.2 /open5gs/install/lib/x86_64-linux-gnu/libogscore.so.2 \
 /open5gs/install/lib/x86_64-linux-gnu/libogsapp.so.2 /open5gs/install/lib/x86_64-linux-gnu/libogspfcp.so.2 /open5gs/install/lib/x86_64-linux-gnu/libogsgtp.so.2 \
 /open5gs/install/lib/x86_64-linux-gnu/libogstun.so.2 /open5gs/install/lib/x86_64-linux-gnu/libogsipfw.so.2 /open5gs/install/lib/x86_64-linux-gnu/libogsmetrics.so.2 \
-/open5gs/install/lib/x86_64-linux-gnu/libcm_prom.so /open5gs/install/lib/x86_64-linux-gnu/
+/open5gs/install/lib/x86_64-linux-gnu/libprom.so /open5gs/install/lib/x86_64-linux-gnu/
 
 # copy helper_functions and entrypoint scripts
 COPY ./helper_functions.sh /open5gs/helper_functions.sh
