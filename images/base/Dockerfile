@@ -8,7 +8,7 @@ ARG UBUNTU_VERSION="jammy"
 FROM ubuntu:${UBUNTU_VERSION} AS builder
 
 # build-time arguments for builder
-ARG OPEN5GS_VERSION="v2.6.2"
+ARG OPEN5GS_VERSION="v2.6.3"
 ARG DEBIAN_FRONTEND="noninteractive"
 
 # install dependencies
