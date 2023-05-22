@@ -76,7 +76,7 @@ services:
         - OPEN5GS_VERSION=${OPEN5GS_VERSION}
         - UBUNTU_VERSION=${UBUNTU_VERSION}
     command: "-c /open5gs/config/udr.yaml"
-    restart: on-failure
+    restart: unless-stopped
     networks:
       open5gs:
         aliases:
@@ -132,7 +132,7 @@ services:
         - OPEN5GS_VERSION=${OPEN5GS_VERSION}
         - UBUNTU_VERSION=${UBUNTU_VERSION}
     command: "-c /open5gs/config/pcf.yaml"
-    restart: on-failure
+    restart: unless-stopped
     networks:
       open5gs:
         aliases:
