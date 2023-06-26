@@ -38,7 +38,7 @@ To create the base image run:
 make
 ```
 
-This will take a while, after this you will have the base image, tagged with the `OPEN5GS_VERSION` selected.
+This will take a while, after this you will have the base image called `base-open5gs`, tagged with the `OPEN5GS_VERSION` selected.
 
 After this you can run the following to create the Network Functions images:
 ```bash

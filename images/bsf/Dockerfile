@@ -4,7 +4,7 @@
 ARG OPEN5GS_VERSION="v2.6.4"
 ARG UBUNTU_VERSION="jammy"
 
-FROM base:${OPEN5GS_VERSION} AS builder
+FROM base-open5gs:${OPEN5GS_VERSION} AS builder
 
 FROM ubuntu:${UBUNTU_VERSION}
 
