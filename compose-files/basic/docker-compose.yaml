@@ -30,23 +30,6 @@ services:
       - source: nrf_config
         target: /open5gs/config/nrf.yaml
 
-  scp:
-    container_name: scp
-    image: "scp:${OPEN5GS_VERSION}"
-    build:
-      context: ../../images/scp
-      args:
-        - OPEN5GS_VERSION=${OPEN5GS_VERSION}
-        - UBUNTU_VERSION=${UBUNTU_VERSION}
-    command: "-c /open5gs/config/scp.yaml"
-    networks:
-      open5gs:
-        aliases:
-          - scp.open5gs.org
-    configs:
-      - source: scp_config
-        target: /open5gs/config/scp.yaml
-
   ausf:
     container_name: ausf
     image: "ausf:${OPEN5GS_VERSION}"
@@ -65,7 +48,6 @@ services:
         target: /open5gs/config/ausf.yaml
     depends_on:
       - nrf
-      - scp
 
   udm:
     container_name: udm
@@ -85,7 +67,6 @@ services:
         target: /open5gs/config/udm.yaml
     depends_on:
       - nrf
-      - scp
 
   udr:
     container_name: udr
@@ -107,7 +88,6 @@ services:
     depends_on:
       - db
       - nrf
-      - scp
 
   nssf:
     container_name: nssf
@@ -127,7 +107,6 @@ services:
         target: /open5gs/config/nssf.yaml
     depends_on:
       - nrf
-      - scp
 
   bsf:
     container_name: bsf
@@ -147,7 +126,6 @@ services:
         target: /open5gs/config/bsf.yaml
     depends_on:
       - nrf
-      - scp
 
   pcf:
     container_name: pcf
@@ -169,7 +147,6 @@ services:
     depends_on:
       - db
       - nrf
-      - scp
 
   amf:
     container_name: amf
@@ -189,7 +166,6 @@ services:
         target: /open5gs/config/amf.yaml
     depends_on:
       - nrf
-      - scp
     ports:
       - "0.0.0.0:38412:38412/sctp"
 
@@ -211,7 +187,6 @@ services:
         target: /open5gs/config/smf.yaml
     depends_on:
       - nrf
-      - scp
       - upf
 
   upf:
@@ -263,24 +238,22 @@ volumes:
 
 configs:
   nrf_config:
-    file: ../../configs/scp-model-d/nrf.yaml
-  scp_config:
-    file: ../../configs/scp-model-d/scp.yaml
+    file: ../../configs/basic/nrf.yaml
   ausf_config:
-    file: ../../configs/scp-model-d/ausf.yaml
+    file: ../../configs/basic/ausf.yaml
   udm_config:
-    file: ../../configs/scp-model-d/udm.yaml
+    file: ../../configs/basic/udm.yaml
   udr_config:
-    file: ../../configs/scp-model-d/udr.yaml
+    file: ../../configs/basic/udr.yaml
   nssf_config:
-    file: ../../configs/scp-model-d/nssf.yaml
+    file: ../../configs/basic/nssf.yaml
   bsf_config:
-    file: ../../configs/scp-model-d/bsf.yaml
+    file: ../../configs/basic/bsf.yaml
   pcf_config:
-    file: ../../configs/scp-model-d/pcf.yaml
+    file: ../../configs/basic/pcf.yaml
   amf_config:
-    file: ../../configs/scp-model-d/amf.yaml
+    file: ../../configs/basic/amf.yaml
   smf_config:
-    file: ../../configs/scp-model-d/smf.yaml
+    file: ../../configs/basic/smf.yaml
   upf_config:
-    file: ../../configs/scp-model-d/upf.yaml
+    file: ../../configs/basic/upf.yaml

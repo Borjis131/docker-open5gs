@@ -42,30 +42,17 @@ This will take a while, after this you will have the base image, tagged with the
 
 After this you can run the following to create the Network Functions images:
 ```bash
-# Example using the basic deployment with docker compose (V2)
-docker compose -f compose-files/basic-v3/docker-compose.yaml --env-file=.env up -d
-
-# or
-
-# Example using the basic deployment with docker-compose (V1)
-docker-compose -f compose-files/basic-v2/docker-compose.yaml up -d
+# Example using the basic deployment
+docker compose -f compose-files/basic/docker-compose.yaml --env-file=.env up -d
 ```
 
 ## Use it
 ```bash
-# Run the basic deployment with docker compose (V2)
-docker compose -f compose-files/basic-v3/docker-compose.yaml --env-file=.env up -d
+# Run the basic deployment
+docker compose -f compose-files/basic/docker-compose.yaml --env-file=.env up -d
 
-# Tear down the basic deployment with docker compose (V2)
-docker compose -f compose-files/basic-v3/docker-compose.yaml --env-file=.env down
-
-# or
-
-# Run the basic deployment with docker-compose (V1)
-docker-compose -f compose-files/basic-v2/docker-compose.yaml up -d
-
-# Tear down the basic deployment with docker-compose (V1)
-docker-compose -f compose-files/basic-v2/docker-compose.yaml down
+# Tear down the basic deployment
+docker compose -f compose-files/basic/docker-compose.yaml --env-file=.env down
 ```
 
 ### Repository contents
@@ -74,5 +61,6 @@ docker-compose -f compose-files/basic-v2/docker-compose.yaml down
 - `configs/` directory contains the Open5GS configuration files for each docker compose deployment.
 - `docs/` directory contains the documentation for this project.
 - `images/` directory has each Network Function Dockerfile.
+- `misc/` contains Compose file version 2.x and 3.x examples.
 
 Check `docs/` to see the documentation.
