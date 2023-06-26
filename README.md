@@ -55,12 +55,24 @@ docker compose -f compose-files/basic/docker-compose.yaml --env-file=.env up -d
 docker compose -f compose-files/basic/docker-compose.yaml --env-file=.env down
 ```
 
+## Overview of the basic deployment
+
+![Overview of the basic deployment](misc/diagrams/basic.png)
+
+The `basic` deployment is prepared to work with external gNBs, exposing:
+- `N2` control plane interface on the AMF using `SCTP port 38412`
+- `N3` user plane  interface on the UPF using `UDP port 2152`
+
+It also exposes the MongoDB database using `TCP port 27017`.
+
+See [docs/configuration](docs/configuration.md) for more information.
+
 ### Repository contents
 
 - `compose-files/` directory contains different docker compose deployments.
 - `configs/` directory contains the Open5GS configuration files for each docker compose deployment.
 - `docs/` directory contains the documentation for this project.
 - `images/` directory has each Network Function Dockerfile.
-- `misc/` contains Compose file version 2.x and 3.x examples.
+- `misc/` contains examples and diagrams.
 
 Check `docs/` to see the documentation.

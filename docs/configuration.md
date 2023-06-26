@@ -13,6 +13,8 @@ The `basic/` Docker compose deployment exposes three things:
 
 These ports are available in the loopback network of the host running Docker and the host itself exposes these ports for external connections.
 
+![Overview of the basic deployment](../misc/diagrams/basic.png)
+
 ### Database configuration
 
 After building, the 5G Core will start without any user configured in the Open5GS mongo database.
