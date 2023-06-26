@@ -43,7 +43,7 @@ The `configs/basic/upf.yaml` UPF config file is using the _advertise_ option wit
 
 The files for the `basic` deployment `compose-files/basic/` contains the docker-compose.yaml files to work with Compose V2 using the Compose specification.
 
-The `docker-compose.yaml` method uses configs, the source config file present in `configs/basic/<nf>.yaml` and is mounted into the container path `/open5gs/config/<nf>.yaml`. This way you can try different configuration files without the need of rebuilding the Docker image.
+The `docker-compose.yaml` uses configs, the source config file present in `configs/basic/<nf>.yaml` and is mounted into the container path `/open5gs/config/<nf>.yaml`. This way you can try different configuration files without the need of rebuilding the Docker image.
 
 ## Specific Network Function configuration
 
