@@ -65,6 +65,14 @@ The `basic` deployment is prepared to work with external gNBs, exposing:
 
 It also exposes the MongoDB database using `TCP port 27017`.
 
+## Overview of the internal deployment
+
+![Overview of the internal deployment](misc/diagrams/internal.png)
+
+The `internal` deployment is prepared to work with internal gNBs (and UEs), only exposing the MongoDB database using `TCP port 27017`.
+
+The `internal` deployment works with UERANSIM using the gNB and UE images from [docker-ueransim](https://github.com/Borjis131/docker-ueransim).
+
 See [docs/configuration](docs/configuration.md) for more information.
 
 ### Repository contents
