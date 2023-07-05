@@ -1,0 +1,30 @@
+logger:
+  file: /open5gs/install/var/log/open5gs/ausf.log
+
+sbi:
+  server:
+    no_tls: true
+    cacert: /open5gs/install/etc/open5gs/tls/ca.crt
+    key: /open5gs/install/etc/open5gs/tls/ausf.key
+    cert: /open5gs/install/etc/open5gs/tls/ausf.crt
+  client:
+    no_tls: true
+    cacert: /open5gs/install/etc/open5gs/tls/ca.crt
+    key: /open5gs/install/etc/open5gs/tls/ausf.key
+    cert: /open5gs/install/etc/open5gs/tls/ausf.crt
+
+ausf:
+  sbi:
+    - name: ausf.open5gs.org
+      port: 80
+
+nrf:
+  sbi:
+    - name: nrf.open5gs.org
+      port: 80
+
+parameter:
+
+max:
+
+time:
