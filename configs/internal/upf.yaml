@@ -1,0 +1,18 @@
+logger:
+  file: /open5gs/install/var/log/open5gs/upf.log
+
+upf:
+  pfcp:
+    - addr: upf.open5gs.org
+  gtpu:
+    - addr: upf.open5gs.org
+  subnet:
+    - addr: 10.45.0.1/16
+
+smf:
+
+parameter:
+
+max:
+
+time:
