@@ -1,6 +1,6 @@
 # Open5GS 5G Core in Docker
 
-Open5GS 5G Core Network Functions images ready for Docker.
+[Open5GS](https://github.com/open5gs/open5gs) 5G Core Network Functions images ready for Docker.
 
 This repository contains the Dockerfiles and docker compose files used to deploy a configurable 5G Core.
 
@@ -64,16 +64,6 @@ The `basic` deployment is prepared to work with external gNBs, exposing:
 - `N3` user plane  interface on the UPF using `UDP port 2152`
 
 It also exposes the MongoDB database using `TCP port 27017`.
-
-## Overview of the internal deployment
-
-![Overview of the internal deployment](misc/diagrams/internal.png)
-
-The `internal` deployment is prepared to work with internal gNBs (and UEs), only exposing the MongoDB database using `TCP port 27017`.
-
-The `internal` deployment works with UERANSIM using the gNB and UE images from [docker-ueransim](https://github.com/Borjis131/docker-ueransim).
-
-See [docs/configuration](docs/configuration.md) for more information.
 
 ### Repository contents
 
