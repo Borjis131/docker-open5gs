@@ -83,4 +83,4 @@ See [docs/configuration](docs/configuration.md) for more information.
 - `images/` directory has each Network Function Dockerfile.
 - `misc/` contains examples and diagrams.
 
-Check `docs/` to see the documentation.
+Check `docs/` to see the full documentation.
