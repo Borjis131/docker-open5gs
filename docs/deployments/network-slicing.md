@@ -6,7 +6,7 @@ The `network-slicing` deployment is prepared to work with internal gNBs (and UEs
 
 This example is based on [s5uishida snssai upf sample](https://github.com/s5uishida/open5gs_5gc_ueransim_snssai_upf_sample_config).
 
-The `network-slicing` deployment works with [UERANSIM](https://github.com/aligungr/UERANSIM) using the gNB and UE images from [docker-ueransim](https://github.com/Borjis131/docker-ueransim) and does not build the images from this repository, instead it downloads the images present in the `ghcr.io/borjis131` registry, those images are created from this repository.
+The `network-slicing` deployment works with [UERANSIM](https://github.com/aligungr/UERANSIM) using the gNB and UE images from [docker-ueransim](https://github.com/Borjis131/docker-ueransim) and does not build the Docker images from this repository, instead it downloads the images present in the `ghcr.io/borjis131` registry, those images are the ones built from this repository.
 
 This deployment connects two UERANSIM UEs (UE1 and UE2) to a UERANSIM gNB. The UEs are configured to select two different network slices, both present on the Open5GS 5G Core configuration files.
 

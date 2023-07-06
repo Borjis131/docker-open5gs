@@ -43,6 +43,8 @@ The `configs/basic/` configuration uses Open5GS 5G Network Functions without SCP
 
 The `configs/basic/upf.yaml` UPF config file is using the _advertise_ option with the `DOCKER_HOST_IP` environment variable present in the `.env` file (it is used through the `docker-host.external-ip` hosts entry). This configures the 5G Core to expect connections from external networks (not the docker network), through the host machine.
 
+For Docker compose deployments without external connections, such as `internal` or `network-slicing` the `DOCKER_HOST_IP` environment variable is ignored.
+
 The files for the `basic` deployment `compose-files/basic/` contains the docker-compose.yaml files to work with Compose V2 using the Compose specification.
 
 The `docker-compose.yaml` uses configs, the source config file present in `configs/basic/<nf>.yaml` and is mounted into the container path `/open5gs/config/<nf>.yaml`. This way you can try different configuration files without the need of rebuilding the Docker image.
