@@ -1,30 +1,15 @@
 logger:
   file: /open5gs/install/var/log/open5gs/bsf.log
 
-sbi:
-  server:
-    no_tls: true
-    cacert: /open5gs/install/etc/open5gs/tls/ca.crt
-    key: /open5gs/install/etc/open5gs/tls/bsf.key
-    cert: /open5gs/install/etc/open5gs/tls/bsf.crt
-  client:
-    no_tls: true
-    cacert: /open5gs/install/etc/open5gs/tls/ca.crt
-    key: /open5gs/install/etc/open5gs/tls/bsf.key
-    cert: /open5gs/install/etc/open5gs/tls/bsf.crt
+global:
+  max:
+    ue: 1024
 
 bsf:
   sbi:
-    - name: bsf.open5gs.org
-      port: 80
-
-nrf:
-  sbi:
-    - name: nrf.open5gs.org
-      port: 80
-
-parameter:
-
-max:
-
-time:
+    server:
+      - address: bsf.open5gs.org
+        port: 80
+    client:
+      nrf:
+        - uri: http://nrf.open5gs.org:80

@@ -110,7 +110,7 @@ function setup_container_interfaces(){
     upf_config_file_path="$(get_config_file_path_from_docker_cmd "${@}")"
 
     # parse subnets from Open5GS upf.yaml config file and put it in CSV format: addr,dev
-    parsed_subnets_csv="$(yq --output-format=csv '.upf.subnet[] | [ .addr, .dev ]' "${upf_config_file_path}")"
+    parsed_subnets_csv="$(yq --output-format=csv '.upf.session[] | [ .subnet, .dev ]' "${upf_config_file_path}")"
 
     # iterate over parsed subnets in CSV format
     for subnet_fields_csv in ${parsed_subnets_csv[@]}; do

@@ -1,35 +1,19 @@
 logger:
   file: /open5gs/install/var/log/open5gs/nssf.log
 
-sbi:
-  server:
-    no_tls: true
-    cacert: /open5gs/install/etc/open5gs/tls/ca.crt
-    key: /open5gs/install/etc/open5gs/tls/nssf.key
-    cert: /open5gs/install/etc/open5gs/tls/nssf.crt
-  client:
-    no_tls: true
-    cacert: /open5gs/install/etc/open5gs/tls/ca.crt
-    key: /open5gs/install/etc/open5gs/tls/nssf.key
-    cert: /open5gs/install/etc/open5gs/tls/nssf.crt
+global:
+  max:
+    ue: 1024
 
 nssf:
   sbi:
-    - name: nssf.open5gs.org
-      port: 80
-  nsi:
-    - name: nrf.open5gs.org
-      port: 80
-      s_nssai:
-        sst: 1
-
-scp:
-  sbi:
-    - name: scp.open5gs.org
-      port: 80
-
-parameter:
-
-max:
-
-time:
+    server:
+      - address: nssf.open5gs.org
+        port: 80
+    client:
+      scp:
+        - uri: http://scp.open5gs.org:80
+      nsi:
+        - uri: http://nrf.open5gs.org:80
+          s_nssai:
+            sst: 1

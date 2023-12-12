@@ -1,27 +1,21 @@
 logger:
   file: /open5gs/install/var/log/open5gs/amf.log
 
-sbi:
-  server:
-    no_tls: true
-    cacert: /open5gs/install/etc/open5gs/tls/ca.crt
-    key: /open5gs/install/etc/open5gs/tls/amf.key
-    cert: /open5gs/install/etc/open5gs/tls/amf.crt
-  client:
-    no_tls: true
-    cacert: /open5gs/install/etc/open5gs/tls/ca.crt
-    key: /open5gs/install/etc/open5gs/tls/amf.key
-    cert: /open5gs/install/etc/open5gs/tls/amf.crt
+global:
+  max:
+    ue: 1024
 
 amf:
   sbi:
-    - name: amf.open5gs.org
-      port: 80
+    server:
+      - address: amf.open5gs.org
+        port: 80
+    client:
+      nrf:
+        - uri: http://nrf.open5gs.org:80
   ngap:
-    - name: amf.open5gs.org
-  metrics:
-      name: amf.open5gs.org
-      port: 9090
+    server:
+      - address: amf.open5gs.org
   guami:
     - plmn_id:
         mcc: 001
@@ -47,20 +41,8 @@ amf:
       integrity_order : [ NIA2, NIA1, NIA0 ]
       ciphering_order : [ NEA0, NEA1, NEA2 ]
   network_name:
-      full: Open5GS
+    full: Open5GS
   amf_name: open5gs-amf0
-
-nrf:
-  sbi:
-    - name: nrf.open5gs.org
-      port: 80
-
-parameter:
-
-max:
-
-usrsctp:
-
-time:
-  t3512:
-    value: 540
+  time:
+    t3512:
+      value: 540

@@ -17,3 +17,22 @@ parameter:
 max:
 
 time:
+
+logger:
+  file: /open5gs/install/var/log/open5gs/upf.log
+
+global:
+  max:
+    ue: 1024
+
+upf:
+  pfcp:
+    server:
+      - address: upf2.open5gs.org
+    client:
+  gtpu:
+    server:
+      - address: upf2.open5gs.org
+  session:
+    - subnet: 10.46.0.1/16
+      dnn: internet

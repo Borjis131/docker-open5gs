@@ -77,7 +77,7 @@ UPF container reads the subnets specified in the Open5GS config file and setups 
 ```yaml
 upf:
     ...
-    subnet:
-      - addr: 10.45.0.1/16
+    session:
+      - subnet: 10.45.0.1/16
     ...
 ```
