@@ -37,9 +37,15 @@ docker-compose -f compose-files/basic/docker-compose.yaml --env-file=.env up -d
 
 ## mongo version > 5 Docker image not working
 
+### Case 1 (Virtual Machine)
 If the Docker image for mongo is higher than the 5.0 and it is crashing with a message regarding illegal AVX instruction and your host running Docker is running on a VM, specify the CPU type of the VM as the same CPU of the host.
 
 > source: [docker-library/mongo GitHub issue](https://github.com/docker-library/mongo/issues/485#issuecomment-1028308997)
+
+### Case 2 (Raspberry Pi 4)
+mongo provides images for `arm64/v8` but targets ARMv8.2-A and the Raspberry Pi 4 has an ARMv8.0-A cpu, so the Docker images provided do not work. In order for it to work, the `docker-compose.yaml` files provided need to use the appropiate Docker image. An example of those images can be found [here](https://github.com/themattman/mongodb-raspberrypi-docker).  
+
+> source: [mongodb developer community forum](https://www.mongodb.com/community/forums/t/mongodb-and-the-pi-4-on-ubuntu-64-bit-aka-armv8-0-a-support/220635)
 
 ## The Docker Compose version mess
 

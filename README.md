@@ -35,6 +35,8 @@ All the images depend on the base image. So first, update the `.env` file with t
 
 ### First way (make + docker compose build)
 
+>Note: Requires make and docker-compose-plugin
+
 To create the base image run:
 ```bash
 make
@@ -49,6 +51,8 @@ docker compose -f compose-files/basic/docker-compose.yaml --env-file=.env up -d
 ```
 
 ### Second way (docker buildx bake)
+
+>Note: Requires docker-buildx-plugin
 
 With this method, you can build all the images all at once with a single command, run:
 ```bash
