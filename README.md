@@ -6,7 +6,7 @@ This repository contains the Dockerfiles and docker compose files used to deploy
 
 The repository uses the same release version tags as Open5GS, so to use an specific Open5GS version just select the appropiate tag.
 
-The Docker images are available:
+The Docker images are available for `amd64/x86-64` and `arm64/v8`:
 - in DockerHub `borieher/<nf_name>:<open5gs_version>`
 - in GitHub Container Registry `ghcr.io/borjis131/<nf_name>:<open5gs_version>`
 
@@ -31,7 +31,9 @@ All the images depend on the base image. So first, update the `.env` file with t
 
 `DOCKER_HOST_IP` is the IP address of the host running Docker. This modifies the `advertise` field in the `upf.yaml` config file for this to work when exposing the Docker containers network.
 
-## Build it
+## Build it (2 ways)
+
+### First way (make + docker compose build)
 
 To create the base image run:
 ```bash
@@ -46,7 +48,17 @@ After this you can run the following to create the Network Functions images:
 docker compose -f compose-files/basic/docker-compose.yaml --env-file=.env up -d
 ```
 
+### Second way (docker buildx bake)
+
+With this method, you can build all the images all at once with a single command, run:
+```bash
+docker buildx bake
+```
+
+>Note: This command uses the `docker-bake.hcl` file, please update the `OPEN5GS_VERSION` and `UBUNTU_VERSION` variables there before running it.
+
 ## Use it
+
 ```bash
 # Run the basic deployment
 docker compose -f compose-files/basic/docker-compose.yaml --env-file=.env up -d
