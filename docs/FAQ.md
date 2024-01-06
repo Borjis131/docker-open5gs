@@ -47,6 +47,8 @@ mongo provides images for `arm64/v8` but targets ARMv8.2-A and the Raspberry Pi 
 
 > source: [mongodb developer community forum](https://www.mongodb.com/community/forums/t/mongodb-and-the-pi-4-on-ubuntu-64-bit-aka-armv8-0-a-support/220635)
 
+An example of the Compose file for it can be found in `misc/examples/raspberry-pi/`.
+
 ## The Docker Compose version mess
 
 Let's start differentiating the Compose (aka the Docker Compose executable) from the Compose files.
@@ -63,21 +65,21 @@ Compose files come in four different flavors:
 
 >Note: The current (June 2023) and recommended versions for Compose and Compose files are `Compose V2` with the `Compose specification`.
 
-Examples for Compose file version 2.x and Compose file version 3.x will be kept under `misc/`.
+Examples for Compose file version 2.x and Compose file version 3.x will be kept under `misc/examples/`.
 
 If you want to run them using Compose V2 or Compose V1:
 ```bash
 # Run the basic deployment with docker compose (V2) and Compose file version 3.x
-docker compose -f misc/basic-compose-file-v3.x/docker-compose.yaml --env-file=.env up -d
+docker compose -f misc/examples/basic-compose-file-v3.x/docker-compose.yaml --env-file=.env up -d
 
 # Tear down the basic deployment with docker compose (V2) and Compose file version 3.x
-docker compose -f misc/basic-compose-file-v3.x/docker-compose.yaml --env-file=.env down
+docker compose -f misc/examples/basic-compose-file-v3.x/docker-compose.yaml --env-file=.env down
 
 # or
 
 # Run the basic deployment with docker-compose (V1) and Compose file version 2.x
-docker-compose -f misc/basic-compose-file-v2.x/docker-compose.yaml up -d
+docker-compose -f misc/examples/basic-compose-file-v2.x/docker-compose.yaml up -d
 
 # Tear down the basic deployment with docker-compose (V1) and Compose file version 2.x
-docker-compose -f misc/basic-compose-file-v2.x/docker-compose.yaml down
+docker-compose -f misc/examples/basic-compose-file-v2.x/docker-compose.yaml down
 ```
