@@ -7,9 +7,8 @@ variable "UBUNTU_VERSION" {
 }
 
 group "default" {
-  targets = [
-    "base-open5gs", "amf", "ausf", "bsf", "nrf", "nssf",
-    "pcf", "scp", "sepp", "smf", "udm", "udr", "upf"]
+  targets = ["base-open5gs", "amf", "ausf", "bsf", "nrf", "nssf",
+              "pcf", "scp", "sepp", "smf", "udm", "udr", "upf"]
 }
 
 target "base-open5gs" {
