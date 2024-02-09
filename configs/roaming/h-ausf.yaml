@@ -1,0 +1,15 @@
+logger:
+  file: /open5gs/install/var/log/open5gs/ausf.log
+
+global:
+  max:
+    ue: 1024
+
+ausf:
+  sbi:
+    server:
+      - address: ausf.5gc.mnc001.mcc001.3gppnetwork.org
+        port: 80
+    client:
+      nrf:
+        - uri: http://nrf.5gc.mnc001.mcc001.3gppnetwork.org:80

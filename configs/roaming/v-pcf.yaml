@@ -1,0 +1,38 @@
+logger:
+  file: /open5gs/install/var/log/open5gs/pcf.log
+
+global:
+  max:
+    ue: 1024
+
+pcf:
+  sbi:
+    server:
+      - address: pcf.5gc.mnc070.mcc999.3gppnetwork.org
+        port: 80
+    client:
+      nrf:
+        - uri: http://nrf.5gc.mnc070.mcc999.3gppnetwork.org:80
+  policy:
+    - plmn_id:
+        mcc: 001
+        mnc: 01
+      slice:
+        - sst: 1
+          default_indicator: true
+          session:
+            - name: internet
+              type: 1
+              ambr:
+                downlink:
+                  value: 1
+                  unit: 3
+                uplink:
+                  value: 1
+                  unit: 3
+              qos:
+                index: 9
+                arp:
+                  priority_level: 8
+                  pre_emption_vulnerability: 1
+                  pre_emption_capability: 1

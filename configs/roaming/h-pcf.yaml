@@ -1,0 +1,18 @@
+db_uri: mongodb://db.open5gs.org/open5gs
+
+logger:
+  file: /open5gs/install/var/log/open5gs/pcf.log
+
+global:
+  max:
+    ue: 1024
+
+pcf:
+  sbi:
+    server:
+      - address: pcf.5gc.mnc001.mcc001.3gppnetwork.org
+        port: 80
+    client:
+      nrf:
+        - uri: http://nrf.5gc.mnc001.mcc001.3gppnetwork.org:80
+

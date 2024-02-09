@@ -1,0 +1,16 @@
+logger:
+  file: /open5gs/install/var/log/open5gs/nrf.log
+
+global:
+  max:
+    ue: 1024
+
+nrf:
+  serving:
+    - plmn_id:
+        mcc: 999
+        mnc: 70
+  sbi:
+    server:
+      - address: nrf.5gc.mnc070.mcc999.3gppnetwork.org
+        port: 80

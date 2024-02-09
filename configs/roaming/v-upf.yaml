@@ -1,0 +1,17 @@
+logger:
+  file: /open5gs/install/var/log/open5gs/upf.log
+
+global:
+  max:
+    ue: 1024
+
+upf:
+  pfcp:
+    server:
+      - address: upf.5gc.mnc070.mcc999.3gppnetwork.org
+    client:
+  gtpu:
+    server:
+      - address: upf.5gc.mnc070.mcc999.3gppnetwork.org
+  session:
+    - subnet: 10.46.0.1/16

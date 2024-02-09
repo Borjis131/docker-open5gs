@@ -1,0 +1,438 @@
+services:
+  db:
+    container_name: db
+    image: "mongo:${MONGODB_VERSION}"
+    command: "mongod --bind_ip 0.0.0.0 --port 27017"
+    networks:
+      open5gs:
+        aliases:
+          - db.open5gs.org
+    volumes:
+      - db_data:/data/db
+      - db_config:/data/configdb
+    ports:
+      - "0.0.0.0:27017:27017/tcp"
+
+  h-nrf:
+    container_name: h-nrf
+    image: "nrf:${OPEN5GS_VERSION}"
+    build:
+      context: ../../images/nrf
+      args:
+        - OPEN5GS_VERSION=${OPEN5GS_VERSION}
+        - UBUNTU_VERSION=${UBUNTU_VERSION}
+    command: "-c /open5gs/config/nrf.yaml"
+    networks:
+      open5gs:
+        aliases:
+          - nrf.5gc.mnc001.mcc001.3gppnetwork.org
+    configs:
+      - source: h-nrf_config
+        target: /open5gs/config/nrf.yaml
+
+  h-ausf:
+    container_name: h-ausf
+    image: "ausf:${OPEN5GS_VERSION}"
+    build:
+      context: ../../images/ausf
+      args:
+        - OPEN5GS_VERSION=${OPEN5GS_VERSION}
+        - UBUNTU_VERSION=${UBUNTU_VERSION}
+    command: "-c /open5gs/config/ausf.yaml"
+    networks:
+      open5gs:
+        aliases:
+          - ausf.5gc.mnc001.mcc001.3gppnetwork.org
+    configs:
+      - source: h-ausf_config
+        target: /open5gs/config/ausf.yaml
+    depends_on:
+      - h-nrf
+
+  h-udm:
+    container_name: h-udm
+    image: "udm:${OPEN5GS_VERSION}"
+    build:
+      context: ../../images/udm
+      args:
+        - OPEN5GS_VERSION=${OPEN5GS_VERSION}
+        - UBUNTU_VERSION=${UBUNTU_VERSION}
+    command: "-c /open5gs/config/udm.yaml"
+    networks:
+      open5gs:
+        aliases:
+          - udm.5gc.mnc001.mcc001.3gppnetwork.org
+    configs:
+      - source: h-udm_config
+        target: /open5gs/config/udm.yaml
+    depends_on:
+      - h-nrf
+
+  h-udr:
+    container_name: h-udr
+    image: "udr:${OPEN5GS_VERSION}"
+    build:
+      context: ../../images/udr
+      args:
+        - OPEN5GS_VERSION=${OPEN5GS_VERSION}
+        - UBUNTU_VERSION=${UBUNTU_VERSION}
+    command: "-c /open5gs/config/udr.yaml"
+    restart: unless-stopped
+    networks:
+      open5gs:
+        aliases:
+          - udr.5gc.mnc001.mcc001.3gppnetwork.org
+    configs:
+      - source: h-udr_config
+        target: /open5gs/config/udr.yaml
+    depends_on:
+      - db
+      - h-nrf
+
+  h-nssf:
+    container_name: h-nssf
+    image: "nssf:${OPEN5GS_VERSION}"
+    build:
+      context: ../../images/nssf
+      args:
+        - OPEN5GS_VERSION=${OPEN5GS_VERSION}
+        - UBUNTU_VERSION=${UBUNTU_VERSION}
+    command: "-c /open5gs/config/nssf.yaml"
+    networks:
+      open5gs:
+        aliases:
+          - nssf.5gc.mnc001.mcc001.3gppnetwork.org
+    configs:
+      - source: h-nssf_config
+        target: /open5gs/config/nssf.yaml
+    depends_on:
+      - h-nrf
+
+  h-bsf:
+    container_name: h-bsf
+    image: "bsf:${OPEN5GS_VERSION}"
+    build:
+      context: ../../images/bsf
+      args:
+        - OPEN5GS_VERSION=${OPEN5GS_VERSION}
+        - UBUNTU_VERSION=${UBUNTU_VERSION}
+    command: "-c /open5gs/config/bsf.yaml"
+    networks:
+      open5gs:
+        aliases:
+          - bsf.5gc.mnc001.mcc001.3gppnetwork.org
+    configs:
+      - source: h-bsf_config
+        target: /open5gs/config/bsf.yaml
+    depends_on:
+      - h-nrf
+
+  h-pcf:
+    container_name: h-pcf
+    image: "pcf:${OPEN5GS_VERSION}"
+    build:
+      context: ../../images/pcf
+      args:
+        - OPEN5GS_VERSION=${OPEN5GS_VERSION}
+        - UBUNTU_VERSION=${UBUNTU_VERSION}
+    command: "-c /open5gs/config/pcf.yaml"
+    restart: unless-stopped
+    networks:
+      open5gs:
+        aliases:
+          - pcf.5gc.mnc001.mcc001.3gppnetwork.org
+    configs:
+      - source: h-pcf_config
+        target: /open5gs/config/pcf.yaml
+    depends_on:
+      - db
+      - h-nrf
+
+  h-amf:
+    container_name: h-amf
+    image: "amf:${OPEN5GS_VERSION}"
+    build:
+      context: ../../images/amf
+      args:
+        - OPEN5GS_VERSION=${OPEN5GS_VERSION}
+        - UBUNTU_VERSION=${UBUNTU_VERSION}
+    command: "-c /open5gs/config/amf.yaml"
+    networks:
+      open5gs:
+        aliases:
+          - amf.5gc.mnc001.mcc001.3gppnetwork.org
+    configs:
+      - source: h-amf_config
+        target: /open5gs/config/amf.yaml
+    depends_on:
+      - h-nrf
+    #ports:
+      #- "0.0.0.0:38412:38412/sctp"
+
+  h-smf:
+    container_name: h-smf
+    image: "smf:${OPEN5GS_VERSION}"
+    build:
+      context: ../../images/smf
+      args:
+        - OPEN5GS_VERSION=${OPEN5GS_VERSION}
+        - UBUNTU_VERSION=${UBUNTU_VERSION}
+    command: "-c /open5gs/config/smf.yaml"
+    networks:
+      open5gs:
+        aliases:
+          - smf.5gc.mnc001.mcc001.3gppnetwork.org
+    configs:
+      - source: h-smf_config
+        target: /open5gs/config/smf.yaml
+    depends_on:
+      - h-nrf
+      - h-upf
+
+  h-upf:
+    container_name: h-upf
+    image: "upf:${OPEN5GS_VERSION}"
+    build:
+      context: ../../images/upf
+      args:
+        - OPEN5GS_VERSION=${OPEN5GS_VERSION}
+        - UBUNTU_VERSION=${UBUNTU_VERSION}
+    command: "-c /open5gs/config/upf.yaml"
+    networks:
+      open5gs:
+        aliases:
+          - upf.5gc.mnc001.mcc001.3gppnetwork.org
+    #extra_hosts:
+      #docker-host.external-ip: ${DOCKER_HOST_IP}
+    configs:
+      - source: h-upf_config
+        target: /open5gs/config/upf.yaml
+    #ports:
+      #- "0.0.0.0:2152:2152/udp"
+    devices:
+      - /dev/net/tun
+    cap_add:
+      - NET_ADMIN
+    sysctls:
+      - net.ipv4.ip_forward=1
+
+  v-nrf:
+    container_name: v-nrf
+    image: "nrf:${OPEN5GS_VERSION}"
+    build:
+      context: ../../images/nrf
+      args:
+        - OPEN5GS_VERSION=${OPEN5GS_VERSION}
+        - UBUNTU_VERSION=${UBUNTU_VERSION}
+    command: "-c /open5gs/config/nrf.yaml"
+    networks:
+      open5gs:
+        aliases:
+          - nrf.5gc.mnc070.mcc999.3gppnetwork.org
+    configs:
+      - source: v-nrf_config
+        target: /open5gs/config/nrf.yaml
+
+  v-ausf:
+    container_name: v-ausf
+    image: "ausf:${OPEN5GS_VERSION}"
+    build:
+      context: ../../images/ausf
+      args:
+        - OPEN5GS_VERSION=${OPEN5GS_VERSION}
+        - UBUNTU_VERSION=${UBUNTU_VERSION}
+    command: "-c /open5gs/config/ausf.yaml"
+    networks:
+      open5gs:
+        aliases:
+          - ausf.5gc.mnc070.mcc999.3gppnetwork.org
+    configs:
+      - source: v-ausf_config
+        target: /open5gs/config/ausf.yaml
+    depends_on:
+      - v-nrf
+
+  v-nssf:
+    container_name: v-nssf
+    image: "nssf:${OPEN5GS_VERSION}"
+    build:
+      context: ../../images/nssf
+      args:
+        - OPEN5GS_VERSION=${OPEN5GS_VERSION}
+        - UBUNTU_VERSION=${UBUNTU_VERSION}
+    command: "-c /open5gs/config/nssf.yaml"
+    networks:
+      open5gs:
+        aliases:
+          - nssf.5gc.mnc070.mcc999.3gppnetwork.org
+    configs:
+      - source: v-nssf_config
+        target: /open5gs/config/nssf.yaml
+    depends_on:
+      - v-nrf
+
+  v-bsf:
+    container_name: v-bsf
+    image: "bsf:${OPEN5GS_VERSION}"
+    build:
+      context: ../../images/bsf
+      args:
+        - OPEN5GS_VERSION=${OPEN5GS_VERSION}
+        - UBUNTU_VERSION=${UBUNTU_VERSION}
+    command: "-c /open5gs/config/bsf.yaml"
+    networks:
+      open5gs:
+        aliases:
+          - bsf.5gc.mnc070.mcc999.3gppnetwork.org
+    configs:
+      - source: v-bsf_config
+        target: /open5gs/config/bsf.yaml
+    depends_on:
+      - v-nrf
+
+  v-pcf:
+    container_name: v-pcf
+    image: "pcf:${OPEN5GS_VERSION}"
+    build:
+      context: ../../images/pcf
+      args:
+        - OPEN5GS_VERSION=${OPEN5GS_VERSION}
+        - UBUNTU_VERSION=${UBUNTU_VERSION}
+    command: "-c /open5gs/config/pcf.yaml"
+    restart: unless-stopped
+    networks:
+      open5gs:
+        aliases:
+          - pcf.5gc.mnc070.mcc999.3gppnetwork.org
+    configs:
+      - source: v-pcf_config
+        target: /open5gs/config/pcf.yaml
+    depends_on:
+      #- db
+      - v-nrf
+
+  v-amf:
+    container_name: v-amf
+    image: "amf:${OPEN5GS_VERSION}"
+    build:
+      context: ../../images/amf
+      args:
+        - OPEN5GS_VERSION=${OPEN5GS_VERSION}
+        - UBUNTU_VERSION=${UBUNTU_VERSION}
+    command: "-c /open5gs/config/amf.yaml"
+    networks:
+      open5gs:
+        aliases:
+          - amf.5gc.mnc070.mcc999.3gppnetwork.org
+    configs:
+      - source: v-amf_config
+        target: /open5gs/config/amf.yaml
+    depends_on:
+      - v-nrf
+    #ports:
+      #- "0.0.0.0:38412:38412/sctp"
+
+  v-smf:
+    container_name: v-smf
+    image: "smf:${OPEN5GS_VERSION}"
+    build:
+      context: ../../images/smf
+      args:
+        - OPEN5GS_VERSION=${OPEN5GS_VERSION}
+        - UBUNTU_VERSION=${UBUNTU_VERSION}
+    command: "-c /open5gs/config/smf.yaml"
+    networks:
+      open5gs:
+        aliases:
+          - smf.5gc.mnc070.mcc999.3gppnetwork.org
+    configs:
+      - source: v-smf_config
+        target: /open5gs/config/smf.yaml
+    depends_on:
+      - v-nrf
+      - v-upf
+
+  v-upf:
+    container_name: v-upf
+    image: "upf:${OPEN5GS_VERSION}"
+    build:
+      context: ../../images/upf
+      args:
+        - OPEN5GS_VERSION=${OPEN5GS_VERSION}
+        - UBUNTU_VERSION=${UBUNTU_VERSION}
+    command: "-c /open5gs/config/upf.yaml"
+    networks:
+      open5gs:
+        aliases:
+          - upf.5gc.mnc070.mcc999.3gppnetwork.org
+    #extra_hosts:
+      #docker-host.external-ip: ${DOCKER_HOST_IP}
+    configs:
+      - source: v-upf_config
+        target: /open5gs/config/upf.yaml
+    #ports:
+      #- "0.0.0.0:2152:2152/udp"
+    devices:
+      - /dev/net/tun
+    cap_add:
+      - NET_ADMIN
+    sysctls:
+      - net.ipv4.ip_forward=1
+
+networks:
+  open5gs:
+    name: open5gs
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.name: br-ogs
+    ipam:
+      config:
+        - subnet: 10.33.33.0/24
+
+volumes:
+  db_data:
+    name: open5gs_db_data
+    labels:
+      org.open5gs.mongodb_version: ${MONGODB_VERSION}
+  db_config:
+    name: open5gs_db_config
+    labels:
+      org.open5gs.mongodb_version: ${MONGODB_VERSION}
+
+configs:
+  h-nrf_config:
+    file: ../../configs/roaming/h-nrf.yaml
+  h-ausf_config:
+    file: ../../configs/roaming/h-ausf.yaml
+  h-udm_config:
+    file: ../../configs/roaming/h-udm.yaml
+  h-udr_config:
+    file: ../../configs/roaming/h-udr.yaml
+  h-nssf_config:
+    file: ../../configs/roaming/h-nssf.yaml
+  h-bsf_config:
+    file: ../../configs/roaming/h-bsf.yaml
+  h-pcf_config:
+    file: ../../configs/roaming/h-pcf.yaml
+  h-amf_config:
+    file: ../../configs/roaming/h-amf.yaml
+  h-smf_config:
+    file: ../../configs/roaming/h-smf.yaml
+  h-upf_config:
+    file: ../../configs/roaming/h-upf.yaml
+  v-nrf_config:
+    file: ../../configs/roaming/v-nrf.yaml
+  v-ausf_config:
+    file: ../../configs/roaming/v-ausf.yaml
+  v-nssf_config:
+    file: ../../configs/roaming/v-nssf.yaml
+  v-bsf_config:
+    file: ../../configs/roaming/v-bsf.yaml
+  v-pcf_config:
+    file: ../../configs/roaming/v-pcf.yaml
+  v-amf_config:
+    file: ../../configs/roaming/v-amf.yaml
+  v-smf_config:
+    file: ../../configs/roaming/v-smf.yaml
+  v-upf_config:
+    file: ../../configs/roaming/v-upf.yaml
