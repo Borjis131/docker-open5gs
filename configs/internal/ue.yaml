@@ -29,9 +29,11 @@ sessions:
     apn: 'internet'
     slice:
       sst: 1
+      sd: 1
 
 configured-nssai:
   - sst: 1
+    sd: 1
 
 default-nssai:
   - sst: 1
