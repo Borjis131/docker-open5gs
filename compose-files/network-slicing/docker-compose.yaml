@@ -168,8 +168,7 @@ services:
     configs:
       - source: upf1_config
         target: /open5gs/config/upf1.yaml
-    devices:
-      - /dev/net/tun
+    privileged: true
     cap_add:
       - NET_ADMIN
     sysctls:
@@ -186,8 +185,7 @@ services:
     configs:
       - source: upf2_config
         target: /open5gs/config/upf2.yaml
-    devices:
-      - /dev/net/tun
+    privileged: true
     cap_add:
       - NET_ADMIN
     sysctls:
@@ -204,10 +202,6 @@ services:
     configs:
       - source: gnb_config
         target: /UERANSIM/config/gnb.yaml
-    devices:
-      - /dev/net/tun
-    cap_add:
-      - NET_ADMIN
     depends_on:
       - amf
 
@@ -222,8 +216,7 @@ services:
     configs:
       - source: ue1_config
         target: /UERANSIM/config/ue1.yaml
-    devices:
-      - /dev/net/tun
+    privileged: true
     cap_add:
       - NET_ADMIN
     depends_on:
@@ -240,8 +233,7 @@ services:
     configs:
       - source: ue2_config
         target: /UERANSIM/config/ue2.yaml
-    devices:
-      - /dev/net/tun
+    privileged: true
     cap_add:
       - NET_ADMIN
     depends_on:

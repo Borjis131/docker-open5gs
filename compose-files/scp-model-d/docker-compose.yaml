@@ -234,8 +234,7 @@ services:
         target: /open5gs/config/upf.yaml
     ports:
       - "0.0.0.0:2152:2152/udp"
-    devices:
-      - /dev/net/tun
+    privileged: true
     cap_add:
       - NET_ADMIN
     sysctls:
