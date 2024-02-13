@@ -262,26 +262,26 @@ volumes:
 
 configs:
   nrf_config:
-    file: ../../configs/internal/nrf.yaml
+    file: ../../../configs/internal/ueransim/nrf.yaml
   ausf_config:
-    file: ../../configs/internal/ausf.yaml
+    file: ../../../configs/internal/ueransim/ausf.yaml
   udm_config:
-    file: ../../configs/internal/udm.yaml
+    file: ../../../configs/internal/ueransim/udm.yaml
   udr_config:
-    file: ../../configs/internal/udr.yaml
+    file: ../../../configs/internal/ueransim/udr.yaml
   nssf_config:
-    file: ../../configs/internal/nssf.yaml
+    file: ../../../configs/internal/ueransim/nssf.yaml
   bsf_config:
-    file: ../../configs/internal/bsf.yaml
+    file: ../../../configs/internal/ueransim/bsf.yaml
   pcf_config:
-    file: ../../configs/internal/pcf.yaml
+    file: ../../../configs/internal/ueransim/pcf.yaml
   amf_config:
-    file: ../../configs/internal/amf.yaml
+    file: ../../../configs/internal/ueransim/amf.yaml
   smf_config:
-    file: ../../configs/internal/smf.yaml
+    file: ../../../configs/internal/ueransim/smf.yaml
   upf_config:
-    file: ../../configs/internal/upf.yaml
+    file: ../../../configs/internal/ueransim/upf.yaml
   gnb_config:
-    file: ../../configs/internal/gnb.yaml
+    file: ../../../configs/internal/ueransim/gnb.yaml
   ue_config:
-    file: ../../configs/internal/ue.yaml
+    file: ../../../configs/internal/ueransim/ue.yaml

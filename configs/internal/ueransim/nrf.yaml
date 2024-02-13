@@ -1,0 +1,12 @@
+logger:
+  file: /open5gs/install/var/log/open5gs/nrf.log
+
+global:
+  max:
+    ue: 1024
+
+nrf:
+  sbi:
+    server:
+      - address: nrf.open5gs.org
+        port: 80

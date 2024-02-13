@@ -1,0 +1,15 @@
+logger:
+  file: /open5gs/install/var/log/open5gs/udm.log
+
+global:
+  max:
+    ue: 1024
+
+udm:
+  sbi:
+    server:
+      - address: udm.open5gs.org
+        port: 80
+    client:
+      nrf:
+        - uri: http://nrf.open5gs.org:80

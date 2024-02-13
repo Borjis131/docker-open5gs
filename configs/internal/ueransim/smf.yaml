@@ -1,0 +1,33 @@
+logger:
+  file: /open5gs/install/var/log/open5gs/smf.log
+
+global:
+  max:
+    ue: 1024
+
+smf:
+  sbi:
+    server:
+      - address: smf.open5gs.org
+        port: 80
+    client:
+      nrf:
+        - uri: http://nrf.open5gs.org:80
+  pfcp:
+    server:
+      - address: smf.open5gs.org
+    client:
+      upf:
+        - address: upf.open5gs.org
+  gtpc:
+    server:
+      - address: smf.open5gs.org
+  gtpu:
+    server:
+      - address: smf.open5gs.org
+  session:
+    - subnet: 10.45.0.1/16
+  dns:
+    - 8.8.8.8
+    - 8.8.4.4
+  mtu: 1400
