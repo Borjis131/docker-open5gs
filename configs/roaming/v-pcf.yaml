@@ -19,6 +19,7 @@ pcf:
         mnc: 01
       slice:
         - sst: 1
+          sd: 000001
           default_indicator: true
           session:
             - name: internet

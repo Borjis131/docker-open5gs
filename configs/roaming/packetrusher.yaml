@@ -6,8 +6,8 @@ gnodeb:
     ip: gnb.packetrusher.org
     port: 2152
   plmnlist:
-    mcc: "001"
-    mnc: "01"
+    mcc: "999"
+    mnc: "70"
     tac: "000001"
     gnbid: "000008"
   slicesupportlist:
@@ -38,7 +38,7 @@ ue:
     nea2: true
     nea3: false
 amfif:
-  ip: amf.open5gs.org
+  ip: amf.5gc.mnc070.mcc999.3gppnetwork.org
   port: 38412
 logs:
   level: 4

@@ -26,7 +26,7 @@ smf:
     server:
       - address: smf.5gc.mnc070.mcc999.3gppnetwork.org
   session:
-    - subnet: 10.46.0.1/16
+    - subnet: 10.45.0.1/16
   dns:
     - 8.8.8.8
     - 8.8.4.4

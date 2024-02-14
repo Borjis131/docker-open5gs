@@ -89,131 +89,25 @@ services:
       - db
       - h-nrf
 
-  h-nssf:
-    container_name: h-nssf
-    image: "nssf:${OPEN5GS_VERSION}"
+  h-sepp:
+    container_name: h-sepp
+    image: "sepp:${OPEN5GS_VERSION}"
     build:
-      context: ../../images/nssf
+      context: ../../images/sepp
       args:
         - OPEN5GS_VERSION=${OPEN5GS_VERSION}
         - UBUNTU_VERSION=${UBUNTU_VERSION}
-    command: "-c /open5gs/config/nssf.yaml"
-    networks:
-      open5gs:
-        aliases:
-          - nssf.5gc.mnc001.mcc001.3gppnetwork.org
-    configs:
-      - source: h-nssf_config
-        target: /open5gs/config/nssf.yaml
-    depends_on:
-      - h-nrf
-
-  h-bsf:
-    container_name: h-bsf
-    image: "bsf:${OPEN5GS_VERSION}"
-    build:
-      context: ../../images/bsf
-      args:
-        - OPEN5GS_VERSION=${OPEN5GS_VERSION}
-        - UBUNTU_VERSION=${UBUNTU_VERSION}
-    command: "-c /open5gs/config/bsf.yaml"
-    networks:
-      open5gs:
-        aliases:
-          - bsf.5gc.mnc001.mcc001.3gppnetwork.org
-    configs:
-      - source: h-bsf_config
-        target: /open5gs/config/bsf.yaml
-    depends_on:
-      - h-nrf
-
-  h-pcf:
-    container_name: h-pcf
-    image: "pcf:${OPEN5GS_VERSION}"
-    build:
-      context: ../../images/pcf
-      args:
-        - OPEN5GS_VERSION=${OPEN5GS_VERSION}
-        - UBUNTU_VERSION=${UBUNTU_VERSION}
-    command: "-c /open5gs/config/pcf.yaml"
+    command: "-c /open5gs/config/sepp.yaml"
     restart: unless-stopped
     networks:
       open5gs:
         aliases:
-          - pcf.5gc.mnc001.mcc001.3gppnetwork.org
+          - sepp.5gc.mnc001.mcc001.3gppnetwork.org
     configs:
-      - source: h-pcf_config
-        target: /open5gs/config/pcf.yaml
-    depends_on:
-      - db
-      - h-nrf
-
-  h-amf:
-    container_name: h-amf
-    image: "amf:${OPEN5GS_VERSION}"
-    build:
-      context: ../../images/amf
-      args:
-        - OPEN5GS_VERSION=${OPEN5GS_VERSION}
-        - UBUNTU_VERSION=${UBUNTU_VERSION}
-    command: "-c /open5gs/config/amf.yaml"
-    networks:
-      open5gs:
-        aliases:
-          - amf.5gc.mnc001.mcc001.3gppnetwork.org
-    configs:
-      - source: h-amf_config
-        target: /open5gs/config/amf.yaml
+      - source: h-sepp_config
+        target: /open5gs/config/sepp.yaml
     depends_on:
       - h-nrf
-    #ports:
-      #- "0.0.0.0:38412:38412/sctp"
-
-  h-smf:
-    container_name: h-smf
-    image: "smf:${OPEN5GS_VERSION}"
-    build:
-      context: ../../images/smf
-      args:
-        - OPEN5GS_VERSION=${OPEN5GS_VERSION}
-        - UBUNTU_VERSION=${UBUNTU_VERSION}
-    command: "-c /open5gs/config/smf.yaml"
-    networks:
-      open5gs:
-        aliases:
-          - smf.5gc.mnc001.mcc001.3gppnetwork.org
-    configs:
-      - source: h-smf_config
-        target: /open5gs/config/smf.yaml
-    depends_on:
-      - h-nrf
-      - h-upf
-
-  h-upf:
-    container_name: h-upf
-    image: "upf:${OPEN5GS_VERSION}"
-    build:
-      context: ../../images/upf
-      args:
-        - OPEN5GS_VERSION=${OPEN5GS_VERSION}
-        - UBUNTU_VERSION=${UBUNTU_VERSION}
-    command: "-c /open5gs/config/upf.yaml"
-    networks:
-      open5gs:
-        aliases:
-          - upf.5gc.mnc001.mcc001.3gppnetwork.org
-    #extra_hosts:
-      #docker-host.external-ip: ${DOCKER_HOST_IP}
-    configs:
-      - source: h-upf_config
-        target: /open5gs/config/upf.yaml
-    #ports:
-      #- "0.0.0.0:2152:2152/udp"
-    privileged: true
-    cap_add:
-      - NET_ADMIN
-    sysctls:
-      - net.ipv4.ip_forward=1
 
   v-nrf:
     container_name: v-nrf
@@ -307,7 +201,6 @@ services:
       - source: v-pcf_config
         target: /open5gs/config/pcf.yaml
     depends_on:
-      #- db
       - v-nrf
 
   v-amf:
@@ -328,8 +221,6 @@ services:
         target: /open5gs/config/amf.yaml
     depends_on:
       - v-nrf
-    #ports:
-      #- "0.0.0.0:38412:38412/sctp"
 
   v-smf:
     container_name: v-smf
@@ -364,18 +255,53 @@ services:
       open5gs:
         aliases:
           - upf.5gc.mnc070.mcc999.3gppnetwork.org
-    #extra_hosts:
-      #docker-host.external-ip: ${DOCKER_HOST_IP}
     configs:
       - source: v-upf_config
         target: /open5gs/config/upf.yaml
-    #ports:
-      #- "0.0.0.0:2152:2152/udp"
     privileged: true
     cap_add:
       - NET_ADMIN
     sysctls:
       - net.ipv4.ip_forward=1
+
+  v-sepp:
+    container_name: v-sepp
+    image: "sepp:${OPEN5GS_VERSION}"
+    build:
+      context: ../../images/sepp
+      args:
+        - OPEN5GS_VERSION=${OPEN5GS_VERSION}
+        - UBUNTU_VERSION=${UBUNTU_VERSION}
+    command: "-c /open5gs/config/sepp.yaml"
+    restart: unless-stopped
+    networks:
+      open5gs:
+        aliases:
+          - sepp.5gc.mnc070.mcc999.3gppnetwork.org
+    configs:
+      - source: v-sepp_config
+        target: /open5gs/config/sepp.yaml
+    depends_on:
+      - v-nrf
+
+  packetrusher:
+    container_name: packetrusher
+    image: "ghcr.io/borjis131/packetrusher:main"
+    command: "--config /PacketRusher/config/packetrusher.yaml ue"
+    environment:
+      - USE_FQDNS=TRUE
+    networks:
+      open5gs:
+        aliases:
+          - gnb.packetrusher.org
+    configs:
+      - source: packetrusher_config
+        target: /PacketRusher/config/packetrusher.yaml
+    privileged: true
+    cap_add:
+      - ALL
+    depends_on:
+      - v-amf
 
 networks:
   open5gs:
@@ -406,18 +332,8 @@ configs:
     file: ../../configs/roaming/h-udm.yaml
   h-udr_config:
     file: ../../configs/roaming/h-udr.yaml
-  h-nssf_config:
-    file: ../../configs/roaming/h-nssf.yaml
-  h-bsf_config:
-    file: ../../configs/roaming/h-bsf.yaml
-  h-pcf_config:
-    file: ../../configs/roaming/h-pcf.yaml
-  h-amf_config:
-    file: ../../configs/roaming/h-amf.yaml
-  h-smf_config:
-    file: ../../configs/roaming/h-smf.yaml
-  h-upf_config:
-    file: ../../configs/roaming/h-upf.yaml
+  h-sepp_config:
+    file: ../../configs/roaming/h-sepp.yaml
   v-nrf_config:
     file: ../../configs/roaming/v-nrf.yaml
   v-ausf_config:
@@ -434,3 +350,7 @@ configs:
     file: ../../configs/roaming/v-smf.yaml
   v-upf_config:
     file: ../../configs/roaming/v-upf.yaml
+  v-sepp_config:
+    file: ../../configs/roaming/v-sepp.yaml
+  packetrusher_config:
+    file: ../../configs/roaming/packetrusher.yaml
