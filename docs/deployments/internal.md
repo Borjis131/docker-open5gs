@@ -1,10 +1,12 @@
 # Overview of the internal deployment
 
-![Overview of the internal deployment](../../misc/diagrams/internal.png)
-
 The `internal` deployment is prepared to work with internal gNBs (and UEs), only exposing the MongoDB database using `TCP port 27017`.
 
+![Overview of the internal/ueransim deployment](../../misc/diagrams/internal-ueransim.png)
+
 The `internal/ueransim` deployment works with [UERANSIM](https://github.com/aligungr/UERANSIM) using the gNB and UE images from [docker-ueransim](https://github.com/Borjis131/docker-ueransim).
+
+![Overview of the internal/packetrusher deployment](../../misc/diagrams/internal-packetrusher.png)
 
 The `internal/packetrusher` deployment works with [PacketRusher](https://github.com/HewlettPackard/PacketRusher) using the packetrusher image from [docker-packetrusher](https://github.com/Borjis131/docker-packetrusher).
 
