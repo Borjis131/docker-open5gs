@@ -13,6 +13,7 @@ gnodeb:
   slicesupportlist:
     sst: "01"
     sd: "000001"
+
 ue:
   msin: "1234567891"
   key: "00000000000000000000000000000000"
@@ -37,6 +38,7 @@ ue:
     nea1: false
     nea2: true
     nea3: false
+
 amfif:
   ip: amf.5gc.mnc070.mcc999.3gppnetwork.org
   port: 38412
