@@ -40,7 +40,7 @@ ue:
     nea3: false
 
 amfif:
-  ip: amf.open5gs.org
-  port: 38412
+  - ip: amf.open5gs.org
+    port: 38412
 logs:
   level: 4
