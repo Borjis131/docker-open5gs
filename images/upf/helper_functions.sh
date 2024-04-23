@@ -8,16 +8,23 @@ function create_tun(){
     tun_name="${1}"
 
     ip tuntap add name ${tun_name} mode tun
-    ip link set ogstun up
+    ip link set ${tun_name} up
 }
 
 # add IP address to device
-# add_ip_to_device <ip_addr> <device_name>
+# add_ip_to_device <subnet> <ip_addr> <device_name>
 function add_ip_to_device(){
-    ip_addr="${1}"
-    device_name="${2}"
+    subnet="${1}"
+    ip_addr="${2}"
+    device_name="${3}"
 
-    ip address add ${ip_addr} dev ${device_name}
+    # keep it backwards compatible
+    if [[ "${ip_addr}" == "null" ]]; then
+        ip address add ${subnet} dev ${device_name}
+    else
+        ip address add ${ip_addr} dev ${device_name}
+        ip route add ${subnet} dev ${device_name}
+    fi
 }
 
 # check if it is IPv4 or IPv6
@@ -37,11 +44,12 @@ function check_ipv4_or_ipv6(){
 }
 
 # takes care of everything related to TUN and NAT
-# setup_subnet <ip_addr> <device>
+# setup_subnet <subnet> <ip_addr> <device>
 # Note: <device> could be a valid device name or null
 function setup_subnet(){
-    ip_addr="${1}"
-    device="${2}"
+    subnet="${1}"
+    ip_addr="${2}"
+    device="${3}"
 
     # check TUN device exists
     ip link show dev "${device}" &> /dev/null
@@ -50,34 +58,34 @@ function setup_subnet(){
     if [[ "${?}" -ne 0 ]]; then
         # if it not exists, create it and add IP address
         create_tun "${device}"
-        add_ip_to_device "${ip_addr}" "${device}"
+        add_ip_to_device "${subnet}" "${ip_addr}" "${device}"
     else
         # if it exists, add IP address
-        add_ip_to_device "${ip_addr}" "${device}"
+        add_ip_to_device "${subnet}" "${ip_addr}" "${device}"
     fi
 
     # NAT configuration section
     if [[ "${DISABLE_NAT}" != TRUE ]]; then
         # extract version of IP address provided
-        ip_version="$(check_ipv4_or_ipv6 "${ip_addr}")"
+        ip_version="$(check_ipv4_or_ipv6 "${subnet}")"
 
         # use iptables or ip6tables depending on type
         if [[ "${ip_version}" -eq 4 ]]; then
             # check NAT rule not exists
-            iptables --wait 30 -t nat -C POSTROUTING -s "${ip_addr}" ! -o "${device}" -j MASQUERADE &> /dev/null
+            iptables --wait 30 -t nat -C POSTROUTING -s "${subnet}" ! -o "${device}" -j MASQUERADE &> /dev/null
 
             if [ "${?}" -ne 0 ]; then
 	            # configure NAT for the subnet specified
-	            iptables --wait 30 -t nat -A POSTROUTING -s "${ip_addr}" ! -o "${device}" -j MASQUERADE
+	            iptables --wait 30 -t nat -A POSTROUTING -s "${subnet}" ! -o "${device}" -j MASQUERADE
             fi
 
         elif [[ "${ip_version}" -eq 6 ]]; then
             # check NAT rule not exists
-            ip6tables-nft --wait 30 -t nat -C POSTROUTING -s "${ip_addr}" ! -o "${device}" -j MASQUERADE &> /dev/null
+            ip6tables-nft --wait 30 -t nat -C POSTROUTING -s "${subnet}" ! -o "${device}" -j MASQUERADE &> /dev/null
 
             if [ "${?}" -ne 0 ]; then
 	            # configure NAT for the subnet specified
-	            ip6tables-nft --wait 30 -t nat -A POSTROUTING -s "${ip_addr}" ! -o "${device}" -j MASQUERADE
+	            ip6tables-nft --wait 30 -t nat -A POSTROUTING -s "${subnet}" ! -o "${device}" -j MASQUERADE
             fi
         fi
     fi
@@ -110,21 +118,22 @@ function setup_container_interfaces(){
     upf_config_file_path="$(get_config_file_path_from_docker_cmd "${@}")"
 
     # parse subnets from Open5GS upf.yaml config file and put it in CSV format: addr,dev
-    parsed_subnets_csv="$(yq --output-format=csv '.upf.session[] | [ .subnet, .dev ]' "${upf_config_file_path}")"
+    parsed_subnets_csv="$(yq --output-format=csv '.upf.session[] | [ .subnet, .gateway, .dev ]' "${upf_config_file_path}")"
 
     # iterate over parsed subnets in CSV format
     for subnet_fields_csv in ${parsed_subnets_csv[@]}; do
         # split string from , delimiter and create array
         subnet_fields=(${subnet_fields_csv//,/ })
 
-        ip_addr="${subnet_fields[0]}"
-        device="${subnet_fields[1]}"
+        subnet="${subnet_fields[0]}"
+        gateway="${subnet_fields[1]}"
+        device="${subnet_fields[2]}"
 
         # null devices default to ogstun
         if [[ "${device}" == "null" ]]; then
-            setup_subnet "${ip_addr}" "ogstun"
-        else
-            setup_subnet "${ip_addr}" "${device}"
+            device="ogstun"
         fi
+
+        setup_subnet "${subnet}" "${gateway}" "${device}"
     done
 }

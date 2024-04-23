@@ -19,14 +19,12 @@ smf:
     client:
       upf:
         - address: upf.open5gs.org
-  gtpc:
-    server:
-      - address: smf.open5gs.org
   gtpu:
     server:
       - address: smf.open5gs.org
   session:
-    - subnet: 10.45.0.1/16
+    - subnet: 10.45.0.0/16
+      gateway: 10.45.0.1
   dns:
     - 8.8.8.8
     - 8.8.4.4

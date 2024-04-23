@@ -14,4 +14,5 @@ upf:
     server:
       - address: upf.open5gs.org
   session:
-    - subnet: 10.45.0.1/16
+    - subnet: 10.45.0.0/16
+      gateway: 10.45.0.1
