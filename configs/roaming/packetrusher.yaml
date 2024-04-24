@@ -40,7 +40,7 @@ ue:
     nea3: false
 
 amfif:
-  ip: amf.5gc.mnc070.mcc999.3gppnetwork.org
-  port: 38412
+  - ip: amf.5gc.mnc070.mcc999.3gppnetwork.org
+    port: 38412
 logs:
   level: 4

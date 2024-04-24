@@ -1,9 +1,8 @@
 logger:
-  file: /open5gs/install/var/log/open5gs/upf.log
+  file:
+    path: /open5gs/install/var/log/open5gs/upf.log
 
 global:
-  max:
-    ue: 1024
 
 upf:
   pfcp:
