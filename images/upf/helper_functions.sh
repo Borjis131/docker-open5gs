@@ -45,7 +45,7 @@ function check_ipv4_or_ipv6(){
 
 # takes care of everything related to TUN and NAT
 # setup_subnet <subnet> <ip_addr> <device>
-# Note: <device> could be a valid device name or null
+# note: <device> could be a valid device name or null
 function setup_subnet(){
     subnet="${1}"
     ip_addr="${2}"
@@ -114,10 +114,17 @@ function get_config_file_path_from_docker_cmd(){
 # receives the Docker CMD and creates the interfaces needed
 # setup_container_interfaces <docker_cmd>
 function setup_container_interfaces(){
+
+    # enable IPv4 forwarding
+    sysctl -w net.ipv4.ip_forward=1 &> /dev/null
+
+    # enable IPv6 forwarding
+    sysctl -w net.ipv6.conf.all.forwarding=1 &> /dev/null
+
     # docker_cmd is "${@}"
     upf_config_file_path="$(get_config_file_path_from_docker_cmd "${@}")"
 
-    # parse subnets from Open5GS upf.yaml config file and put it in CSV format: addr,dev
+    # parse subnets from Open5GS upf.yaml config file and put it in CSV format: subnet,gateway,dev
     parsed_subnets_csv="$(yq --output-format=csv '.upf.session[] | [ .subnet, .gateway, .dev ]' "${upf_config_file_path}")"
 
     # iterate over parsed subnets in CSV format
