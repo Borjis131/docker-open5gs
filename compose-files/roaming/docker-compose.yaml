@@ -261,8 +261,6 @@ services:
     privileged: true
     cap_add:
       - NET_ADMIN
-    sysctls:
-      - net.ipv4.ip_forward=1
 
   v-sepp:
     container_name: v-sepp

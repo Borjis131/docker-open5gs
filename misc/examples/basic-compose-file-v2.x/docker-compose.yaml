@@ -205,8 +205,6 @@ services:
       - /dev/net/tun
     cap_add:
       - NET_ADMIN
-    sysctls:
-      - net.ipv4.ip_forward=1
 
 networks:
   open5gs:

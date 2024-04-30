@@ -171,8 +171,6 @@ services:
     privileged: true
     cap_add:
       - NET_ADMIN
-    sysctls:
-      - net.ipv4.ip_forward=1
 
   upf2:
     container_name: upf2
@@ -188,8 +186,6 @@ services:
     privileged: true
     cap_add:
       - NET_ADMIN
-    sysctls:
-      - net.ipv4.ip_forward=1
 
   gnb:
     container_name: gnb

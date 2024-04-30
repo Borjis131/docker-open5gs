@@ -1,7 +1,7 @@
 services:
   db:
     container_name: db
-    image: "mongodb-raspberrypi4-unofficial-r6.0.11:latest"
+    image: "ghcr.io/borjis131/db:6.0.11"
     command: "mongod --bind_ip 0.0.0.0 --port 27017"
     networks:
       open5gs:
@@ -213,8 +213,6 @@ services:
       - /dev/net/tun
     cap_add:
       - NET_ADMIN
-    sysctls:
-      - net.ipv4.ip_forward=1
 
 networks:
   open5gs:

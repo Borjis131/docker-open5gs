@@ -206,8 +206,6 @@ services:
     privileged: true
     cap_add:
       - NET_ADMIN
-    sysctls:
-      - net.ipv4.ip_forward=1
 
   packetrusher:
     container_name: packetrusher
