@@ -19,13 +19,13 @@ These ports are available in the loopback network of the host running Docker and
 
 After building, the 5G Core will start without any user configured in the Open5GS mongo database.
 
-The information for the database is kept in Docker volumes named `open5gs_db_config` and `open5gs_db_data`, this way the information added to the database is persistent between restarts.
+The information for the database is kept in a Docker volume named `open5gs_db_data`, this way the information added to the database is persistent between restarts.
 
 You can use the Open5GS `open5gs-dbctl` script in the host to add users to the database.
 
-The database Docker volumes are marked with a label `org.open5gs.mongodb_version` indicating the `MONGODB_VERSION` selected in the `.env` file. This marks the version used for the mongo container. This label is needed to debug issues with users changing the mongo container version but keeping the Docker volumes created.
+The database Docker volume is marked with a label `org.open5gs.mongodb_version` indicating the `MONGODB_VERSION` selected in the `.env` file. This marks the version used for the mongo container. This label is needed to debug issues with users changing the mongo container version but keeping the Docker volumes created.
 
-> When upgrading/downgrading the `MONGODB_VERSION` the existing `open5gs_db_config` and `open5gs_db_data` Docker volumes could cause problems/crashing. It is recommended to remove them.
+> When upgrading/downgrading the `MONGODB_VERSION` the existing `open5gs_db_data` Docker volume could cause problems/crashing. It is recommended to remove it.
 
 ### Network Function configuration
 

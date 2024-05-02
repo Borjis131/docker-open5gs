@@ -9,7 +9,6 @@ services:
           - db.open5gs.org
     volumes:
       - db_data:/data/db
-      - db_config:/data/configdb
     ports:
       - "0.0.0.0:27017:27017/tcp"
 
@@ -226,10 +225,6 @@ networks:
 volumes:
   db_data:
     name: open5gs_db_data
-    labels:
-      org.open5gs.mongodb_version: ${MONGODB_VERSION}
-  db_config:
-    name: open5gs_db_config
     labels:
       org.open5gs.mongodb_version: ${MONGODB_VERSION}
 
