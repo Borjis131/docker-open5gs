@@ -20,14 +20,14 @@ services:
       args:
         - OPEN5GS_VERSION=${OPEN5GS_VERSION}
         - UBUNTU_VERSION=${UBUNTU_VERSION}
-    command: "-c /open5gs/config/nrf.yaml"
+    command: "-c /etc/open5gs/custom/nrf.yaml"
     networks:
       open5gs:
         aliases:
           - nrf.5gc.mnc001.mcc001.3gppnetwork.org
     configs:
       - source: h-nrf_config
-        target: /open5gs/config/nrf.yaml
+        target: /etc/open5gs/custom/nrf.yaml
 
   h-ausf:
     container_name: h-ausf
@@ -37,14 +37,14 @@ services:
       args:
         - OPEN5GS_VERSION=${OPEN5GS_VERSION}
         - UBUNTU_VERSION=${UBUNTU_VERSION}
-    command: "-c /open5gs/config/ausf.yaml"
+    command: "-c /etc/open5gs/custom/ausf.yaml"
     networks:
       open5gs:
         aliases:
           - ausf.5gc.mnc001.mcc001.3gppnetwork.org
     configs:
       - source: h-ausf_config
-        target: /open5gs/config/ausf.yaml
+        target: /etc/open5gs/custom/ausf.yaml
     depends_on:
       - h-nrf
 
@@ -56,14 +56,14 @@ services:
       args:
         - OPEN5GS_VERSION=${OPEN5GS_VERSION}
         - UBUNTU_VERSION=${UBUNTU_VERSION}
-    command: "-c /open5gs/config/udm.yaml"
+    command: "-c /etc/open5gs/custom/udm.yaml"
     networks:
       open5gs:
         aliases:
           - udm.5gc.mnc001.mcc001.3gppnetwork.org
     configs:
       - source: h-udm_config
-        target: /open5gs/config/udm.yaml
+        target: /etc/open5gs/custom/udm.yaml
     depends_on:
       - h-nrf
 
@@ -75,7 +75,7 @@ services:
       args:
         - OPEN5GS_VERSION=${OPEN5GS_VERSION}
         - UBUNTU_VERSION=${UBUNTU_VERSION}
-    command: "-c /open5gs/config/udr.yaml"
+    command: "-c /etc/open5gs/custom/udr.yaml"
     restart: unless-stopped
     networks:
       open5gs:
@@ -83,7 +83,7 @@ services:
           - udr.5gc.mnc001.mcc001.3gppnetwork.org
     configs:
       - source: h-udr_config
-        target: /open5gs/config/udr.yaml
+        target: /etc/open5gs/custom/udr.yaml
     depends_on:
       - db
       - h-nrf
@@ -96,7 +96,7 @@ services:
       args:
         - OPEN5GS_VERSION=${OPEN5GS_VERSION}
         - UBUNTU_VERSION=${UBUNTU_VERSION}
-    command: "-c /open5gs/config/sepp.yaml"
+    #command: "-c /etc/open5gs/custom/sepp.yaml"
     restart: unless-stopped
     networks:
       open5gs:
@@ -104,7 +104,7 @@ services:
           - sepp.5gc.mnc001.mcc001.3gppnetwork.org
     configs:
       - source: h-sepp_config
-        target: /open5gs/config/sepp.yaml
+        target: /etc/open5gs/custom/sepp.yaml
     depends_on:
       - h-nrf
 
@@ -116,14 +116,14 @@ services:
       args:
         - OPEN5GS_VERSION=${OPEN5GS_VERSION}
         - UBUNTU_VERSION=${UBUNTU_VERSION}
-    command: "-c /open5gs/config/nrf.yaml"
+    command: "-c /etc/open5gs/custom/nrf.yaml"
     networks:
       open5gs:
         aliases:
           - nrf.5gc.mnc070.mcc999.3gppnetwork.org
     configs:
       - source: v-nrf_config
-        target: /open5gs/config/nrf.yaml
+        target: /etc/open5gs/custom/nrf.yaml
 
   v-ausf:
     container_name: v-ausf
@@ -133,14 +133,14 @@ services:
       args:
         - OPEN5GS_VERSION=${OPEN5GS_VERSION}
         - UBUNTU_VERSION=${UBUNTU_VERSION}
-    command: "-c /open5gs/config/ausf.yaml"
+    command: "-c /etc/open5gs/custom/ausf.yaml"
     networks:
       open5gs:
         aliases:
           - ausf.5gc.mnc070.mcc999.3gppnetwork.org
     configs:
       - source: v-ausf_config
-        target: /open5gs/config/ausf.yaml
+        target: /etc/open5gs/custom/ausf.yaml
     depends_on:
       - v-nrf
 
@@ -152,14 +152,14 @@ services:
       args:
         - OPEN5GS_VERSION=${OPEN5GS_VERSION}
         - UBUNTU_VERSION=${UBUNTU_VERSION}
-    command: "-c /open5gs/config/nssf.yaml"
+    command: "-c /etc/open5gs/custom/nssf.yaml"
     networks:
       open5gs:
         aliases:
           - nssf.5gc.mnc070.mcc999.3gppnetwork.org
     configs:
       - source: v-nssf_config
-        target: /open5gs/config/nssf.yaml
+        target: /etc/open5gs/custom/nssf.yaml
     depends_on:
       - v-nrf
 
@@ -171,14 +171,14 @@ services:
       args:
         - OPEN5GS_VERSION=${OPEN5GS_VERSION}
         - UBUNTU_VERSION=${UBUNTU_VERSION}
-    command: "-c /open5gs/config/bsf.yaml"
+    command: "-c /etc/open5gs/custom/bsf.yaml"
     networks:
       open5gs:
         aliases:
           - bsf.5gc.mnc070.mcc999.3gppnetwork.org
     configs:
       - source: v-bsf_config
-        target: /open5gs/config/bsf.yaml
+        target: /etc/open5gs/custom/bsf.yaml
     depends_on:
       - v-nrf
 
@@ -190,7 +190,7 @@ services:
       args:
         - OPEN5GS_VERSION=${OPEN5GS_VERSION}
         - UBUNTU_VERSION=${UBUNTU_VERSION}
-    command: "-c /open5gs/config/pcf.yaml"
+    command: "-c /etc/open5gs/custom/pcf.yaml"
     restart: unless-stopped
     networks:
       open5gs:
@@ -198,7 +198,7 @@ services:
           - pcf.5gc.mnc070.mcc999.3gppnetwork.org
     configs:
       - source: v-pcf_config
-        target: /open5gs/config/pcf.yaml
+        target: /etc/open5gs/custom/pcf.yaml
     depends_on:
       - v-nrf
 
@@ -210,14 +210,14 @@ services:
       args:
         - OPEN5GS_VERSION=${OPEN5GS_VERSION}
         - UBUNTU_VERSION=${UBUNTU_VERSION}
-    command: "-c /open5gs/config/amf.yaml"
+    command: "-c /etc/open5gs/custom/amf.yaml"
     networks:
       open5gs:
         aliases:
           - amf.5gc.mnc070.mcc999.3gppnetwork.org
     configs:
       - source: v-amf_config
-        target: /open5gs/config/amf.yaml
+        target: /etc/open5gs/custom/amf.yaml
     depends_on:
       - v-nrf
 
@@ -229,14 +229,14 @@ services:
       args:
         - OPEN5GS_VERSION=${OPEN5GS_VERSION}
         - UBUNTU_VERSION=${UBUNTU_VERSION}
-    command: "-c /open5gs/config/smf.yaml"
+    command: "-c /etc/open5gs/custom/smf.yaml"
     networks:
       open5gs:
         aliases:
           - smf.5gc.mnc070.mcc999.3gppnetwork.org
     configs:
       - source: v-smf_config
-        target: /open5gs/config/smf.yaml
+        target: /etc/open5gs/custom/smf.yaml
     depends_on:
       - v-nrf
       - v-upf
@@ -249,14 +249,14 @@ services:
       args:
         - OPEN5GS_VERSION=${OPEN5GS_VERSION}
         - UBUNTU_VERSION=${UBUNTU_VERSION}
-    command: "-c /open5gs/config/upf.yaml"
+    command: "-c /etc/open5gs/custom/upf.yaml"
     networks:
       open5gs:
         aliases:
           - upf.5gc.mnc070.mcc999.3gppnetwork.org
     configs:
       - source: v-upf_config
-        target: /open5gs/config/upf.yaml
+        target: /etc/open5gs/custom/upf.yaml
     privileged: true
     cap_add:
       - NET_ADMIN
@@ -269,7 +269,7 @@ services:
       args:
         - OPEN5GS_VERSION=${OPEN5GS_VERSION}
         - UBUNTU_VERSION=${UBUNTU_VERSION}
-    command: "-c /open5gs/config/sepp.yaml"
+    #command: "-c /etc/open5gs/custom/sepp.yaml"
     restart: unless-stopped
     networks:
       open5gs:
@@ -277,7 +277,7 @@ services:
           - sepp.5gc.mnc070.mcc999.3gppnetwork.org
     configs:
       - source: v-sepp_config
-        target: /open5gs/config/sepp.yaml
+        target: /etc/open5gs/custom/sepp.yaml
     depends_on:
       - v-nrf
 

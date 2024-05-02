@@ -1,6 +1,6 @@
 logger:
   file:
-    path: /open5gs/install/var/log/open5gs/sepp.log
+    path: /var/log/open5gs/sepp.log
 
 global:
 

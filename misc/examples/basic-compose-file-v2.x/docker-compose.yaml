@@ -22,13 +22,13 @@ services:
       args:
         - OPEN5GS_VERSION=${OPEN5GS_VERSION}
         - UBUNTU_VERSION=${UBUNTU_VERSION}
-    command: "-c /open5gs/config/nrf.yaml"
+    command: "-c /etc/open5gs/custom/nrf.yaml"
     networks:
       open5gs:
         aliases:
           - nrf.open5gs.org
     volumes:
-      - ../../../configs/basic/nrf.yaml:/open5gs/config/nrf.yaml
+      - ../../../configs/basic/nrf.yaml:/etc/open5gs/custom/nrf.yaml
 
   ausf:
     container_name: ausf
@@ -38,13 +38,13 @@ services:
       args:
         - OPEN5GS_VERSION=${OPEN5GS_VERSION}
         - UBUNTU_VERSION=${UBUNTU_VERSION}
-    command: "-c /open5gs/config/ausf.yaml"
+    command: "-c /etc/open5gs/custom/ausf.yaml"
     networks:
       open5gs:
         aliases:
           - ausf.open5gs.org
     volumes:
-      - ../../../configs/basic/ausf.yaml:/open5gs/config/ausf.yaml
+      - ../../../configs/basic/ausf.yaml:/etc/open5gs/custom/ausf.yaml
     depends_on:
       - nrf
 
@@ -56,13 +56,13 @@ services:
       args:
         - OPEN5GS_VERSION=${OPEN5GS_VERSION}
         - UBUNTU_VERSION=${UBUNTU_VERSION}
-    command: "-c /open5gs/config/udm.yaml"
+    command: "-c /etc/open5gs/custom/udm.yaml"
     networks:
       open5gs:
         aliases:
           - udm.open5gs.org
     volumes:
-      - ../../../configs/basic/udm.yaml:/open5gs/config/udm.yaml
+      - ../../../configs/basic/udm.yaml:/etc/open5gs/custom/udm.yaml
     depends_on:
       - nrf
 
@@ -74,14 +74,14 @@ services:
       args:
         - OPEN5GS_VERSION=${OPEN5GS_VERSION}
         - UBUNTU_VERSION=${UBUNTU_VERSION}
-    command: "-c /open5gs/config/udr.yaml"
+    command: "-c /etc/open5gs/custom/udr.yaml"
     restart: unless-stopped
     networks:
       open5gs:
         aliases:
           - udr.open5gs.org
     volumes:
-      - ../../../configs/basic/udr.yaml:/open5gs/config/udr.yaml
+      - ../../../configs/basic/udr.yaml:/etc/open5gs/custom/udr.yaml
     depends_on:
       - db
       - nrf
@@ -94,13 +94,13 @@ services:
       args:
         - OPEN5GS_VERSION=${OPEN5GS_VERSION}
         - UBUNTU_VERSION=${UBUNTU_VERSION}
-    command: "-c /open5gs/config/nssf.yaml"
+    command: "-c /etc/open5gs/custom/nssf.yaml"
     networks:
       open5gs:
         aliases:
           - nssf.open5gs.org
     volumes:
-      - ../../../configs/basic/nssf.yaml:/open5gs/config/nssf.yaml
+      - ../../../configs/basic/nssf.yaml:/etc/open5gs/custom/nssf.yaml
     depends_on:
       - nrf
 
@@ -112,13 +112,13 @@ services:
       args:
         - OPEN5GS_VERSION=${OPEN5GS_VERSION}
         - UBUNTU_VERSION=${UBUNTU_VERSION}
-    command: "-c /open5gs/config/bsf.yaml"
+    command: "-c /etc/open5gs/custom/bsf.yaml"
     networks:
       open5gs:
         aliases:
           - bsf.open5gs.org
     volumes:
-      - ../../../configs/basic/bsf.yaml:/open5gs/config/bsf.yaml
+      - ../../../configs/basic/bsf.yaml:/etc/open5gs/custom/bsf.yaml
     depends_on:
       - nrf
 
@@ -130,14 +130,14 @@ services:
       args:
         - OPEN5GS_VERSION=${OPEN5GS_VERSION}
         - UBUNTU_VERSION=${UBUNTU_VERSION}
-    command: "-c /open5gs/config/pcf.yaml"
+    command: "-c /etc/open5gs/custom/pcf.yaml"
     restart: unless-stopped
     networks:
       open5gs:
         aliases:
           - pcf.open5gs.org
     volumes:
-      - ../../../configs/basic/pcf.yaml:/open5gs/config/pcf.yaml
+      - ../../../configs/basic/pcf.yaml:/etc/open5gs/custom/pcf.yaml
     depends_on:
       - db
       - nrf
@@ -150,13 +150,13 @@ services:
       args:
         - OPEN5GS_VERSION=${OPEN5GS_VERSION}
         - UBUNTU_VERSION=${UBUNTU_VERSION}
-    command: "-c /open5gs/config/amf.yaml"
+    command: "-c /etc/open5gs/custom/amf.yaml"
     networks:
       open5gs:
         aliases:
           - amf.open5gs.org
     volumes:
-      - ../../../configs/basic/amf.yaml:/open5gs/config/amf.yaml
+      - ../../../configs/basic/amf.yaml:/etc/open5gs/custom/amf.yaml
     depends_on:
       - nrf
     ports:
@@ -170,13 +170,13 @@ services:
       args:
         - OPEN5GS_VERSION=${OPEN5GS_VERSION}
         - UBUNTU_VERSION=${UBUNTU_VERSION}
-    command: "-c /open5gs/config/smf.yaml"
+    command: "-c /etc/open5gs/custom/smf.yaml"
     networks:
       open5gs:
         aliases:
           - smf.open5gs.org
     volumes:
-      - ../../../configs/basic/smf.yaml:/open5gs/config/smf.yaml
+      - ../../../configs/basic/smf.yaml:/etc/open5gs/custom/smf.yaml
     depends_on:
       - nrf
       - upf
@@ -189,7 +189,7 @@ services:
       args:
         - OPEN5GS_VERSION=${OPEN5GS_VERSION}
         - UBUNTU_VERSION=${UBUNTU_VERSION}
-    command: "-c /open5gs/config/upf.yaml"
+    command: "-c /etc/open5gs/custom/upf.yaml"
     networks:
       open5gs:
         aliases:
@@ -197,7 +197,7 @@ services:
     extra_hosts:
       docker-host.external-ip: ${DOCKER_HOST_IP}
     volumes:
-      - ../../../configs/basic/upf.yaml:/open5gs/config/upf.yaml
+      - ../../../configs/basic/upf.yaml:/etc/open5gs/custom/upf.yaml
     ports:
       - "0.0.0.0:2152:2152/udp"
     privileged: true

@@ -15,47 +15,47 @@ services:
   nrf:
     container_name: nrf
     image: "ghcr.io/borjis131/nrf:${OPEN5GS_VERSION}"
-    command: "-c /open5gs/config/nrf.yaml"
+    command: "-c /etc/open5gs/custom/nrf.yaml"
     networks:
       open5gs:
         aliases:
           - nrf.open5gs.org
     configs:
       - source: nrf_config
-        target: /open5gs/config/nrf.yaml
+        target: /etc/open5gs/custom/nrf.yaml
 
   ausf:
     container_name: ausf
     image: "ghcr.io/borjis131/ausf:${OPEN5GS_VERSION}"
-    command: "-c /open5gs/config/ausf.yaml"
+    command: "-c /etc/open5gs/custom/ausf.yaml"
     networks:
       open5gs:
         aliases:
           - ausf.open5gs.org
     configs:
       - source: ausf_config
-        target: /open5gs/config/ausf.yaml
+        target: /etc/open5gs/custom/ausf.yaml
     depends_on:
       - nrf
 
   udm:
     container_name: udm
     image: "ghcr.io/borjis131/udm:${OPEN5GS_VERSION}"
-    command: "-c /open5gs/config/udm.yaml"
+    command: "-c /etc/open5gs/custom/udm.yaml"
     networks:
       open5gs:
         aliases:
           - udm.open5gs.org
     configs:
       - source: udm_config
-        target: /open5gs/config/udm.yaml
+        target: /etc/open5gs/custom/udm.yaml
     depends_on:
       - nrf
 
   udr:
     container_name: udr
     image: "ghcr.io/borjis131/udr:${OPEN5GS_VERSION}"
-    command: "-c /open5gs/config/udr.yaml"
+    command: "-c /etc/open5gs/custom/udr.yaml"
     restart: unless-stopped
     networks:
       open5gs:
@@ -63,7 +63,7 @@ services:
           - udr.open5gs.org
     configs:
       - source: udr_config
-        target: /open5gs/config/udr.yaml
+        target: /etc/open5gs/custom/udr.yaml
     depends_on:
       - db
       - nrf
@@ -71,35 +71,35 @@ services:
   nssf:
     container_name: nssf
     image: "ghcr.io/borjis131/nssf:${OPEN5GS_VERSION}"
-    command: "-c /open5gs/config/nssf.yaml"
+    command: "-c /etc/open5gs/custom/nssf.yaml"
     networks:
       open5gs:
         aliases:
           - nssf.open5gs.org
     configs:
       - source: nssf_config
-        target: /open5gs/config/nssf.yaml
+        target: /etc/open5gs/custom/nssf.yaml
     depends_on:
       - nrf
 
   bsf:
     container_name: bsf
     image: "ghcr.io/borjis131/bsf:${OPEN5GS_VERSION}"
-    command: "-c /open5gs/config/bsf.yaml"
+    command: "-c /etc/open5gs/custom/bsf.yaml"
     networks:
       open5gs:
         aliases:
           - bsf.open5gs.org
     configs:
       - source: bsf_config
-        target: /open5gs/config/bsf.yaml
+        target: /etc/open5gs/custom/bsf.yaml
     depends_on:
       - nrf
 
   pcf:
     container_name: pcf
     image: "ghcr.io/borjis131/pcf:${OPEN5GS_VERSION}"
-    command: "-c /open5gs/config/pcf.yaml"
+    command: "-c /etc/open5gs/custom/pcf.yaml"
     restart: unless-stopped
     networks:
       open5gs:
@@ -107,7 +107,7 @@ services:
           - pcf.open5gs.org
     configs:
       - source: pcf_config
-        target: /open5gs/config/pcf.yaml
+        target: /etc/open5gs/custom/pcf.yaml
     depends_on:
       - db
       - nrf
@@ -115,28 +115,28 @@ services:
   amf:
     container_name: amf
     image: "ghcr.io/borjis131/amf:${OPEN5GS_VERSION}"
-    command: "-c /open5gs/config/amf.yaml"
+    command: "-c /etc/open5gs/custom/amf.yaml"
     networks:
       open5gs:
         aliases:
           - amf.open5gs.org
     configs:
       - source: amf_config
-        target: /open5gs/config/amf.yaml
+        target: /etc/open5gs/custom/amf.yaml
     depends_on:
       - nrf
 
   smf1:
     container_name: smf1
     image: "ghcr.io/borjis131/smf:${OPEN5GS_VERSION}"
-    command: "-c /open5gs/config/smf1.yaml"
+    command: "-c /etc/open5gs/custom/smf1.yaml"
     networks:
       open5gs:
         aliases:
           - smf1.open5gs.org
     configs:
       - source: smf1_config
-        target: /open5gs/config/smf1.yaml
+        target: /etc/open5gs/custom/smf1.yaml
     depends_on:
       - nrf
       - upf1
@@ -144,14 +144,14 @@ services:
   smf2:
     container_name: smf2
     image: "ghcr.io/borjis131/smf:${OPEN5GS_VERSION}"
-    command: "-c /open5gs/config/smf2.yaml"
+    command: "-c /etc/open5gs/custom/smf2.yaml"
     networks:
       open5gs:
         aliases:
           - smf2.open5gs.org
     configs:
       - source: smf2_config
-        target: /open5gs/config/smf2.yaml
+        target: /etc/open5gs/custom/smf2.yaml
     depends_on:
       - nrf
       - upf2
@@ -159,14 +159,14 @@ services:
   upf1:
     container_name: upf1
     image: "ghcr.io/borjis131/upf:${OPEN5GS_VERSION}"
-    command: "-c /open5gs/config/upf1.yaml"
+    command: "-c /etc/open5gs/custom/upf1.yaml"
     networks:
       open5gs:
         aliases:
           - upf1.open5gs.org
     configs:
       - source: upf1_config
-        target: /open5gs/config/upf1.yaml
+        target: /etc/open5gs/custom/upf1.yaml
     privileged: true
     cap_add:
       - NET_ADMIN
@@ -174,14 +174,14 @@ services:
   upf2:
     container_name: upf2
     image: "ghcr.io/borjis131/upf:${OPEN5GS_VERSION}"
-    command: "-c /open5gs/config/upf2.yaml"
+    command: "-c /etc/open5gs/custom/upf2.yaml"
     networks:
       open5gs:
         aliases:
           - upf2.open5gs.org
     configs:
       - source: upf2_config
-        target: /open5gs/config/upf2.yaml
+        target: /etc/open5gs/custom/upf2.yaml
     privileged: true
     cap_add:
       - NET_ADMIN
