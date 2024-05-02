@@ -2,7 +2,7 @@
 
 # AMF entrypoint
 
-if [[ "${DISABLE_CHECKSUM_OFFLOADING}" == TRUE ]]; then
+if [[ "${DISABLE_CHECKSUM_OFFLOADING}" == "TRUE" ]]; then
     ethtool -K eth0 rx off tx off
 fi
 

@@ -73,11 +73,32 @@ UPF container lets you enable/disable NAT in the UPF. NAT in the UPF is enabled 
     ...
 ```
 
+Also the UPF container lets you choose between using TUN (default) as the device type or using TAP, by setting the environment variable `ENABLE_TAP` to TRUE in the Docker compose UPF service:
+```yaml
+  upf:
+    ...
+    environment:
+      - ENABLE_TAP=TRUE
+    ...
+```
+
+To enable TAP, the `dev` field on the `upf.yaml` `session` list must be present. The `dev` field can't be `ogstun` in this context.
+```yaml
+upf:
+    ...
+    session:
+      - subnet: 10.45.0.0/16
+        gateway: 10.45.0.1
+        dev: ogstap
+    ...
+```
+
 UPF container reads the subnets specified in the Open5GS config file and setups the network interfaces needed with the addresses specified and the NAT (or not) configuration:
 ```yaml
 upf:
     ...
     session:
-      - subnet: 10.45.0.1/16
+      - subnet: 10.45.0.0/16
+        gateway: 10.45.0.1
     ...
 ```

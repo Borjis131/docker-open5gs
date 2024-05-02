@@ -2,13 +2,18 @@
 
 # Helper functions for UPF entrypoint
 
-# create TUN device with the name specified
-# create_tun <tun_name>
-function create_tun(){
-    tun_name="${1}"
+# create device with the name specified
+# create_device <device_name>
+function create_device(){
+    device_name="${1}"
 
-    ip tuntap add name ${tun_name} mode tun
-    ip link set ${tun_name} up
+    if [[ "${ENABLE_TAP}" == "TRUE" ]]; then
+        ip tuntap add name ${device_name} mode tap
+    else
+        ip tuntap add name ${device_name} mode tun
+    fi
+
+    ip link set ${device_name} up
 }
 
 # add IP address to device
@@ -43,49 +48,49 @@ function check_ipv4_or_ipv6(){
     fi
 }
 
-# takes care of everything related to TUN and NAT
-# setup_subnet <subnet> <ip_addr> <device>
-# note: <device> could be a valid device name or null
+# takes care of everything related to devices and NAT
+# setup_subnet <subnet> <ip_addr> <device_name>
+# note: <device_name> could be a valid device name or null
 function setup_subnet(){
     subnet="${1}"
     ip_addr="${2}"
-    device="${3}"
+    device_name="${3}"
 
-    # check TUN device exists
-    ip link show dev "${device}" &> /dev/null
+    # check if device exists
+    ip link show dev "${device_name}" &> /dev/null
 
-    # setup TUN device
+    # setup device
     if [[ "${?}" -ne 0 ]]; then
         # if it not exists, create it and add IP address
-        create_tun "${device}"
-        add_ip_to_device "${subnet}" "${ip_addr}" "${device}"
+        create_device "${device_name}"
+        add_ip_to_device "${subnet}" "${ip_addr}" "${device_name}"
     else
         # if it exists, add IP address
-        add_ip_to_device "${subnet}" "${ip_addr}" "${device}"
+        add_ip_to_device "${subnet}" "${ip_addr}" "${device_name}"
     fi
 
     # NAT configuration section
-    if [[ "${DISABLE_NAT}" != TRUE ]]; then
+    if [[ "${DISABLE_NAT}" != "TRUE" ]]; then
         # extract version of IP address provided
         ip_version="$(check_ipv4_or_ipv6 "${subnet}")"
 
         # use iptables or ip6tables depending on type
         if [[ "${ip_version}" -eq 4 ]]; then
             # check NAT rule not exists
-            iptables --wait 30 -t nat -C POSTROUTING -s "${subnet}" ! -o "${device}" -j MASQUERADE &> /dev/null
+            iptables --wait 30 -t nat -C POSTROUTING -s "${subnet}" ! -o "${device_name}" -j MASQUERADE &> /dev/null
 
             if [ "${?}" -ne 0 ]; then
 	            # configure NAT for the subnet specified
-	            iptables --wait 30 -t nat -A POSTROUTING -s "${subnet}" ! -o "${device}" -j MASQUERADE
+	            iptables --wait 30 -t nat -A POSTROUTING -s "${subnet}" ! -o "${device_name}" -j MASQUERADE
             fi
 
         elif [[ "${ip_version}" -eq 6 ]]; then
             # check NAT rule not exists
-            ip6tables-nft --wait 30 -t nat -C POSTROUTING -s "${subnet}" ! -o "${device}" -j MASQUERADE &> /dev/null
+            ip6tables-nft --wait 30 -t nat -C POSTROUTING -s "${subnet}" ! -o "${device_name}" -j MASQUERADE &> /dev/null
 
             if [ "${?}" -ne 0 ]; then
 	            # configure NAT for the subnet specified
-	            ip6tables-nft --wait 30 -t nat -A POSTROUTING -s "${subnet}" ! -o "${device}" -j MASQUERADE
+	            ip6tables-nft --wait 30 -t nat -A POSTROUTING -s "${subnet}" ! -o "${device_name}" -j MASQUERADE
             fi
         fi
     fi
@@ -134,13 +139,13 @@ function setup_container_interfaces(){
 
         subnet="${subnet_fields[0]}"
         gateway="${subnet_fields[1]}"
-        device="${subnet_fields[2]}"
+        device_name="${subnet_fields[2]}"
 
         # null devices default to ogstun
-        if [[ "${device}" == "null" ]]; then
-            device="ogstun"
+        if [[ "${device_name}" == "null" ]]; then
+            device_name="ogstun"
         fi
 
-        setup_subnet "${subnet}" "${gateway}" "${device}"
+        setup_subnet "${subnet}" "${gateway}" "${device_name}"
     done
 }
