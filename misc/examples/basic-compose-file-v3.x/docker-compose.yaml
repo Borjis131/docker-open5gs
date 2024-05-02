@@ -11,7 +11,6 @@ services:
           - db.open5gs.org
     volumes:
       - db_data:/data/db
-      - db_config:/data/configdb
     ports:
       - "0.0.0.0:27017:27017/tcp"
 
@@ -211,8 +210,7 @@ services:
         target: /open5gs/config/upf.yaml
     ports:
       - "0.0.0.0:2152:2152/udp"
-    devices:
-      - /dev/net/tun
+    privileged: true
     cap_add:
       - NET_ADMIN
 
@@ -232,29 +230,25 @@ volumes:
     name: open5gs_db_data
     labels:
       org.open5gs.mongodb_version: ${MONGODB_VERSION}
-  db_config:
-    name: open5gs_db_config
-    labels:
-      org.open5gs.mongodb_version: ${MONGODB_VERSION}
 
 configs:
   nrf_config:
-    file: ../../configs/basic/nrf.yaml
+    file: ../../../configs/basic/nrf.yaml
   ausf_config:
-    file: ../../configs/basic/ausf.yaml
+    file: ../../../configs/basic/ausf.yaml
   udm_config:
-    file: ../../configs/basic/udm.yaml
+    file: ../../../configs/basic/udm.yaml
   udr_config:
-    file: ../../configs/basic/udr.yaml
+    file: ../../../configs/basic/udr.yaml
   nssf_config:
-    file: ../../configs/basic/nssf.yaml
+    file: ../../../configs/basic/nssf.yaml
   bsf_config:
-    file: ../../configs/basic/bsf.yaml
+    file: ../../../configs/basic/bsf.yaml
   pcf_config:
-    file: ../../configs/basic/pcf.yaml
+    file: ../../../configs/basic/pcf.yaml
   amf_config:
-    file: ../../configs/basic/amf.yaml
+    file: ../../../configs/basic/amf.yaml
   smf_config:
-    file: ../../configs/basic/smf.yaml
+    file: ../../../configs/basic/smf.yaml
   upf_config:
-    file: ../../configs/basic/upf.yaml
+    file: ../../../configs/basic/upf.yaml

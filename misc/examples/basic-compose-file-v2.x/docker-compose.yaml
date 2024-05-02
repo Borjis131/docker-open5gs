@@ -11,7 +11,6 @@ services:
           - db.open5gs.org
     volumes:
       - db_data:/data/db
-      - db_config:/data/configdb
     ports:
       - "0.0.0.0:27017:27017/tcp"
 
@@ -29,7 +28,7 @@ services:
         aliases:
           - nrf.open5gs.org
     volumes:
-      - ../../configs/basic/nrf.yaml:/open5gs/config/nrf.yaml
+      - ../../../configs/basic/nrf.yaml:/open5gs/config/nrf.yaml
 
   ausf:
     container_name: ausf
@@ -45,7 +44,7 @@ services:
         aliases:
           - ausf.open5gs.org
     volumes:
-      - ../../configs/basic/ausf.yaml:/open5gs/config/ausf.yaml
+      - ../../../configs/basic/ausf.yaml:/open5gs/config/ausf.yaml
     depends_on:
       - nrf
 
@@ -63,7 +62,7 @@ services:
         aliases:
           - udm.open5gs.org
     volumes:
-      - ../../configs/basic/udm.yaml:/open5gs/config/udm.yaml
+      - ../../../configs/basic/udm.yaml:/open5gs/config/udm.yaml
     depends_on:
       - nrf
 
@@ -82,7 +81,7 @@ services:
         aliases:
           - udr.open5gs.org
     volumes:
-      - ../../configs/basic/udr.yaml:/open5gs/config/udr.yaml
+      - ../../../configs/basic/udr.yaml:/open5gs/config/udr.yaml
     depends_on:
       - db
       - nrf
@@ -101,7 +100,7 @@ services:
         aliases:
           - nssf.open5gs.org
     volumes:
-      - ../../configs/basic/nssf.yaml:/open5gs/config/nssf.yaml
+      - ../../../configs/basic/nssf.yaml:/open5gs/config/nssf.yaml
     depends_on:
       - nrf
 
@@ -119,7 +118,7 @@ services:
         aliases:
           - bsf.open5gs.org
     volumes:
-      - ../../configs/basic/bsf.yaml:/open5gs/config/bsf.yaml
+      - ../../../configs/basic/bsf.yaml:/open5gs/config/bsf.yaml
     depends_on:
       - nrf
 
@@ -138,7 +137,7 @@ services:
         aliases:
           - pcf.open5gs.org
     volumes:
-      - ../../configs/basic/pcf.yaml:/open5gs/config/pcf.yaml
+      - ../../../configs/basic/pcf.yaml:/open5gs/config/pcf.yaml
     depends_on:
       - db
       - nrf
@@ -157,7 +156,7 @@ services:
         aliases:
           - amf.open5gs.org
     volumes:
-      - ../../configs/basic/amf.yaml:/open5gs/config/amf.yaml
+      - ../../../configs/basic/amf.yaml:/open5gs/config/amf.yaml
     depends_on:
       - nrf
     ports:
@@ -177,7 +176,7 @@ services:
         aliases:
           - smf.open5gs.org
     volumes:
-      - ../../configs/basic/smf.yaml:/open5gs/config/smf.yaml
+      - ../../../configs/basic/smf.yaml:/open5gs/config/smf.yaml
     depends_on:
       - nrf
       - upf
@@ -198,11 +197,10 @@ services:
     extra_hosts:
       docker-host.external-ip: ${DOCKER_HOST_IP}
     volumes:
-      - ../../configs/basic/upf.yaml:/open5gs/config/upf.yaml
+      - ../../../configs/basic/upf.yaml:/open5gs/config/upf.yaml
     ports:
       - "0.0.0.0:2152:2152/udp"
-    devices:
-      - /dev/net/tun
+    privileged: true
     cap_add:
       - NET_ADMIN
 
@@ -220,9 +218,5 @@ networks:
 volumes:
   db_data:
     name: open5gs_db_data
-    labels:
-      org.open5gs.mongodb_version: ${MONGODB_VERSION}
-  db_config:
-    name: open5gs_db_config
     labels:
       org.open5gs.mongodb_version: ${MONGODB_VERSION}
