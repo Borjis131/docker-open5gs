@@ -7,4 +7,4 @@ if [[ "${DISABLE_CHECKSUM_OFFLOADING}" == "TRUE" ]]; then
 fi
 
 # container entrypoint receiving arguments from Docker CMD
-/open5gs/install/bin/open5gs-amfd "${@}"
+open5gs-amfd "${@}"

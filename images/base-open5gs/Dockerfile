@@ -20,4 +20,4 @@ RUN apt-get update && apt-get install python3-pip python3-setuptools python3-whe
 # clone the specific open5gs version and install it
 RUN git clone --depth 1 --branch=${OPEN5GS_VERSION} https://github.com/open5gs/open5gs \
     && cd open5gs && meson build --prefix=`pwd`/install && ninja -j `nproc` -C build \
-	&& cd build && ninja install
+	  && cd build && ninja install

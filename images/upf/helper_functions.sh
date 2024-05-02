@@ -104,13 +104,13 @@ function get_config_file_path_from_docker_cmd(){
     # parse only the -c option of the Docker CMD
     arguments=($(getopt --quiet --options c: -- ${docker_cmd}))
 
-    # if -c is present grab argument, if not default to /open5gs/install/etc/open5gs/upf.yaml
+    # if -c is present grab argument, if not default to /etc/open5gs/default/upf.yaml
     if [[ "${arguments[0]}" != "--" ]]; then
         # remove single quotes from config file path
         config_file_path="${arguments[1]//\'/}"
     else
         # fallback to default path
-        config_file_path="/open5gs/install/etc/open5gs/upf.yaml"
+        config_file_path="/etc/open5gs/default/upf.yaml"
     fi
 
     printf "${config_file_path}"
