@@ -1,0 +1,20 @@
+db_uri: mongodb://db.open5gs.org/open5gs
+
+logger:
+  file:
+    path: /var/log/open5gs/pcf.log
+
+global:
+
+pcf:
+  sbi:
+    server:
+      - address: pcf.open5gs.org
+        port: 80
+    client:
+      nrf:
+        - uri: http://nrf.open5gs.org:80
+  metrics:
+    server:
+      - address: pcf.open5gs.org
+        port: 9090

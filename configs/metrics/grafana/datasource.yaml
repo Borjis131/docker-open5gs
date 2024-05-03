@@ -1,0 +1,22 @@
+apiVersion: 1
+
+deleteDatasources:
+  - name: "Open5GS metrics"
+    orgId: 1
+
+datasources:
+  - name: "Open5GS metrics"
+    type: prometheus
+    uid: "open5gsmetrics"
+    access: proxy
+    url: http://metrics.prometheus.org:9090
+    jsonData:
+      httpMethod: POST
+      manageAlerts: true
+      prometheusType: Prometheus
+      prometheusVersion: 2.51.0
+      cacheLevel: "High"
+      disableRecordingRules: false
+      incrementalQueryOverlapWindow: 10m
+    version: 1
+    editable: false

@@ -1,0 +1,323 @@
+services:
+  db:
+    container_name: db
+    image: "mongo:${MONGODB_VERSION}"
+    command: "mongod --bind_ip 0.0.0.0 --port 27017"
+    networks:
+      open5gs:
+        aliases:
+          - db.open5gs.org
+    volumes:
+      - db_data:/data/db
+    ports:
+      - "0.0.0.0:27017:27017/tcp"
+
+  nrf:
+    container_name: nrf
+    image: "nrf:${OPEN5GS_VERSION}"
+    build:
+      context: ../images/nrf
+      args:
+        - OPEN5GS_VERSION=${OPEN5GS_VERSION}
+        - UBUNTU_VERSION=${UBUNTU_VERSION}
+    command: "-c /etc/open5gs/custom/nrf.yaml"
+    networks:
+      open5gs:
+        aliases:
+          - nrf.open5gs.org
+    configs:
+      - source: nrf_config
+        target: /etc/open5gs/custom/nrf.yaml
+
+  ausf:
+    container_name: ausf
+    image: "ausf:${OPEN5GS_VERSION}"
+    build:
+      context: ../images/ausf
+      args:
+        - OPEN5GS_VERSION=${OPEN5GS_VERSION}
+        - UBUNTU_VERSION=${UBUNTU_VERSION}
+    command: "-c /etc/open5gs/custom/ausf.yaml"
+    networks:
+      open5gs:
+        aliases:
+          - ausf.open5gs.org
+    configs:
+      - source: ausf_config
+        target: /etc/open5gs/custom/ausf.yaml
+    depends_on:
+      - nrf
+
+  udm:
+    container_name: udm
+    image: "udm:${OPEN5GS_VERSION}"
+    build:
+      context: ../images/udm
+      args:
+        - OPEN5GS_VERSION=${OPEN5GS_VERSION}
+        - UBUNTU_VERSION=${UBUNTU_VERSION}
+    command: "-c /etc/open5gs/custom/udm.yaml"
+    networks:
+      open5gs:
+        aliases:
+          - udm.open5gs.org
+    configs:
+      - source: udm_config
+        target: /etc/open5gs/custom/udm.yaml
+    depends_on:
+      - nrf
+
+  udr:
+    container_name: udr
+    image: "udr:${OPEN5GS_VERSION}"
+    build:
+      context: ../images/udr
+      args:
+        - OPEN5GS_VERSION=${OPEN5GS_VERSION}
+        - UBUNTU_VERSION=${UBUNTU_VERSION}
+    command: "-c /etc/open5gs/custom/udr.yaml"
+    restart: unless-stopped
+    networks:
+      open5gs:
+        aliases:
+          - udr.open5gs.org
+    configs:
+      - source: udr_config
+        target: /etc/open5gs/custom/udr.yaml
+    depends_on:
+      - db
+      - nrf
+
+  nssf:
+    container_name: nssf
+    image: "nssf:${OPEN5GS_VERSION}"
+    build:
+      context: ../images/nssf
+      args:
+        - OPEN5GS_VERSION=${OPEN5GS_VERSION}
+        - UBUNTU_VERSION=${UBUNTU_VERSION}
+    command: "-c /etc/open5gs/custom/nssf.yaml"
+    networks:
+      open5gs:
+        aliases:
+          - nssf.open5gs.org
+    configs:
+      - source: nssf_config
+        target: /etc/open5gs/custom/nssf.yaml
+    depends_on:
+      - nrf
+
+  bsf:
+    container_name: bsf
+    image: "bsf:${OPEN5GS_VERSION}"
+    build:
+      context: ../images/bsf
+      args:
+        - OPEN5GS_VERSION=${OPEN5GS_VERSION}
+        - UBUNTU_VERSION=${UBUNTU_VERSION}
+    command: "-c /etc/open5gs/custom/bsf.yaml"
+    networks:
+      open5gs:
+        aliases:
+          - bsf.open5gs.org
+    configs:
+      - source: bsf_config
+        target: /etc/open5gs/custom/bsf.yaml
+    depends_on:
+      - nrf
+
+  pcf:
+    container_name: pcf
+    image: "pcf:${OPEN5GS_VERSION}"
+    build:
+      context: ../images/pcf
+      args:
+        - OPEN5GS_VERSION=${OPEN5GS_VERSION}
+        - UBUNTU_VERSION=${UBUNTU_VERSION}
+    command: "-c /etc/open5gs/custom/pcf.yaml"
+    restart: unless-stopped
+    networks:
+      open5gs:
+        aliases:
+          - pcf.open5gs.org
+    configs:
+      - source: pcf_config
+        target: /etc/open5gs/custom/pcf.yaml
+    depends_on:
+      - db
+      - nrf
+
+  amf:
+    container_name: amf
+    image: "amf:${OPEN5GS_VERSION}"
+    build:
+      context: ../images/amf
+      args:
+        - OPEN5GS_VERSION=${OPEN5GS_VERSION}
+        - UBUNTU_VERSION=${UBUNTU_VERSION}
+    command: "-c /etc/open5gs/custom/amf.yaml"
+    networks:
+      open5gs:
+        aliases:
+          - amf.open5gs.org
+    configs:
+      - source: amf_config
+        target: /etc/open5gs/custom/amf.yaml
+    depends_on:
+      - nrf
+
+  smf:
+    container_name: smf
+    image: "smf:${OPEN5GS_VERSION}"
+    build:
+      context: ../images/smf
+      args:
+        - OPEN5GS_VERSION=${OPEN5GS_VERSION}
+        - UBUNTU_VERSION=${UBUNTU_VERSION}
+    command: "-c /etc/open5gs/custom/smf.yaml"
+    networks:
+      open5gs:
+        aliases:
+          - smf.open5gs.org
+    configs:
+      - source: smf_config
+        target: /etc/open5gs/custom/smf.yaml
+    depends_on:
+      - nrf
+      - upf
+
+  upf:
+    container_name: upf
+    image: "upf:${OPEN5GS_VERSION}"
+    build:
+      context: ../images/upf
+      args:
+        - OPEN5GS_VERSION=${OPEN5GS_VERSION}
+        - UBUNTU_VERSION=${UBUNTU_VERSION}
+    command: "-c /etc/open5gs/custom/upf.yaml"
+    networks:
+      open5gs:
+        aliases:
+          - upf.open5gs.org
+    configs:
+      - source: upf_config
+        target: /etc/open5gs/custom/upf.yaml
+    privileged: true
+    cap_add:
+      - NET_ADMIN
+
+  gnb:
+    container_name: gnb
+    image: "ghcr.io/borjis131/gnb:v3.2.6"
+    command: "-c /UERANSIM/config/gnb.yaml"
+    networks:
+      open5gs:
+        aliases:
+          - gnb.ueransim.org
+    configs:
+      - source: gnb_config
+        target: /UERANSIM/config/gnb.yaml
+    depends_on:
+      - amf
+
+  ue:
+    container_name: ue
+    image: "ghcr.io/borjis131/ue:v3.2.6"
+    command: "-c /UERANSIM/config/ue.yaml"
+    networks:
+      open5gs:
+        aliases:
+          - ue.ueransim.org
+    configs:
+      - source: ue_config
+        target: /UERANSIM/config/ue.yaml
+    privileged: true
+    cap_add:
+      - NET_ADMIN
+    depends_on:
+      - gnb
+
+  prometheus:
+    container_name: prometheus
+    image: "prom/prometheus:v2.51.0"
+    networks:
+      open5gs:
+        aliases:
+          - metrics.prometheus.org
+    configs:
+      - source: prometheus_config
+        target: /etc/prometheus/prometheus.yml
+    ports:
+      - "0.0.0.0:9090:9090/tcp"
+    depends_on:
+      - amf
+      - pcf
+      - smf
+      - upf
+
+  grafana:
+    container_name: grafana
+    image: "grafana/grafana-oss:10.4.0"
+    networks:
+      open5gs:
+        aliases:
+          - dashboard.grafana.org
+    configs:
+      - source: grafana_datasource
+        target: /etc/grafana/provisioning/datasources/open5gs_prometheus.yaml
+      - source: grafana_dashboard_provider
+        target: /etc/grafana/provisioning/dashboards/open5gs_metrics.yaml
+    volumes:
+      - ../../configs/metrics/grafana/dashboards:/var/lib/grafana/dashboards
+    ports:
+      - "0.0.0.0:3000:3000/tcp"
+    depends_on:
+      - prometheus
+
+networks:
+  open5gs:
+    name: open5gs
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.name: br-ogs
+    ipam:
+      config:
+        - subnet: 10.33.33.0/24
+
+volumes:
+  db_data:
+    name: open5gs_db_data
+    labels:
+      org.open5gs.mongodb_version: ${MONGODB_VERSION}
+
+configs:
+  nrf_config:
+    file: ../../configs/metrics/nrf.yaml
+  ausf_config:
+    file: ../../configs/metrics/ausf.yaml
+  udm_config:
+    file: ../../configs/metrics/udm.yaml
+  udr_config:
+    file: ../../configs/metrics/udr.yaml
+  nssf_config:
+    file: ../../configs/metrics/nssf.yaml
+  bsf_config:
+    file: ../../configs/metrics/bsf.yaml
+  pcf_config:
+    file: ../../configs/metrics/pcf.yaml
+  amf_config:
+    file: ../../configs/metrics/amf.yaml
+  smf_config:
+    file: ../../configs/metrics/smf.yaml
+  upf_config:
+    file: ../../configs/metrics/upf.yaml
+  gnb_config:
+    file: ../../configs/metrics/gnb.yaml
+  ue_config:
+    file: ../../configs/metrics/ue.yaml
+  prometheus_config:
+    file: ../../configs/metrics/prometheus.yml
+  grafana_datasource:
+    file: ../../configs/metrics/grafana/datasource.yaml
+  grafana_dashboard_provider:
+    file: ../../configs/metrics/grafana/dashboard_provider.yaml

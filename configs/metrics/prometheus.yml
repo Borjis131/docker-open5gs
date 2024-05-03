@@ -1,0 +1,16 @@
+global:
+  scrape_interval: 10s
+
+scrape_configs:
+  - job_name: amf
+    static_configs:
+      - targets: ["amf.open5gs.org:9090"]
+  - job_name: pcf
+    static_configs:
+      - targets: ["pcf.open5gs.org:9090"]
+  - job_name: smf
+    static_configs:
+      - targets: ["smf.open5gs.org:9090"]
+  - job_name: upf
+    static_configs:
+      - targets: ["upf.open5gs.org:9090"]
