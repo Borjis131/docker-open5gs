@@ -1,9 +1,6 @@
 logger:
-  file: /open5gs/install/var/log/open5gs/ausf.log
-
-logger:
   file:
-    path: /open5gs/install/var/log/open5gs/ausf.log
+    path: /var/log/open5gs/ausf.log
 
 global:
 
