@@ -19,4 +19,4 @@ datasources:
       disableRecordingRules: false
       incrementalQueryOverlapWindow: 10m
     version: 1
-    editable: false
+    editable: true

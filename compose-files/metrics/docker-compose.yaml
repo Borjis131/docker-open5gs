@@ -269,6 +269,10 @@ services:
         target: /etc/grafana/provisioning/dashboards/open5gs_metrics.yaml
     volumes:
       - ../../configs/metrics/grafana/dashboards:/var/lib/grafana/dashboards
+    secrets:
+      - admin_password
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD__FILE=/run/secrets/admin_password
     ports:
       - "0.0.0.0:3000:3000/tcp"
     depends_on:
@@ -289,6 +293,10 @@ volumes:
     name: open5gs_db_data
     labels:
       org.open5gs.mongodb_version: ${MONGODB_VERSION}
+
+secrets:
+  admin_password:
+    file: ../../configs/metrics/grafana/admin_password.txt
 
 configs:
   nrf_config:
