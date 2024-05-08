@@ -106,14 +106,26 @@
             "uid": "open5gsmetrics"
           },
           "editorMode": "code",
-          "expr": "fivegs_upffunction_upf_qosflows{dnn=\"$dnn\"}",
+          "expr": "fivegs_upffunction_upf_qosflows{job=\"upf\"}",
+          "instant": false,
+          "legendFormat": "UPF number of QoS flows",
+          "range": true,
+          "refId": "UPF number of QoS flows"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "open5gsmetrics"
+          },
+          "editorMode": "code",
+          "expr": "fivegs_upffunction_upf_qosflows{job=\"upf\",dnn=\"$dnn\"}",
           "instant": false,
           "legendFormat": "UPF number of QoS flows for DNN {{dnn}}",
           "range": true,
-          "refId": "UPF number of QoS flows"
+          "refId": "UPF number of QoS flows for DNN"
         }
       ],
-      "title": "UPF number of QoS flows for DNN",
+      "title": "UPF number of QoS flows",
       "type": "timeseries"
     }
   ],

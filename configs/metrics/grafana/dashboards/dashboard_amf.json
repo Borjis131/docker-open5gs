@@ -553,9 +553,9 @@
           "expr": "fivegs_amffunction_rm_registeredsubnbr{job=\"amf\"}",
           "hide": false,
           "instant": false,
-          "legendFormat": "AMF number of registered state subscribers",
+          "legendFormat": "AMF number of UEs in REGISTERED state",
           "range": true,
-          "refId": "AMF number of subscribers in REGISTERED state"
+          "refId": "AMF number of UEs in REGISTERED state"
         },
         {
           "datasource": {
@@ -565,12 +565,12 @@
           "editorMode": "code",
           "expr": "fivegs_amffunction_rm_registeredsubnbr{job=\"amf\",plmnid=\"00101\",snssai=\"1-000001\"}",
           "instant": false,
-          "legendFormat": "AMF number of registered state subscribers for PLMN {{plmnid}} and S-NSSAI {{snssai}}",
+          "legendFormat": "AMF number of UEs in REGISTERED state for PLMN {{plmnid}} and S-NSSAI {{snssai}}",
           "range": true,
-          "refId": "AMF number of subscribers in REGISTERED state for PLMN and S-NSSAI"
+          "refId": "AMF number of UEs in REGISTERED state for PLMN and S-NSSAI"
         }
       ],
-      "title": "AMF number of subscribers in REGISTERED state",
+      "title": "AMF number of UEs in REGISTERED state",
       "type": "timeseries"
     }
   ],

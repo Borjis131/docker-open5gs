@@ -106,14 +106,26 @@
             "uid": "open5gsmetrics"
           },
           "editorMode": "code",
-          "expr": "fivegs_smffunction_sm_pdusessioncreationreq{job=\"smf\",plmnid=\"$plmnid\",snssai=\"$snssai\"}",
+          "expr": "fivegs_smffunction_sm_pdusessioncreationreq{job=\"smf\"}",
           "instant": false,
-          "legendFormat": "SMF PDU Session Create request for PLMN {{plmnid}} and S-NSSAI {{snssai}}",
+          "legendFormat": "SMF PDU Session Create requests",
           "range": true,
-          "refId": "SMF PDU Session Create request"
+          "refId": "SMF PDU Session Create requests"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "open5gsmetrics"
+          },
+          "editorMode": "code",
+          "expr": "fivegs_smffunction_sm_pdusessioncreationreq{job=\"smf\",plmnid=\"$plmnid\",snssai=\"$snssai\",fiveqi=\"$fiveqi\"}",
+          "instant": false,
+          "legendFormat": "SMF PDU Session Create requests for PLMN {{plmnid}}, S-NSSAI {{snssai}} and 5QI {{fiveqi}}",
+          "range": true,
+          "refId": "SMF PDU Session Create requests for PLMN, S-NSSAI and 5QI"
         }
       ],
-      "title": "SMF PDU Session Create request",
+      "title": "SMF PDU Session Create requests",
       "type": "timeseries"
     }
   ],

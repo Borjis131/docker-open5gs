@@ -106,14 +106,26 @@
             "uid": "open5gsmetrics"
           },
           "editorMode": "code",
+          "expr": "fivegs_pcffunction_pa_policysmassoreq{job=\"pcf\"}",
+          "instant": false,
+          "legendFormat": "PCF SM Policy Association requests",
+          "range": true,
+          "refId": "PCF SM Policy Association requests"
+        },
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "open5gsmetrics"
+          },
+          "editorMode": "code",
           "expr": "fivegs_pcffunction_pa_policysmassoreq{job=\"pcf\",plmnid=\"$plmnid\",snssai=\"$snssai\"}",
           "instant": false,
-          "legendFormat": "PCF SM Policy Association request for PLMN {{plmnid}} and S-NSSAI {{snssai}}",
+          "legendFormat": "PCF SM Policy Association requests for PLMN {{plmnid}} and S-NSSAI {{snssai}}",
           "range": true,
-          "refId": "PCF SM Policy Association request"
+          "refId": "PCF SM Policy Association requests for PLMN and S-NSSAI"
         }
       ],
-      "title": "PCF SM Policy Association request",
+      "title": "PCF SM Policy Association requests",
       "type": "timeseries"
     }
   ],

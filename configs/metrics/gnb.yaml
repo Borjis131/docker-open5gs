@@ -16,5 +16,7 @@ amfConfigs:
 slices:
   - sst: 1
     sd: 1
+  - sst: 1
+    sd: 2
 
 ignoreStreamIds: true

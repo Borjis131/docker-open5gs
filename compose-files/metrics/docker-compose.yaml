@@ -220,8 +220,8 @@ services:
     depends_on:
       - amf
 
-  ue:
-    container_name: ue
+  ue1:
+    container_name: ue1
     image: "ghcr.io/borjis131/ue:v3.2.6"
     command: "-c /UERANSIM/config/ue.yaml"
     networks:
@@ -229,7 +229,24 @@ services:
         aliases:
           - ue.ueransim.org
     configs:
-      - source: ue_config
+      - source: ue1_config
+        target: /UERANSIM/config/ue.yaml
+    privileged: true
+    cap_add:
+      - NET_ADMIN
+    depends_on:
+      - gnb
+
+  ue2:
+    container_name: ue2
+    image: "ghcr.io/borjis131/ue:v3.2.6"
+    command: "-c /UERANSIM/config/ue.yaml"
+    networks:
+      open5gs:
+        aliases:
+          - ue.ueransim.org
+    configs:
+      - source: ue2_config
         target: /UERANSIM/config/ue.yaml
     privileged: true
     cap_add:
@@ -321,8 +338,10 @@ configs:
     file: ../../configs/metrics/upf.yaml
   gnb_config:
     file: ../../configs/metrics/gnb.yaml
-  ue_config:
-    file: ../../configs/metrics/ue.yaml
+  ue1_config:
+    file: ../../configs/metrics/ue1.yaml
+  ue2_config:
+    file: ../../configs/metrics/ue2.yaml
   prometheus_config:
     file: ../../configs/metrics/prometheus.yml
   grafana_datasource:
