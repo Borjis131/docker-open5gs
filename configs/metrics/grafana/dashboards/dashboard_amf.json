@@ -550,20 +550,7 @@
             "uid": "open5gsmetrics"
           },
           "editorMode": "code",
-          "expr": "fivegs_amffunction_rm_registeredsubnbr{job=\"amf\"}",
-          "hide": false,
-          "instant": false,
-          "legendFormat": "AMF number of UEs in REGISTERED state",
-          "range": true,
-          "refId": "AMF number of UEs in REGISTERED state"
-        },
-        {
-          "datasource": {
-            "type": "prometheus",
-            "uid": "open5gsmetrics"
-          },
-          "editorMode": "code",
-          "expr": "fivegs_amffunction_rm_registeredsubnbr{job=\"amf\",plmnid=\"00101\",snssai=\"1-000001\"}",
+          "expr": "fivegs_amffunction_rm_registeredsubnbr{job=\"amf\",plmnid=\"$plmnid\",snssai=\"$snssai\"}",
           "instant": false,
           "legendFormat": "AMF number of UEs in REGISTERED state for PLMN {{plmnid}} and S-NSSAI {{snssai}}",
           "range": true,

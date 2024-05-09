@@ -118,14 +118,109 @@
             "uid": "open5gsmetrics"
           },
           "editorMode": "code",
-          "expr": "fivegs_smffunction_sm_pdusessioncreationreq{job=\"smf\",plmnid=\"$plmnid\",snssai=\"$snssai\",fiveqi=\"$fiveqi\"}",
+          "expr": "fivegs_smffunction_sm_pdusessioncreationreq{job=\"smf\",plmnid=\"$plmnid\",snssai=\"$snssai\"}",
           "instant": false,
-          "legendFormat": "SMF PDU Session Create requests for PLMN {{plmnid}}, S-NSSAI {{snssai}} and 5QI {{fiveqi}}",
+          "legendFormat": "SMF PDU Session Create requests for PLMN {{plmnid}} and S-NSSAI {{snssai}}",
           "range": true,
-          "refId": "SMF PDU Session Create requests for PLMN, S-NSSAI and 5QI"
+          "refId": "SMF PDU Session Create requests for PLMN and S-NSSAI"
         }
       ],
       "title": "SMF PDU Session Create requests",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "prometheus",
+        "uid": "open5gsmetrics"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          }
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 0,
+        "y": 8
+      },
+      "id": 2,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "targets": [
+        {
+          "datasource": {
+            "type": "prometheus",
+            "uid": "open5gsmetrics"
+          },
+          "editorMode": "code",
+          "expr": "fivegs_smffunction_sm_qos_flow_nbr{job=\"smf\",plmnid=\"$plmnid\",snssai=\"$snssai\",fiveqi=\"$fiveqi\"}",
+          "instant": false,
+          "legendFormat": "SMF number of QoS flows for PLMN {{plmnid}}, S-NSSAI {{snssai}} and 5QI {{fiveqi}}",
+          "range": true,
+          "refId": "SMF number of QoS flows for PLMN, S-NSSAI and 5QI"
+        }
+      ],
+      "title": "SMF number of QoS flows",
       "type": "timeseries"
     }
   ],

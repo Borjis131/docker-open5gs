@@ -21,3 +21,7 @@ nssf:
           s_nssai:
             sst: 1
             sd: 2
+        - uri: http://nrf.open5gs.org:80
+          s_nssai:
+            sst: 1
+            sd: 3

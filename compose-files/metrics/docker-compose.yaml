@@ -9,6 +9,7 @@ services:
           - db.open5gs.org
     volumes:
       - db_data:/data/db
+      - db_config:/data/configdb
     ports:
       - "0.0.0.0:27017:27017/tcp"
 
@@ -227,7 +228,7 @@ services:
     networks:
       open5gs:
         aliases:
-          - ue.ueransim.org
+          - ue1.ueransim.org
     configs:
       - source: ue1_config
         target: /UERANSIM/config/ue.yaml
@@ -244,9 +245,26 @@ services:
     networks:
       open5gs:
         aliases:
-          - ue.ueransim.org
+          - ue2.ueransim.org
     configs:
       - source: ue2_config
+        target: /UERANSIM/config/ue.yaml
+    privileged: true
+    cap_add:
+      - NET_ADMIN
+    depends_on:
+      - gnb
+
+  ue3:
+    container_name: ue3
+    image: "ghcr.io/borjis131/ue:v3.2.6"
+    command: "-c /UERANSIM/config/ue.yaml"
+    networks:
+      open5gs:
+        aliases:
+          - ue3.ueransim.org
+    configs:
+      - source: ue3_config
         target: /UERANSIM/config/ue.yaml
     privileged: true
     cap_add:
@@ -264,6 +282,8 @@ services:
     configs:
       - source: prometheus_config
         target: /etc/prometheus/prometheus.yml
+    volumes:
+      - prometheus_data:/prometheus
     ports:
       - "0.0.0.0:9090:9090/tcp"
     depends_on:
@@ -286,10 +306,9 @@ services:
         target: /etc/grafana/provisioning/dashboards/open5gs_metrics.yaml
     volumes:
       - ../../configs/metrics/grafana/dashboards:/var/lib/grafana/dashboards
-    secrets:
-      - admin_password
     environment:
-      - GF_SECURITY_ADMIN_PASSWORD__FILE=/run/secrets/admin_password
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=grafana
     ports:
       - "0.0.0.0:3000:3000/tcp"
     depends_on:
@@ -310,10 +329,12 @@ volumes:
     name: open5gs_db_data
     labels:
       org.open5gs.mongodb_version: ${MONGODB_VERSION}
-
-secrets:
-  admin_password:
-    file: ../../configs/metrics/grafana/admin_password.txt
+  db_config:
+    name: open5gs_db_config
+    labels:
+      org.open5gs.mongodb_version: ${MONGODB_VERSION}
+  prometheus_data:
+    name: open5gs_prometheus_data
 
 configs:
   nrf_config:
@@ -342,6 +363,8 @@ configs:
     file: ../../configs/metrics/ue1.yaml
   ue2_config:
     file: ../../configs/metrics/ue2.yaml
+  ue3_config:
+    file: ../../configs/metrics/ue3.yaml
   prometheus_config:
     file: ../../configs/metrics/prometheus.yml
   grafana_datasource:
