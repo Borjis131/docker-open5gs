@@ -6,6 +6,10 @@ variable "UBUNTU_VERSION" {
   default = "jammy"
 }
 
+variable "NODE_VERSION" {
+  default= "20"
+}
+
 variable "DOCKER_REGISTRY" {
   default = "borieher"
 }
@@ -213,6 +217,19 @@ target "upf" {
   tags = [
     "${DOCKER_REGISTRY}/upf:${OPEN5GS_VERSION}",
     "${GITHUB_REGISTRY}/upf:${OPEN5GS_VERSION}"
+  ]
+  labels = {
+    "org.opencontainers.image.source" = "https://github.com/Borjis131/docker-open5gs"
+  }
+  output = ["type=registry"]
+}
+
+target "webui" {
+  context = "./images/webui"
+  platforms = ["linux/amd64", "linux/arm64/v8"]
+    tags = [
+    "${DOCKER_REGISTRY}/webui:${OPEN5GS_VERSION}",
+    "${GITHUB_REGISTRY}/webui:${OPEN5GS_VERSION}"
   ]
   labels = {
     "org.opencontainers.image.source" = "https://github.com/Borjis131/docker-open5gs"

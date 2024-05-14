@@ -6,6 +6,10 @@ variable "UBUNTU_VERSION" {
   default = "jammy"
 }
 
+variable "NODE_VERSION" {
+  default= "20"
+}
+
 group "default" {
   targets = ["base-open5gs", "amf", "ausf", "bsf", "nrf", "nssf",
               "pcf", "scp", "sepp", "smf", "udm", "udr", "upf"]
@@ -122,5 +126,11 @@ target "upf" {
     "base-open5gs:${OPEN5GS_VERSION}" = "target:base-open5gs"
   }
   tags = ["upf:${OPEN5GS_VERSION}"]
+  output = ["type=image"]
+}
+
+target "webui" {
+  context = "./images/webui"
+  tags = ["webui:${OPEN5GS_VERSION}"]
   output = ["type=image"]
 }
