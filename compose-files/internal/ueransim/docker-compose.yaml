@@ -17,7 +17,7 @@ services:
     container_name: nrf
     image: "nrf:${OPEN5GS_VERSION}"
     build:
-      context: ../../images/nrf
+      context: ../../../images/nrf
       args:
         - OPEN5GS_VERSION=${OPEN5GS_VERSION}
         - UBUNTU_VERSION=${UBUNTU_VERSION}
@@ -34,7 +34,7 @@ services:
     container_name: ausf
     image: "ausf:${OPEN5GS_VERSION}"
     build:
-      context: ../../images/ausf
+      context: ../../../images/ausf
       args:
         - OPEN5GS_VERSION=${OPEN5GS_VERSION}
         - UBUNTU_VERSION=${UBUNTU_VERSION}
@@ -53,7 +53,7 @@ services:
     container_name: udm
     image: "udm:${OPEN5GS_VERSION}"
     build:
-      context: ../../images/udm
+      context: ../../../images/udm
       args:
         - OPEN5GS_VERSION=${OPEN5GS_VERSION}
         - UBUNTU_VERSION=${UBUNTU_VERSION}
@@ -72,7 +72,7 @@ services:
     container_name: udr
     image: "udr:${OPEN5GS_VERSION}"
     build:
-      context: ../../images/udr
+      context: ../../../images/udr
       args:
         - OPEN5GS_VERSION=${OPEN5GS_VERSION}
         - UBUNTU_VERSION=${UBUNTU_VERSION}
@@ -93,7 +93,7 @@ services:
     container_name: nssf
     image: "nssf:${OPEN5GS_VERSION}"
     build:
-      context: ../../images/nssf
+      context: ../../../images/nssf
       args:
         - OPEN5GS_VERSION=${OPEN5GS_VERSION}
         - UBUNTU_VERSION=${UBUNTU_VERSION}
@@ -112,7 +112,7 @@ services:
     container_name: bsf
     image: "bsf:${OPEN5GS_VERSION}"
     build:
-      context: ../../images/bsf
+      context: ../../../images/bsf
       args:
         - OPEN5GS_VERSION=${OPEN5GS_VERSION}
         - UBUNTU_VERSION=${UBUNTU_VERSION}
@@ -131,7 +131,7 @@ services:
     container_name: pcf
     image: "pcf:${OPEN5GS_VERSION}"
     build:
-      context: ../../images/pcf
+      context: ../../../images/pcf
       args:
         - OPEN5GS_VERSION=${OPEN5GS_VERSION}
         - UBUNTU_VERSION=${UBUNTU_VERSION}
@@ -152,7 +152,7 @@ services:
     container_name: amf
     image: "amf:${OPEN5GS_VERSION}"
     build:
-      context: ../../images/amf
+      context: ../../../images/amf
       args:
         - OPEN5GS_VERSION=${OPEN5GS_VERSION}
         - UBUNTU_VERSION=${UBUNTU_VERSION}
@@ -171,7 +171,7 @@ services:
     container_name: smf
     image: "smf:${OPEN5GS_VERSION}"
     build:
-      context: ../../images/smf
+      context: ../../../images/smf
       args:
         - OPEN5GS_VERSION=${OPEN5GS_VERSION}
         - UBUNTU_VERSION=${UBUNTU_VERSION}
@@ -191,7 +191,7 @@ services:
     container_name: upf
     image: "upf:${OPEN5GS_VERSION}"
     build:
-      context: ../../images/upf
+      context: ../../../images/upf
       args:
         - OPEN5GS_VERSION=${OPEN5GS_VERSION}
         - UBUNTU_VERSION=${UBUNTU_VERSION}
