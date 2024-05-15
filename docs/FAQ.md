@@ -6,6 +6,7 @@ It is normal to see:
 ```bash
 WARN[0297]
 volume "open5gs_db_data" already exists but was not created for project "<deployment_name>".
+volume "open5gs_db_config" already exists but was not created for project "<deployment_name>".
 ```
 
 It is only a warning, telling you that the Docker volume exists.

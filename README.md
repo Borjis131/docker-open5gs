@@ -29,11 +29,27 @@ All the images depend on the base image. So first, update the `.env` file with t
 - Default value: The one specified in the `.env` file
 - Tested values: 3.6.8, 4.2, 6.0
 
+`NODE_VERSION` is the version of Node.js being used to build the Open5GS WebUI.
+- Accepted values are the tags used by Node in Docker Hub for its bookworm-slim image and the Node.js dependency of Open5GS WebUI
+- Default value: 20
+- Tested values: 20
+
 `DOCKER_HOST_IP` is the IP address of the host running Docker. This modifies the `advertise` field in the `upf.yaml` config file for this to work when exposing the Docker containers network.
 
 ## Build it (2 ways)
 
-### First way (make + docker compose build)
+### First way (docker buildx bake)
+
+>Note: Requires docker-buildx-plugin
+
+With this method, you can build all the images all at once with a single command (taking advantage of docker buildx parallelism), run:
+```bash
+docker buildx bake
+```
+
+>Note: This command uses the `docker-bake.hcl` file, please update the `OPEN5GS_VERSION`, `UBUNTU_VERSION` and `NODE_VERSION` variables there before running it.
+
+### Second way (make + docker compose)
 
 >Note: Requires make and docker-compose-plugin
 
@@ -44,22 +60,22 @@ make
 
 This will take a while, after this you will have the base image called `base-open5gs`, tagged with the `OPEN5GS_VERSION` selected.
 
-After this you can run the following to create the Network Functions images:
+Or you can run the following to create the base image and all the Network Function images:
+```bash
+make all
+```
+
+Some deployments have the build instructions for the images (like the `basic` deployment), only depending of the `base-open5gs` image:
 ```bash
 # Example using the basic deployment
 docker compose -f compose-files/basic/docker-compose.yaml --env-file=.env up -d
 ```
 
-### Second way (docker buildx bake)
-
->Note: Requires docker-buildx-plugin
-
-With this method, you can build all the images all at once with a single command, run:
+Some other deployments download the images needed from container registries like Docker Hub or GitHub Container Registry (like the `network-slicing` deployment):
 ```bash
-docker buildx bake
+# Example using the network-slicing deployment
+docker compose -f compose-files/network-slicing/docker-compose.yaml --env-file=.env up -d
 ```
-
->Note: This command uses the `docker-bake.hcl` file, please update the `OPEN5GS_VERSION` and `UBUNTU_VERSION` variables there before running it.
 
 ## Use it
 

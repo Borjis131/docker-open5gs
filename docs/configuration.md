@@ -25,7 +25,7 @@ You can use the Open5GS `open5gs-dbctl` script in the host to add users to the d
 
 The database Docker volume is marked with a label `org.open5gs.mongodb_version` indicating the `MONGODB_VERSION` selected in the `.env` file. This marks the version used for the mongo container. This label is needed to debug issues with users changing the mongo container version but keeping the Docker volumes created.
 
-> When upgrading/downgrading the `MONGODB_VERSION` the existing `open5gs_db_data` Docker volume could cause problems/crashing. It is recommended to remove it.
+> When upgrading/downgrading the `MONGODB_VERSION` the existing `open5gs_db_data` and `open5gs_db_config` Docker volumes could cause problems/crashing. It is recommended to remove them.
 
 ### Network Function configuration
 
