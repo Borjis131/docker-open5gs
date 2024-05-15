@@ -20,7 +20,7 @@ variable "GITHUB_REGISTRY" {
 
 group "default" {
   targets = ["base-open5gs", "amf", "ausf", "bsf", "nrf", "nssf",
-              "pcf", "scp", "sepp", "smf", "udm", "udr", "upf"]
+              "pcf", "scp", "sepp", "smf", "udm", "udr", "upf", "webui"]
 }
 
 target "base-open5gs" {
@@ -227,7 +227,7 @@ target "upf" {
 target "webui" {
   context = "./images/webui"
   platforms = ["linux/amd64", "linux/arm64/v8"]
-    tags = [
+  tags = [
     "${DOCKER_REGISTRY}/webui:${OPEN5GS_VERSION}",
     "${GITHUB_REGISTRY}/webui:${OPEN5GS_VERSION}"
   ]

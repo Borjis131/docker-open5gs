@@ -12,7 +12,7 @@ variable "NODE_VERSION" {
 
 group "default" {
   targets = ["base-open5gs", "amf", "ausf", "bsf", "nrf", "nssf",
-              "pcf", "scp", "sepp", "smf", "udm", "udr", "upf"]
+              "pcf", "scp", "sepp", "smf", "udm", "udr", "upf", "webui"]
 }
 
 target "base-open5gs" {
