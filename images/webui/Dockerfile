@@ -19,14 +19,14 @@ RUN git clone --depth 1 --branch=${OPEN5GS_VERSION} https://github.com/open5gs/o
 FROM node:${NODE_VERSION}-bookworm-slim
 
 # copy webui
-COPY --from=builder /open5gs/webui/ /usr/src/webui
+COPY --from=builder /open5gs/webui/ /usr/local/src/webui
 
 ENV DB_URI="mongodb://localhost/open5gs"
 ENV HOSTNAME="0.0.0.0"
 ENV PORT=9999
 ENV NODE_ENV="production"
 
-WORKDIR /usr/src/webui
+WORKDIR /usr/local/src/webui
 ENTRYPOINT ["npm"]
 
 # use CMD to provide arguments to ENTRYPOINT (can be overridden by user)
