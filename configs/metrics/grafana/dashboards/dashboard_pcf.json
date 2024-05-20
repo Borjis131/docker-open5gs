@@ -106,11 +106,11 @@
             "uid": "open5gsmetrics"
           },
           "editorMode": "code",
-          "expr": "fivegs_pcffunction_pa_policysmassoreq{job=\"pcf\"}",
+          "expr": "sum(fivegs_pcffunction_pa_policysmassoreq{job=\"pcf\",plmnid=\"$plmnid\"}) by (plmnid)",
           "instant": false,
-          "legendFormat": "PCF SM Policy Association requests",
+          "legendFormat": "PCF SM Policy Association requests for PLMN {{plmnid}}",
           "range": true,
-          "refId": "PCF SM Policy Association requests"
+          "refId": "PCF SM Policy Association requests for PLMN"
         },
         {
           "datasource": {
