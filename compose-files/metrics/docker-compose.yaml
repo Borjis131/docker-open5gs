@@ -325,7 +325,9 @@ services:
     environment:
       - DB_URI=mongodb://db.open5gs.org/open5gs
       - PORT=9999
-    command: "run start"
+      - HOSTNAME=0.0.0.0
+      - NODE_ENV=dev
+    command: "run dev"
     networks:
       open5gs:
         aliases:
