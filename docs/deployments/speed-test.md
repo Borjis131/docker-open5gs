@@ -74,4 +74,9 @@ In my specific deployment, executing the test inside the PacketRusher container 
 Some issues appear due to not having the same version of PacketRusher being installed on the host machine (free5gc's gtp5g kernel module) and the PacketRusher version being compiled for the Docker image. The current image uses the PacketRusher tag `20240521`, so make sure to checkout to this version for the PacketRusher being installed on the host machine.
 
 ### Issue 2: Cannot allocate memory
-Sometimes the error "[GNB][GTP] Unable to create Kernel GTP interface: cannot allocate memory1234567891val1234567891" appears, I do not know why this error happens. Just restarting the Docker Compose deployment fixes the issue.
+Sometimes this error appears:
+```cmd
+time="your-date" level=info msg="[GNB][GTP] Unable to create Kernel GTP interface: cannot allocate memory1234567891val1234567891"
+```
+
+I do not know why this error happens, restarting the Docker Compose deployment fixes the issue.
