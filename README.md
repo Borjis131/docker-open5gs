@@ -2,7 +2,7 @@
 
 [Open5GS](https://github.com/open5gs/open5gs) 5G Core Network Functions images ready for Docker.
 
-This repository contains the Dockerfiles and docker compose files used to deploy a configurable 5G Core.
+This repository contains the Dockerfiles, Docker Compose files and Helm charts to deploy a configurable 5G Core.
 
 The repository uses the same release version tags as Open5GS, so to use an specific Open5GS version just select the appropiate tag.
 
@@ -10,9 +10,19 @@ The Docker images are available for `amd64/x86-64` and `arm64/v8`:
 - in DockerHub `borieher/<nf_name>:<open5gs_version>`
 - in GitHub Container Registry `ghcr.io/borjis131/<nf_name>:<open5gs_version>`
 
+The Helm charts will be available:
+- in DockerHub `borieher/<chart_name>:<chart_version>`
+- in GitHub Container Registry `ghcr.io/borjis131/<chart_name>:<chart_version>`
+
+>Note: The <chart_version> is not the same as the <open5gs_version>
+
 ## Configure it
 
-All the images depend on the base image. So first, update the `.env` file with the desired values to use:
+All the images (except `webui`) depend on the `base-open5gs` image to be built, after that each image is indepent.
+
+First, update the `.env` and `docker-bake.hcl` files with the desired values to use.
+
+The `.env` file is used to build the images using Make or Docker Compose, as well as deploying in Docker Compose. The `docker-bake.hcl` file is used to build the images using bake.
 
 `OPEN5GS_VERSION` is the version of Open5GS to use.
 - Accepted values are the tags, branches or commit IDs used in the Open5GS project
@@ -36,49 +46,61 @@ All the images depend on the base image. So first, update the `.env` file with t
 
 `DOCKER_HOST_IP` is the IP address of the host running Docker. This modifies the `advertise` field in the `upf.yaml` config file for this to work when exposing the Docker containers network.
 
-## Build it (2 ways)
+## Build it
 
-### First way (docker buildx bake)
+<details>
+<summary>Build it with bake (recommended)</summary>
 
->Note: Requires docker-buildx-plugin
+>Note: This method uses the `docker-bake.hcl` file and requires `docker-buildx-plugin`
 
-With this method, you can build all the images all at once with a single command (taking advantage of docker buildx parallelism), run:
+With this method, you can build the images all at once with a single command taking advantage of docker buildx parallelism. From the top level directory of the repository run:
 ```bash
 docker buildx bake
 ```
 
->Note: This command uses the `docker-bake.hcl` file, please update the `OPEN5GS_VERSION`, `UBUNTU_VERSION` and `NODE_VERSION` variables there before running it.
+</details>
+<details>
+<summary>Build it with Make</summary>
 
-### Second way (make + docker compose)
+>Note: This method uses the `Makefile` and `.env` files
 
->Note: Requires make and docker-compose-plugin
-
-To create the base image run:
-```bash
-make
-```
-
-This will take a while, after this you will have the base image called `base-open5gs`, tagged with the `OPEN5GS_VERSION` selected.
-
-Or you can run the following to create the base image and all the Network Function images:
+From the top level directory of the repository run the following to create the `base-open5gs` image and all the Network Function images:
 ```bash
 make all
 ```
 
-Some deployments have the build instructions for the images (like the `basic` deployment), only depending of the `base-open5gs` image:
+This will take a while.
+
+</details>
+<details>
+<summary>Build it with Docker Compose</summary>
+
+>Note: This method uses the `Makefile`, `.env` and `docker-compose.yaml` files
+
+Some deployments have the build instructions for the images (like the `basic` deployment), only depending of the `base-open5gs` image. Some other deployments download the images needed from container registries like Docker Hub or GitHub Container Registry (like the `network-slicing` deployment).
+
+First create the `base-open5gs` image, from the top level directory of the repository run:
+```bash
+make base-open5gs
+```
+
+Then select the appropiate deployment (`basic`, `scp-model-d` or `roaming`). From the top level directory of the repository, run:
 ```bash
 # Example using the basic deployment
 docker compose -f compose-files/basic/docker-compose.yaml --env-file=.env up -d
 ```
 
-Some other deployments download the images needed from container registries like Docker Hub or GitHub Container Registry (like the `network-slicing` deployment):
-```bash
-# Example using the network-slicing deployment
-docker compose -f compose-files/network-slicing/docker-compose.yaml --env-file=.env up -d
-```
+This command will build all the images for the deployment selected and then run the deployment.
+
+</details>
 
 ## Use it
+<details>
+<summary>Use it with Docker Compose</summary>
 
+Update the `.env` file with the desired values to use:
+
+Then select the appropiate deployment and from the top level directory of the repository run:
 ```bash
 # Run the basic deployment
 docker compose -f compose-files/basic/docker-compose.yaml --env-file=.env up -d
@@ -87,7 +109,23 @@ docker compose -f compose-files/basic/docker-compose.yaml --env-file=.env up -d
 docker compose -f compose-files/basic/docker-compose.yaml --env-file=.env down
 ```
 
-## Overview of the basic deployment
+</details>
+<details>
+<summary>Use it with Kubernetes</summary>
+
+TBD
+
+</details>
+
+## Repository structure
+
+- `compose-files/` directory contains different docker compose deployments.
+- `configs/` directory contains the Open5GS configuration files for each docker compose deployment.
+- `docs/` directory contains the documentation for this project.
+- `images/` directory has each Network Function Dockerfile.
+- `misc/` contains examples and diagrams.
+
+### Overview of the basic deployment
 
 ![Overview of the basic deployment](misc/diagrams/basic.png)
 
@@ -97,12 +135,4 @@ The `basic` deployment is prepared to work with external gNBs, exposing:
 
 It also exposes the MongoDB database using `TCP port 27017`.
 
-### Repository contents
-
-- `compose-files/` directory contains different docker compose deployments.
-- `configs/` directory contains the Open5GS configuration files for each docker compose deployment.
-- `docs/` directory contains the documentation for this project.
-- `images/` directory has each Network Function Dockerfile.
-- `misc/` contains examples and diagrams.
-
-Check `docs/` to see the full documentation.
+Check `docs/` to see the full documentation for the different deployments.
