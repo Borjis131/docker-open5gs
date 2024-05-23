@@ -1,0 +1,36 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "common.names.fullname" . }}-deployment
+  namespace: {{ include "common.names.namespace" . }}
+  labels:
+    nf: amf
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      nf: amf
+  template:
+    metadata:
+      labels:
+        nf: amf
+    spec:
+      containers:
+      - name: {{ include "common.names.fullname" . }}
+        image: {{ template "amf.image" . }}
+        args: ["-c", "/open5gs/config/amf.yaml"]
+        ports:
+        - name: sbi
+          containerPort: {{ .Values.global.containerPorts.sbi }}
+        - name: ngap
+          containerPort: 38412
+          protocol: SCTP
+        volumeMounts:
+        - name: amf-volume-config
+          mountPath: /open5gs/config/amf.yaml
+          subPath: amf.yaml
+      volumes:
+      - name: amf-volume-config
+        configMap:
+          name: {{ include "common.names.fullname" . }}-configmap

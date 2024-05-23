@@ -1,0 +1,13 @@
+# Default values for bsf
+
+image:
+  registry: ghcr.io
+  repository: borjis131/bsf
+  tag: "v2.7.1"
+  pullPolicy: IfNotPresent
+
+config: {}
+
+global:
+  containerPorts:
+    sbi: 80

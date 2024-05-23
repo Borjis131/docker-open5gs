@@ -1,0 +1,11 @@
+logger:
+  file:
+    path: /open5gs/install/var/log/open5gs/nrf.log
+
+global:
+
+nrf:
+  sbi:
+    server:
+      - dev: eth0
+        port: {{ .Values.global.containerPorts.sbi }}

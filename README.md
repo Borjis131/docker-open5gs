@@ -10,9 +10,8 @@ The Docker images are available for `amd64/x86-64` and `arm64/v8`:
 - in DockerHub `borieher/<nf_name>:<open5gs_version>`
 - in GitHub Container Registry `ghcr.io/borjis131/<nf_name>:<open5gs_version>`
 
-The Helm charts will be available:
-- in DockerHub `borieher/<chart_name>:<chart_version>`
-- in GitHub Container Registry `ghcr.io/borjis131/<chart_name>:<chart_version>`
+The Helm charts are available:
+- in DockerHub `registry-1.docker.io/borieher/<chart_name> --version <chart_version>`
 
 >Note: The <chart_version> is not the same as the <open5gs_version>
 
@@ -90,11 +89,28 @@ Then select the appropiate deployment (`basic`, `scp-model-d` or `roaming`). Fro
 docker compose -f compose-files/basic/docker-compose.yaml --env-file=.env up -d
 ```
 
-This command will build all the images for the deployment selected and then run the deployment.
+This command builds all the images for the deployment selected and then runs the deployment.
+
+</details>
+<details>
+<summary>Build the Helm charts</summary>
+
+Use the following commands inside the `helm/` directory.
+
+First retrieve the dependencies of each chart individually, the `open5gs` chart must be the latest one, cause it depends on all the other charts:
+```bash
+helm dependency build ./<chart_name>
+```
+
+You can also package the charts (it is not mandatory):
+```bash
+helm package ./<chart_name>
+```
 
 </details>
 
 ## Use it
+
 <details>
 <summary>Use it with Docker Compose</summary>
 
@@ -113,7 +129,31 @@ docker compose -f compose-files/basic/docker-compose.yaml --env-file=.env down
 <details>
 <summary>Use it with Kubernetes</summary>
 
-TBD
+You can download the packaged charts from the repository or you can use the ones built by yourself.
+
+To download a chart:
+```bash
+helm pull oci://registry-1.docker.io/borieher/<chart_name> --version <chart_version>
+```
+
+To install a chart run:
+```bash
+helm install -n <namespace> <release_name> ./<chart_name>
+```
+
+You can provide your custom values using the helm flag `-f` and providing a `values.yaml` file:
+```bash
+helm install -n <namespace> -f values.yaml <release_name> ./<chart_name>
+```
+
+If the namespace does not exist, create it by using the helm flag `--create-namespace`.
+
+To uninstall a chart and remove a namespace run:
+```bash
+helm uninstall -n <namespace> <release_name>
+
+kubectl delete namespace <namespace>
+```
 
 </details>
 

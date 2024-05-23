@@ -1,0 +1,13 @@
+# Default values for nrf
+
+image:
+  registry: ghcr.io
+  repository: borjis131/nrf
+  tag: "v2.7.1"
+  pullPolicy: IfNotPresent
+
+config: {}
+
+global:
+  containerPorts:
+    sbi: 80

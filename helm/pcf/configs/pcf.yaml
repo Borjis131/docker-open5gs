@@ -1,0 +1,24 @@
+{{- if eq .Release.Name "db" }}
+db_uri: mongodb://db-service/open5gs
+{{- else }}
+db_uri: mongodb://{{ .Release.Name }}-db-service/open5gs
+{{- end }}
+
+logger:
+  file:
+    path: /open5gs/install/var/log/open5gs/pcf.log
+
+global:
+
+pcf:
+  sbi:
+    server:
+      - dev: eth0
+        port: {{ .Values.global.containerPorts.sbi }}
+    client:
+      nrf:
+        {{- if eq .Release.Name "nrf" }}
+        - uri: http://nrf-service-sbi:{{ .Values.global.containerPorts.sbi }}
+        {{- else }}
+        - uri: http://{{ .Release.Name }}-nrf-service-sbi:{{ .Values.global.containerPorts.sbi }}
+        {{- end }}

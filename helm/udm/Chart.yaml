@@ -1,0 +1,16 @@
+apiVersion: v2
+
+name: udm
+description: Open5GS UDM Helm chart for Kubernetes
+version: 0.1.0
+type: application
+appVersion: "v2.7.1"
+
+icon: https://open5gs.org/assets/img/open5gs-logo.png
+
+dependencies:
+- name: common
+  repository: oci://registry-1.docker.io/bitnamicharts
+  tags:
+  - bitnami-common
+  version: 2.x.x

@@ -1,0 +1,33 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "common.names.fullname" . }}-deployment
+  namespace: {{ include "common.names.namespace" . }}
+  labels:
+    nf: ausf
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      nf: ausf
+  template:
+    metadata:
+      labels:
+        nf: ausf
+    spec:
+      containers:
+      - name: {{ include "common.names.fullname" . }}
+        image: {{ template "ausf.image" . }}
+        args: ["-c", "/open5gs/config/ausf.yaml"]
+        ports:
+        - name: sbi
+          containerPort: {{ .Values.global.containerPorts.sbi }}
+        volumeMounts:
+        - name: ausf-volume-config
+          mountPath: /open5gs/config/ausf.yaml
+          subPath: ausf.yaml
+      volumes:
+      - name: ausf-volume-config
+        configMap:
+          name: {{ include "common.names.fullname" . }}-configmap

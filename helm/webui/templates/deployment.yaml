@@ -1,0 +1,38 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "common.names.fullname" . }}-deployment
+  namespace: {{ include "common.names.namespace" . }}
+  labels:
+    app: webui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: webui
+  template:
+    metadata:
+      labels:
+        app: webui
+    spec:
+      containers:
+      - name: {{ include "common.names.fullname" . }}
+        image: {{ template "webui.image" . }}
+        args: ["run", "dev"]
+        env:
+        - name: DB_URI
+          {{- if eq .Release.Name "db" }}
+          value: "mongodb://db-service/open5gs"
+          {{- else }}
+          value: "mongodb://{{ .Release.Name }}-db-service/open5gs"
+          {{- end }}
+        - name: HOSTNAME
+          value: "0.0.0.0"
+        - name: PORT
+          value: {{ .Values.global.containerPorts.webui | quote }}
+        - name: NODE_ENV
+          value: "dev"
+        ports:
+        - name: webui
+          containerPort: {{ .Values.global.containerPorts.webui }}

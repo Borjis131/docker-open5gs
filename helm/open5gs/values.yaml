@@ -1,0 +1,74 @@
+# Default values for open5gs
+
+global:
+  containerPorts:
+    db: 27017
+    sbi: 80
+    webui: 9999
+  mobileNetwork:
+    name: Open5GS
+    plmn:
+      mcc: "001"
+      mnc: "01"
+      tac: 1
+      s_nssai:
+        sst: 1
+        sd: "000001"
+    dataNetwork:
+      subnet: 10.45.0.0/16
+      gateway: 10.45.0.1
+      dnn: internet
+
+db:
+  enabled: true
+  services:
+    db:
+      type: NodePort
+      nodePort: 30007
+
+webui:
+  enabled: true
+  services:
+    webui:
+      type: NodePort
+      nodePort: 30999
+
+nrf:
+  enabled: true
+
+ausf:
+  enabled: true
+
+bsf:
+  enabled: true
+
+nssf:
+  enabled: true
+
+pcf:
+  enabled: true
+
+udm:
+  enabled: true
+
+udr:
+  enabled: true
+
+amf:
+  enabled: true
+  services:
+    ngap:
+      type: LoadBalancer
+      loadBalancerIP: 10.33.0.2
+      provider: MetalLB
+
+smf:
+  enabled: true
+
+upf:
+  enabled: true
+  services:
+    gtpu:
+      type: LoadBalancer
+      loadBalancerIP: 10.33.0.3
+      provider: MetalLB

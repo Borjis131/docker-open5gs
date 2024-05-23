@@ -1,0 +1,36 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "common.names.fullname" . }}-deployment
+  namespace: {{ include "common.names.namespace" . }}
+  labels:
+    nf: smf
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      nf: smf
+  template:
+    metadata:
+      labels:
+        nf: smf
+    spec:
+      containers:
+      - name: {{ include "common.names.fullname" . }}
+        image: {{ template "smf.image" . }}
+        args: ["-c", "/open5gs/config/smf.yaml"]
+        ports:
+        - name: sbi
+          containerPort: {{ .Values.global.containerPorts.sbi }}
+        - name: pfcp
+          containerPort: 8805
+          protocol: UDP
+        volumeMounts:
+        - name: smf-volume-config
+          mountPath: /open5gs/config/smf.yaml
+          subPath: smf.yaml
+      volumes:
+      - name: smf-volume-config
+        configMap:
+          name: {{ include "common.names.fullname" . }}-configmap

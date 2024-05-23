@@ -1,0 +1,33 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "common.names.fullname" . }}-deployment
+  namespace: {{ include "common.names.namespace" . }}
+  labels:
+    nf: bsf
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      nf: bsf
+  template:
+    metadata:
+      labels:
+        nf: bsf
+    spec:
+      containers:
+      - name: {{ include "common.names.fullname" . }}
+        image: {{ template "bsf.image" . }}
+        args: ["-c", "/open5gs/config/bsf.yaml"]
+        ports:
+        - name: sbi
+          containerPort: {{ .Values.global.containerPorts.sbi }}
+        volumeMounts:
+        - name: bsf-volume-config
+          mountPath: /open5gs/config/bsf.yaml
+          subPath: bsf.yaml
+      volumes:
+      - name: bsf-volume-config
+        configMap:
+          name: {{ include "common.names.fullname" . }}-configmap

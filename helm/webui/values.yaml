@@ -1,0 +1,16 @@
+# Default values for webui
+
+image:
+  registry: ghcr.io
+  repository: borjis131/webui
+  tag: "v2.7.1"
+  pullPolicy: IfNotPresent
+
+services:
+  webui:
+    type: NodePort
+    nodePort: 30999
+
+global:
+  containerPorts:
+    webui: 9999

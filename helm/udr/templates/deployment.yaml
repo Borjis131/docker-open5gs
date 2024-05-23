@@ -1,0 +1,33 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "common.names.fullname" . }}-deployment
+  namespace: {{ include "common.names.namespace" . }}
+  labels:
+    nf: udr
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      nf: udr
+  template:
+    metadata:
+      labels:
+        nf: udr
+    spec:
+      containers:
+      - name: {{ include "common.names.fullname" . }}
+        image: {{ template "udr.image" . }}
+        args: ["-c", "/open5gs/config/udr.yaml"]
+        ports:
+        - name: sbi
+          containerPort: {{ .Values.global.containerPorts.sbi }}
+        volumeMounts:
+        - name: udr-volume-config
+          mountPath: /open5gs/config/udr.yaml
+          subPath: udr.yaml
+      volumes:
+      - name: udr-volume-config
+        configMap:
+          name: {{ include "common.names.fullname" . }}-configmap

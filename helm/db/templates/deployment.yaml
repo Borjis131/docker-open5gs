@@ -1,0 +1,38 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "common.names.fullname" . }}-deployment
+  namespace: {{ include "common.names.namespace" . }}
+  labels:
+    app: db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      containers:
+      - name: {{ include "common.names.fullname" . }}
+        image: {{ template "db.image" . }}
+        #args: ["--bind_ip 0.0.0.0 --port 27017"]
+        ports:
+        - name: db
+          containerPort: {{ .Values.global.containerPorts.db }}
+        volumeMounts:
+        - name: db-volume-data
+          mountPath: /data/db
+        #- name: db-volume-config
+          #mountPath: /etc/mongod.conf
+          #subPath: mongod.conf
+      volumes:
+      - name: db-volume-data
+        persistentVolumeClaim:
+          claimName: {{ include "common.names.fullname" . }}-pvc-data
+      #- name: db-volume-config
+        #configMap:
+          #name: {{ include "common.names.fullname" . }}-configmap

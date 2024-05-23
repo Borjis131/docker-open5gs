@@ -1,0 +1,9 @@
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "common.names.fullname" . }}-configmap
+  namespace: {{ include "common.names.namespace" . }}
+data:
+  pcf.yaml: |
+    {{ template "pcf.config" . }}

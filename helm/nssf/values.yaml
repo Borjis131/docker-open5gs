@@ -1,0 +1,18 @@
+# Default values for nssf
+
+image:
+  registry: ghcr.io
+  repository: borjis131/nssf
+  tag: "v2.7.1"
+  pullPolicy: IfNotPresent
+
+config: {}
+
+global:
+  containerPorts:
+    sbi: 80
+  mobileNetwork:
+    plmn:
+      s_nssai:
+        sst: 1
+        sd: "000001"

@@ -1,0 +1,41 @@
+logger:
+  file:
+    path: /open5gs/install/var/log/open5gs/smf.log
+
+global:
+
+smf:
+  sbi:
+    server:
+      - dev: eth0
+        port: {{ .Values.global.containerPorts.sbi }}
+    client:
+      nrf:
+        {{- if eq .Release.Name "nrf" }}
+        - uri: http://nrf-service-sbi:{{ .Values.global.containerPorts.sbi }}
+        {{- else }}
+        - uri: http://{{ .Release.Name }}-nrf-service-sbi:{{ .Values.global.containerPorts.sbi }}
+        {{- end }}
+  pfcp:
+    server:
+      - dev: eth0
+    client:
+      upf:
+        {{- if eq .Release.Name "upf" }}
+        - address: upf-service-pfcp
+        {{- else }}
+        - address: {{ .Release.Name }}-upf-service-pfcp
+        {{- end }}
+  gtpu:
+    server:
+      - dev: eth0
+  session:
+    - subnet: {{ .Values.global.mobileNetwork.dataNetwork.subnet }}
+      gateway: {{ .Values.global.mobileNetwork.dataNetwork.gateway }}
+      {{- if .Values.global.mobileNetwork.dataNetwork.dnn }}
+      dnn: {{ .Values.global.mobileNetwork.dataNetwork.dnn }}
+      {{- end }}
+  dns:
+    - 8.8.8.8
+    - 8.8.4.4
+  mtu: 1400

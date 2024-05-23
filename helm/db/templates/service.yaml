@@ -1,0 +1,19 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "common.names.fullname" . }}-service
+  namespace: {{ include "common.names.namespace" . }}
+spec:
+  selector:
+    app: db
+  ports:
+    - name: db
+      port: {{ .Values.global.containerPorts.db }}
+      targetPort: {{ .Values.global.containerPorts.db }}
+  {{- if eq .Values.services.db.type "NodePort" }}
+      nodePort: {{ .Values.services.db.nodePort }}
+  type: NodePort
+  {{- else if eq .Values.services.db.type "ClusterIP" }}
+  type: ClusterIP
+  {{- end }}

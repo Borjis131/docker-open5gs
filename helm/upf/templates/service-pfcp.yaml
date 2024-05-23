@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "common.names.fullname" . }}-service-pfcp
+  namespace: {{ include "common.names.namespace" . }}
+spec:
+  selector:
+    nf: upf
+  ports:
+    - name: pfcp
+      port: 8805
+      targetPort: 8805
+      protocol: UDP
+  type: ClusterIP

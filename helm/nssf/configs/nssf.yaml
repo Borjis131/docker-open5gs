@@ -1,0 +1,27 @@
+logger:
+  file:
+    path: /open5gs/install/var/log/open5gs/nssf.log
+
+global:
+
+nssf:
+  sbi:
+    server:
+      - dev: eth0
+        port: {{ .Values.global.containerPorts.sbi }}
+    client:
+      nrf:
+        {{- if eq .Release.Name "nrf" }}
+        - uri: http://nrf-service-sbi:{{ .Values.global.containerPorts.sbi }}
+        {{- else }}
+        - uri: http://{{ .Release.Name }}-nrf-service-sbi:{{ .Values.global.containerPorts.sbi }}
+        {{- end }}
+      nsi:
+        {{- if eq .Release.Name "nrf" }}
+        - uri: http://nrf-service-sbi:{{ .Values.global.containerPorts.sbi }}
+        {{- else }}
+        - uri: http://{{ .Release.Name }}-nrf-service-sbi:{{ .Values.global.containerPorts.sbi }}
+        {{- end }}
+          s_nssai:
+            sst: {{ .Values.global.mobileNetwork.plmn.s_nssai.sst }}
+            sd: {{ .Values.global.mobileNetwork.plmn.s_nssai.sd }}

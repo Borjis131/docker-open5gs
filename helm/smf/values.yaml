@@ -1,0 +1,18 @@
+# Default values for smf
+
+image:
+  registry: ghcr.io
+  repository: borjis131/smf
+  tag: "v2.7.1"
+  pullPolicy: IfNotPresent
+
+config: {}
+
+global:
+  containerPorts:
+    sbi: 80
+  mobileNetwork:
+    dataNetwork:
+      subnet: 10.45.0.0/16
+      gateway: 10.45.0.1
+      dnn: internet

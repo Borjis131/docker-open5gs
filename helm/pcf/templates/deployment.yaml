@@ -1,0 +1,33 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "common.names.fullname" . }}-deployment
+  namespace: {{ include "common.names.namespace" . }}
+  labels:
+    nf: pcf
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      nf: pcf
+  template:
+    metadata:
+      labels:
+        nf: pcf
+    spec:
+      containers:
+      - name: {{ include "common.names.fullname" . }}
+        image: {{ template "pcf.image" . }}
+        args: ["-c", "/open5gs/config/pcf.yaml"]
+        ports:
+        - name: sbi
+          containerPort: {{ .Values.global.containerPorts.sbi }}
+        volumeMounts:
+        - name: pcf-volume-config
+          mountPath: /open5gs/config/pcf.yaml
+          subPath: pcf.yaml
+      volumes:
+      - name: pcf-volume-config
+        configMap:
+          name: {{ include "common.names.fullname" . }}-configmap

@@ -1,0 +1,19 @@
+# Default values for db
+
+image:
+  registry: docker.io
+  repository: mongo
+  tag: "6.0"
+  pullPolicy: IfNotPresent
+
+services:
+  db:
+    type: NodePort
+    nodePort: 30007
+
+
+config: {}
+
+global:
+  containerPorts:
+    db: 27017

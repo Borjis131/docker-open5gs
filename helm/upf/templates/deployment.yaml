@@ -1,0 +1,41 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "common.names.fullname" . }}-deployment
+  namespace: {{ include "common.names.namespace" . }}
+  labels:
+    nf: upf
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      nf: upf
+  template:
+    metadata:
+      labels:
+        nf: upf
+    spec:
+      containers:
+      - name: {{ include "common.names.fullname" . }}
+        image: {{ template "upf.image" . }}
+        args: ["-c", "/open5gs/config/upf.yaml"]
+        ports:
+        - name: gtpu
+          containerPort: 2152
+          protocol: UDP
+        - name: pfcp
+          containerPort: 8805
+          protocol: UDP
+        securityContext:
+          privileged: true
+          capabilities:
+            add: ["NET_ADMIN"]
+        volumeMounts:
+        - name: upf-volume-config
+          mountPath: /open5gs/config/upf.yaml
+          subPath: upf.yaml
+      volumes:
+      - name: upf-volume-config
+        configMap:
+          name: {{ include "common.names.fullname" . }}-configmap

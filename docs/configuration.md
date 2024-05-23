@@ -1,6 +1,6 @@
 # Configuration guide
 
-## Common configuration
+## Docker Compose configuration
 
 ### Network configuration
 
@@ -33,21 +33,110 @@ You can override the command being run in the container by using the command sec
 ```yaml
   nssf:
     ...
-    command: "-c /open5gs/config/nssf.yaml"
+    command: "-c /etc/open5gs/custom/nssf.yaml"
     ...
 ```
 
-## The `basic` Docker compose deployment
+## The `basic` Docker Compose deployment
 
 The `configs/basic/` configuration uses Open5GS 5G Network Functions without SCP.
 
 The `configs/basic/upf.yaml` UPF config file is using the _advertise_ option with the `DOCKER_HOST_IP` environment variable present in the `.env` file (it is used through the `docker-host.external-ip` hosts entry). This configures the 5G Core to expect connections from external networks (not the docker network), through the host machine.
 
-For Docker compose deployments without external connections, such as `internal` or `network-slicing` the `DOCKER_HOST_IP` environment variable is ignored.
+For Docker Compose deployments without external connections, such as `internal/packetrusher`, `internal/ueransim` or `network-slicing` the `DOCKER_HOST_IP` environment variable is ignored.
 
 The files for the `basic` deployment `compose-files/basic/` contains the docker-compose.yaml files to work with Compose V2 using the Compose specification.
 
-The `docker-compose.yaml` uses configs, the source config file present in `configs/basic/<nf>.yaml` and is mounted into the container path `/open5gs/config/<nf>.yaml`. This way you can try different configuration files without the need of rebuilding the Docker image.
+The `docker-compose.yaml` uses configs, the source config file present in `configs/basic/<nf>.yaml` and is mounted into the container path `/etc/open5gs/custom/<nf>.yaml`. This way you can try different configuration files without the need of rebuilding the Docker image.
+
+## Helm configuration (for Kubernetes)
+
+Each Helm chart comes with different values, some of them present per chart like the `image` or `config` values and some others are global like the `mobileNetwork` values. But all of these values can be configured through the `open5gs` chart. The `open5gs` chart includes all the charts as subcharts.
+
+The `open5gs` charts values are explained below, to change specific values in the subcharts follow this structure or take a look to the `values.yaml` file located on each chart to see the list of possible values.
+
+```yaml
+global:
+  containerPorts:
+    db: 27017
+    sbi: 80
+    webui: 9999
+  mobileNetwork:
+    name: Open5GS
+    plmn:
+      mcc: "001"
+      mnc: "01"
+      tac: 1
+      s_nssai:
+        sst: 1
+        sd: "000001"
+    dataNetwork:
+      subnet: 10.45.0.0/16
+      gateway: 10.45.0.1
+      dnn: internet
+
+db:
+  enabled: true
+  services:
+    db:
+      type: NodePort
+      nodePort: 30007
+
+webui:
+  enabled: true
+  services:
+    webui:
+      type: NodePort
+      nodePort: 30999
+
+nrf:
+  enabled: true
+
+ausf:
+  enabled: true
+
+bsf:
+  enabled: true
+
+nssf:
+  enabled: true
+
+pcf:
+  enabled: true
+
+udm:
+  enabled: true
+
+udr:
+  enabled: true
+
+amf:
+  enabled: true
+  services:
+    ngap:
+      type: LoadBalancer
+      loadBalancerIP: 10.33.0.2
+      provider: MetalLB
+
+smf:
+  enabled: true
+
+upf:
+  enabled: true
+  services:
+    gtpu:
+      type: LoadBalancer
+      loadBalancerIP: 10.33.0.3
+      provider: MetalLB
+```
+
+Through this `values.yaml` file all the values inside the 5G Core are configured. The `global` values are shared by multiple Network Functions, e.g. the `containerPorts` values modify all the containers that make use of those ports. When changing the `sbi` value through the `global` values all the Network Functions on the SBI change its port to the one specified there.
+
+Other options like `mobileNetwork` are shared between Network Functions, each one grabbing different parts but all of them sharing the same structure. Inside `mobileNetwork`, the `plmn` part uses `mnc`, `mcc` and `s_nssai` on the AMF chart but only `s_nssai` on the NSSF. Another example is the `dataNetwork` part, this part is used on the SMF and UPF Network Functions.
+
+Each subchart comes defined with a value `enabled`, set it to true to deploy that subchart or set it to false to skip it.
+
+This chart needs a Kubernetes PersistentVolume created for the database. You can create it "by hand" or use an StorageClass. An example of this PersistentVolume can be found on `misc/examples/k8s-db-pv/persistentvolume.yaml`.
 
 ## Specific Network Function configuration
 

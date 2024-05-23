@@ -1,0 +1,28 @@
+# Default values for amf
+
+image:
+  registry: ghcr.io
+  repository: borjis131/amf
+  tag: "v2.7.1"
+  pullPolicy: IfNotPresent
+
+services:
+  ngap:
+    type: LoadBalancer
+    loadBalancerIP: 10.33.0.2
+    provider: MetalLB
+
+config: {}
+
+global:
+  containerPorts:
+    sbi: 80
+  mobileNetwork:
+    name: Open5GS
+    plmn:
+      mcc: "001"
+      mnc: "01"
+      tac: 1
+      s_nssai:
+        sst: 1
+        sd: "000001"

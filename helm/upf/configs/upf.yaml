@@ -1,0 +1,23 @@
+logger:
+  file:
+    path: /open5gs/install/var/log/open5gs/upf.log
+
+global:
+
+upf:
+  pfcp:
+    server:
+      - dev: eth0
+    client:
+  gtpu:
+    server:
+      - dev: eth0
+        {{- if eq .Values.services.gtpu.type "LoadBalancer" }}
+        advertise: {{ .Values.services.gtpu.loadBalancerIP }}
+        {{- end }}
+  session:
+    - subnet: {{ .Values.global.mobileNetwork.dataNetwork.subnet }}
+      gateway: {{ .Values.global.mobileNetwork.dataNetwork.gateway }}
+      {{- if .Values.global.mobileNetwork.dataNetwork.dnn }}
+      dnn: {{ .Values.global.mobileNetwork.dataNetwork.dnn }}
+      {{- end }}

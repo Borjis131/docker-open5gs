@@ -1,0 +1,14 @@
+# Default values for udr
+
+image:
+  registry: ghcr.io
+  repository: borjis131/udr
+  tag: "v2.7.1"
+  pullPolicy: IfNotPresent
+
+config: {}
+
+global:
+  containerPorts:
+    sbi: 80
+    db: 27017

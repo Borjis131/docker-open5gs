@@ -1,0 +1,16 @@
+apiVersion: v2
+
+name: db
+description: Open5GS DB Helm chart for ARMv8 Kubernetes
+version: 0.1.0
+type: application
+appVersion: "6.0.11"
+
+#icon:
+
+dependencies:
+- name: common
+  repository: oci://registry-1.docker.io/bitnamicharts
+  tags:
+  - bitnami-common
+  version: 2.x.x

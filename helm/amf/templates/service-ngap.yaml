@@ -1,0 +1,19 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "common.names.fullname" . }}-service-ngap
+  namespace: {{ include "common.names.namespace" . }}
+  annotations:
+    {{- if eq .Values.services.ngap.provider "MetalLB" }}
+    metallb.universe.tf/loadBalancerIPs: {{ .Values.services.ngap.loadBalancerIP }}
+    {{- end }}
+spec:
+  selector:
+    nf: amf
+  ports:
+    - name: ngap
+      port: 38412
+      targetPort: 38412
+      protocol: SCTP
+  type: {{ .Values.services.ngap.type }}

@@ -1,0 +1,18 @@
+logger:
+  file:
+    path: /open5gs/install/var/log/open5gs/bsf.log
+
+global:
+
+bsf:
+  sbi:
+    server:
+      - dev: eth0
+        port: {{ .Values.global.containerPorts.sbi }}
+    client:
+      nrf:
+        {{- if eq .Release.Name "nrf" }}
+        - uri: http://nrf-service-sbi:{{ .Values.global.containerPorts.sbi }}
+        {{- else }}
+        - uri: http://{{ .Release.Name }}-nrf-service-sbi:{{ .Values.global.containerPorts.sbi }}
+        {{- end }}

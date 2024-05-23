@@ -1,0 +1,22 @@
+# Default values for upf
+
+image:
+  registry: ghcr.io
+  repository: borjis131/upf
+  tag: "v2.7.1"
+  pullPolicy: IfNotPresent
+
+services:
+  gtpu:
+    type: LoadBalancer
+    loadBalancerIP: 10.33.0.3
+    provider: MetalLB
+
+config: {}
+
+global:
+  mobileNetwork:
+    dataNetwork:
+      subnet: 10.45.0.0/16
+      gateway: 10.45.0.1
+      dnn: internet
