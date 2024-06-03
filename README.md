@@ -13,7 +13,8 @@ The Docker images are available for `amd64/x86-64` and `arm64/v8`:
 The Helm charts are available:
 - in DockerHub `registry-1.docker.io/borieher/<chart_name> --version <chart_version>`
 
->Note: The <chart_version> is not the same as the <open5gs_version>
+> [!NOTE]
+> The <chart_version> is not the same as the <open5gs_version>
 
 ## Configure it
 
@@ -48,11 +49,13 @@ The `.env` file is used to build the images using Make or Docker Compose, as wel
 ## Build it
 
 <details>
-<summary>Build it with bake (recommended)</summary>
+<summary>Build it with Bake</summary>
 
->Note: This method uses the `docker-bake.hcl` file and requires `docker-buildx-plugin`
+> Tip: This is the recommended way to build the project, you can build the images all at once with a single command taking advantage of docker buildx parallelism
 
-With this method, you can build the images all at once with a single command taking advantage of docker buildx parallelism. From the top level directory of the repository run:
+> Note: This method uses the `docker-bake.hcl` file and requires `docker-buildx-plugin`
+
+From the top level directory of the repository run:
 ```bash
 docker buildx bake
 ```
@@ -61,7 +64,7 @@ docker buildx bake
 <details>
 <summary>Build it with Make</summary>
 
->Note: This method uses the `Makefile` and `.env` files
+> Note: This method uses the `Makefile` and `.env` files
 
 From the top level directory of the repository run the following to create the `base-open5gs` image and all the Network Function images:
 ```bash
@@ -74,7 +77,7 @@ This will take a while.
 <details>
 <summary>Build it with Docker Compose</summary>
 
->Note: This method uses the `Makefile`, `.env` and `docker-compose.yaml` files
+> Note: This method uses the `Makefile`, `.env` and `docker-compose.yaml` files
 
 Some deployments have the build instructions for the images (like the `basic` deployment), only depending of the `base-open5gs` image. Some other deployments download the images needed from container registries like Docker Hub or GitHub Container Registry (like the `network-slicing` deployment).
 
