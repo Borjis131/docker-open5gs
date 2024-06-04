@@ -17,11 +17,13 @@ nssf:
         - uri: http://{{ .Release.Name }}-nrf-service-sbi:{{ .Values.global.containerPorts.sbi }}
         {{- end }}
       nsi:
-        {{- if eq .Release.Name "nrf" }}
+        {{- range .Values.global.mobileNetwork.plmn.s_nssai }}
+        {{- if eq $.Release.Name "nrf" }}
         - uri: http://nrf-service-sbi:{{ .Values.global.containerPorts.sbi }}
         {{- else }}
-        - uri: http://{{ .Release.Name }}-nrf-service-sbi:{{ .Values.global.containerPorts.sbi }}
+        - uri: http://{{ $.Release.Name }}-nrf-service-sbi:{{ $.Values.global.containerPorts.sbi }}
         {{- end }}
           s_nssai:
-            sst: {{ .Values.global.mobileNetwork.plmn.s_nssai.sst }}
-            sd: {{ .Values.global.mobileNetwork.plmn.s_nssai.sd }}
+            - sst: {{ .sst }}
+              sd: {{ .sd }}
+        {{- end }}

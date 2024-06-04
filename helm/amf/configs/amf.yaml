@@ -36,8 +36,10 @@ amf:
         mcc: {{ .Values.global.mobileNetwork.plmn.mcc }}
         mnc: {{ .Values.global.mobileNetwork.plmn.mnc }}
       s_nssai:
-        - sst: {{ .Values.global.mobileNetwork.plmn.s_nssai.sst }}
-          sd: {{ .Values.global.mobileNetwork.plmn.s_nssai.sd }}
+        {{- range .Values.global.mobileNetwork.plmn.s_nssai }}
+        - sst: {{ .sst }}
+          sd: {{ .sd }}
+        {{- end }}
   security:
       integrity_order : [ NIA2, NIA1, NIA0 ]
       ciphering_order : [ NEA0, NEA1, NEA2 ]

@@ -2,7 +2,7 @@ apiVersion: v2
 
 name: amf
 description: Open5GS AMF Helm chart for Kubernetes
-version: 0.1.0
+version: 0.2.0
 type: application
 appVersion: "v2.7.1"
 

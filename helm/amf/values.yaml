@@ -24,5 +24,5 @@ global:
       mnc: "01"
       tac: 1
       s_nssai:
-        sst: 1
-        sd: "000001"
+        - sst: 1
+          sd: "000001"
