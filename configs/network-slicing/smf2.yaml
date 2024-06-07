@@ -14,7 +14,7 @@ smf:
         - uri: http://nrf.open5gs.org:80
   pfcp:
     server:
-      - address: smf2.open5gs.orgg
+      - address: smf2.open5gs.org
     client:
       upf:
         - address: upf2.open5gs.org
