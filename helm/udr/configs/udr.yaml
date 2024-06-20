@@ -6,7 +6,7 @@ db_uri: mongodb://{{ .Release.Name }}-db-service/open5gs
 
 logger:
   file:
-    path: /open5gs/install/var/log/open5gs/udr.log
+    path: /var/log/open5gs/udr.log
 
 global:
 
