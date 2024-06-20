@@ -24,6 +24,6 @@ nssf:
         - uri: http://{{ $.Release.Name }}-nrf-service-sbi:{{ $.Values.global.containerPorts.sbi }}
         {{- end }}
           s_nssai:
-            - sst: {{ .sst }}
-              sd: {{ .sd }}
+            sst: {{ .sst }}
+            sd: {{ .sd }}
         {{- end }}
