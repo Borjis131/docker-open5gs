@@ -1,5 +1,80 @@
 # Default values for open5gs
 
+#nf:
+  #enabled: true/false
+  #image:
+  #config: {}
+  #global:
+    #containerPorts:
+
+#db:
+  #enabled: true/false
+  #image:
+  #services:
+    #db:
+      #type: NodePort/ClusterIP
+      #nodePort:
+  #config: {}
+  #global:
+    #containerPorts:
+
+#webui:
+  #enabled: true/false
+  #image:
+  #services:
+    #webui:
+      #type: NodePort/ClusterIP
+      #nodePort:
+  #global:
+    #containerPorts:
+
+#nssf:
+  #enabled: true/false
+  #image:
+  #config: {}
+  #global:
+    #containerPorts:
+    #mobileNetwork:
+      #plmn:
+        #s_nssai:
+
+#amf:
+  #enabled: true/false
+  #image:
+  #services:
+    #ngap:
+      #type: LoadBalancer/ClusterIP
+      #loadBalancerIP:
+      #provider:
+  #config: {}
+  #global:
+    #containerPorts:
+    #mobileNetwork:
+      #name:
+      #plmn:
+
+#smf:
+  #enabled: true/false
+  #image:
+  #config: {}
+  #global:
+    #containerPorts:
+    #mobileNetwork:
+      #dataNetwork:
+
+#upf:
+  #enabled: true/false
+  #image:
+  #services:
+    #gtpu:
+      #type: LoadBalancer/ClusterIP
+      #loadBalancerIP:
+      #provider:
+  #config: {}
+  #global:
+    #mobileNetwork:
+      #dataNetwork:
+
 global:
   containerPorts:
     db: 27017

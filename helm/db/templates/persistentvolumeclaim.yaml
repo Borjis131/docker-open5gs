@@ -4,9 +4,4 @@ kind: PersistentVolumeClaim
 metadata:
   name: {{ include "common.names.fullname" . }}-pvc-data
 spec:
-  resources:
-    requests:
-      storage: 1Gi
-  accessModes:
-    - ReadWriteOnce
-  volumeMode: Filesystem
+  {{ .Values.storage.volumeClaimTemplate.spec | toYaml | nindent 2 }}

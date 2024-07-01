@@ -2,7 +2,7 @@ apiVersion: v2
 
 name: open5gs
 description: Open5GS deployment Helm chart for Kubernetes
-version: 0.2.0
+version: 0.3.0
 type: application
 appVersion: "v2.7.1"
 
@@ -11,7 +11,7 @@ icon: https://open5gs.org/assets/img/open5gs-logo.png
 dependencies:
 - name: db
   repository: file://../db
-  version: 0.2.0
+  version: 0.3.0
   condition: db.enabled
 
 - name: webui

@@ -11,8 +11,17 @@ services:
     type: NodePort
     nodePort: 30007
 
-
 config: {}
+
+storage:
+  volumeClaimTemplate:
+    spec:
+      storageClassName: ""
+      resources:
+        requests:
+          storage: 1Gi
+      accessModes:
+        - ReadWriteOnce
 
 global:
   containerPorts:
