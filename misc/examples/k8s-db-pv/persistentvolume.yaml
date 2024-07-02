@@ -8,6 +8,5 @@ spec:
     storage: 1Gi
   accessModes:
     - ReadWriteOnce
-  volumeMode: Filesystem
   hostPath:
     path: /mnt/db_data

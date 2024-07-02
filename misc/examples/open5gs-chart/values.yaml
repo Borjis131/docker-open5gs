@@ -1,0 +1,91 @@
+# Custom values for open5gs on Raspberry Pi
+
+global:
+  containerPorts:
+    db: 27017
+    sbi: 80
+    webui: 9999
+  mobileNetwork:
+    name: Open5GS
+    plmn:
+      mcc: "001"
+      mnc: "01"
+      tac: 1
+      s_nssai:
+        - sst: 1
+          sd: "000001"
+    dataNetwork:
+      subnet: 10.45.0.0/16
+      gateway: 10.45.0.1
+      dnn: internet
+
+db:
+  enabled: true
+  # the only raspberry-pi specific part is this image for the DB, it is built for ARMv8.0-A
+  image:
+    registry: ghcr.io
+    repository: borjis131/db
+    tag: "6.0.11"
+  services:
+    db:
+      type: NodePort
+      nodePort: 30007
+  # uses local-path-provisioner from Rancher
+  storage:
+    volumeClaimTemplate:
+      spec:
+        storageClassName: "local-path"
+        resources:
+          requests:
+            storage: 2Gi
+        accessModes:
+          - ReadWriteOnce
+
+webui:
+  enabled: true
+  services:
+    webui:
+      type: NodePort
+      nodePort: 30999
+
+nrf:
+  enabled: true
+
+ausf:
+  enabled: true
+
+bsf:
+  enabled: true
+
+nssf:
+  enabled: true
+
+pcf:
+  enabled: true
+
+udm:
+  enabled: true
+
+udr:
+  enabled: true
+
+amf:
+  enabled: true
+  # AMF uses MetalLB LoadBalancer to serve NGAP
+  services:
+    ngap:
+      type: LoadBalancer
+      loadBalancerIP: 192.168.0.142
+      provider: MetalLB
+
+smf:
+  enabled: true
+
+upf:
+  enabled: true
+  # UPF uses MetalLB LoadBalancer to serve GTPU
+  services:
+    gtpu:
+      type: LoadBalancer
+      loadBalancerIP: 192.168.0.143
+      provider: MetalLB
