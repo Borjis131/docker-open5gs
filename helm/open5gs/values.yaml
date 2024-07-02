@@ -15,6 +15,15 @@
       #type: NodePort/ClusterIP
       #nodePort:
   #config: {}
+  #storage:
+    #volumeClaimTemplate:
+      #spec:
+        #storageClassName: ""
+        #resources:
+          #requests:
+            #storage: 1Gi
+        #accessModes:
+          #- ReadWriteOnce
   #global:
     #containerPorts:
 
