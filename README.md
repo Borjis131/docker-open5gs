@@ -18,7 +18,7 @@ The Helm charts are available:
 
 ## Configure it
 
-All the images (except `webui`) depend on the `base-open5gs` image to be built, after that each image is indepent.
+All the images (except `webui`) depend on the `base-open5gs` image to be built, after that each image is independent.
 
 First, update the `.env` and `docker-bake.hcl` files with the desired values to use.
 

@@ -25,6 +25,7 @@ You can use the Open5GS `open5gs-dbctl` script in the host to add users to the d
 
 The database Docker volume is marked with a label `org.open5gs.mongodb_version` indicating the `MONGODB_VERSION` selected in the `.env` file. This marks the version used for the mongo container. This label is needed to debug issues with users changing the mongo container version but keeping the Docker volumes created.
 
+> [!WARNING]
 > When upgrading/downgrading the `MONGODB_VERSION` the existing `open5gs_db_data` and `open5gs_db_config` Docker volumes could cause problems/crashing. It is recommended to remove them.
 
 ### Network Function configuration
@@ -68,8 +69,8 @@ global:
       mnc: "01"
       tac: 1
       s_nssai:
-        sst: 1
-        sd: "000001"
+        - sst: 1
+          sd: "000001"
     dataNetwork:
       subnet: 10.45.0.0/16
       gateway: 10.45.0.1
@@ -137,6 +138,34 @@ Other options like `mobileNetwork` are shared between Network Functions, each on
 Each subchart comes defined with a value `enabled`, set it to true to deploy that subchart or set it to false to skip it.
 
 This chart needs a Kubernetes PersistentVolume created for the database. You can create it "by hand" or use an StorageClass. An example of this PersistentVolume can be found on `misc/examples/k8s-db-pv/persistentvolume.yaml`.
+
+You can also define your StorageClass using the following syntax on the database configuration. The following example lets you change the container image for the database Helm chart, configure the service to use a NodePort and use the storageClass `local-path` to create the Kubernetes PersistentVolume:
+
+```yaml
+db:
+  enabled: true
+  image:
+    registry: ghcr.io
+    repository: borjis131/db
+    tag: "6.0.11"
+  services:
+    db:
+      type: NodePort
+      nodePort: 30007
+  storage:
+    volumeClaimTemplate:
+      spec:
+        storageClassName: "local-path"
+        resources:
+          requests:
+            storage: 2Gi
+        accessModes:
+          - ReadWriteOnce
+```
+> [!NOTE]
+> In this example, the local-path StorageClass being used comes from [here](https://github.com/rancher/local-path-provisioner)
+
+Find a complete example to work with Raspberry Pi on `misc/examples/open5gs-chart/values.yaml`.
 
 ## Specific Network Function configuration
 
