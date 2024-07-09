@@ -5,9 +5,9 @@
 
 ARG UBUNTU_VERSION="jammy"
 
-FROM ubuntu:${UBUNTU_VERSION} AS builder
+FROM ubuntu:${UBUNTU_VERSION}
 
-# build-time arguments for builder
+# build-time arguments
 ARG OPEN5GS_VERSION="v2.7.1"
 ARG DEBIAN_FRONTEND="noninteractive"
 
