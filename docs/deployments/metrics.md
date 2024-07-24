@@ -16,6 +16,12 @@ You can add more dashboards by creating them on the `configs/metrics/grafana/das
 
 The Open5GS WebUI uses the image present on this repository. This WebUI is reachable from all the containers connected to the `open5gs` network in the Docker Compose deployment using the domain name `webui.open5gs.org` and to the host using the port `9999`. The user configured is `user: admin` and `password: 1423`.
 
+
+The deployment has also a `logs/` directory configured to store all the Network Functions container logs.
+
+> [!NOTE]
+> You will need to create the `logs/` directory at the root of the repository.
+
 ## Common issues with the metrics deployment
 
 ### Issue 1: Slices not connected appearing on the Prometheus/Grafana metrics

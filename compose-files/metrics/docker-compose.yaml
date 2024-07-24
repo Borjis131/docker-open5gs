@@ -26,6 +26,8 @@ services:
       open5gs:
         aliases:
           - nrf.open5gs.org
+    volumes:
+      - ../../logs:/var/log/open5gs
     configs:
       - source: nrf_config
         target: /etc/open5gs/custom/nrf.yaml
@@ -43,6 +45,8 @@ services:
       open5gs:
         aliases:
           - ausf.open5gs.org
+    volumes:
+      - ../../logs:/var/log/open5gs
     configs:
       - source: ausf_config
         target: /etc/open5gs/custom/ausf.yaml
@@ -62,6 +66,8 @@ services:
       open5gs:
         aliases:
           - udm.open5gs.org
+    volumes:
+      - ../../logs:/var/log/open5gs
     configs:
       - source: udm_config
         target: /etc/open5gs/custom/udm.yaml
@@ -82,6 +88,8 @@ services:
       open5gs:
         aliases:
           - udr.open5gs.org
+    volumes:
+      - ../../logs:/var/log/open5gs
     configs:
       - source: udr_config
         target: /etc/open5gs/custom/udr.yaml
@@ -102,6 +110,8 @@ services:
       open5gs:
         aliases:
           - nssf.open5gs.org
+    volumes:
+      - ../../logs:/var/log/open5gs
     configs:
       - source: nssf_config
         target: /etc/open5gs/custom/nssf.yaml
@@ -121,6 +131,8 @@ services:
       open5gs:
         aliases:
           - bsf.open5gs.org
+    volumes:
+      - ../../logs:/var/log/open5gs
     configs:
       - source: bsf_config
         target: /etc/open5gs/custom/bsf.yaml
@@ -141,6 +153,8 @@ services:
       open5gs:
         aliases:
           - pcf.open5gs.org
+    volumes:
+      - ../../logs:/var/log/open5gs
     configs:
       - source: pcf_config
         target: /etc/open5gs/custom/pcf.yaml
@@ -161,6 +175,8 @@ services:
       open5gs:
         aliases:
           - amf.open5gs.org
+    volumes:
+      - ../../logs:/var/log/open5gs
     configs:
       - source: amf_config
         target: /etc/open5gs/custom/amf.yaml
@@ -180,6 +196,8 @@ services:
       open5gs:
         aliases:
           - smf.open5gs.org
+    volumes:
+      - ../../logs:/var/log/open5gs
     configs:
       - source: smf_config
         target: /etc/open5gs/custom/smf.yaml
@@ -200,6 +218,8 @@ services:
       open5gs:
         aliases:
           - upf.open5gs.org
+    volumes:
+      - ../../logs:/var/log/open5gs
     configs:
       - source: upf_config
         target: /etc/open5gs/custom/upf.yaml

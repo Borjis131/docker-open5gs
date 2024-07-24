@@ -28,6 +28,10 @@ The database Docker volume is marked with a label `org.open5gs.mongodb_version` 
 > [!WARNING]
 > When upgrading/downgrading the `MONGODB_VERSION` the existing `open5gs_db_data` and `open5gs_db_config` Docker volumes could cause problems/crashing. It is recommended to remove them.
 
+### Logs configuration
+
+Take a look at the [metrics](deployments/metrics.md) Docker compose deployment to see how to configure a directory to store all the logs of the Network Functions.
+
 ### Network Function configuration
 
 You can override the command being run in the container by using the command section in each service specified in the Docker compose file:
