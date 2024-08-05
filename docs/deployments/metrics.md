@@ -19,9 +19,6 @@ The Open5GS WebUI uses the image present on this repository. This WebUI is reach
 
 The deployment has also a `logs/` directory configured to store all the Network Functions container logs.
 
-> [!NOTE]
-> You will need to create the `logs/` directory at the root of the repository.
-
 ## Common issues with the metrics deployment
 
 ### Issue 1: Slices not connected appearing on the Prometheus/Grafana metrics
