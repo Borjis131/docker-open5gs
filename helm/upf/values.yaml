@@ -3,7 +3,7 @@
 image:
   registry: ghcr.io
   repository: borjis131/upf
-  tag: "v2.7.1"
+  tag: "v2.7.2"
   pullPolicy: IfNotPresent
 
 services:

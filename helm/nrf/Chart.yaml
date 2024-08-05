@@ -2,9 +2,9 @@ apiVersion: v2
 
 name: nrf
 description: Open5GS NRF Helm chart for Kubernetes
-version: 0.2.0
+version: 0.3.0
 type: application
-appVersion: "v2.7.1"
+appVersion: "v2.7.2"
 
 icon: https://open5gs.org/assets/img/open5gs-logo.png
 

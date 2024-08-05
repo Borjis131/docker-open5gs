@@ -2,9 +2,9 @@ apiVersion: v2
 
 name: open5gs
 description: Open5GS deployment Helm chart for Kubernetes
-version: 0.3.0
+version: 0.3.1
 type: application
-appVersion: "v2.7.1"
+appVersion: "v2.7.2"
 
 icon: https://open5gs.org/assets/img/open5gs-logo.png
 
@@ -16,55 +16,55 @@ dependencies:
 
 - name: webui
   repository: file://../webui
-  version: 0.2.0
+  version: 0.3.0
   condition: webui.enabled
 
 - name: nrf
   repository: file://../nrf
-  version: 0.2.0
+  version: 0.3.0
   condition: nrf.enabled
 
 - name: ausf
   repository: file://../ausf
-  version: 0.2.0
+  version: 0.3.0
   condition: ausf.enabled
 
 - name: bsf
   repository: file://../bsf
-  version: 0.2.0
+  version: 0.3.0
   condition: bsf.enabled
 
 - name: nssf
   repository: file://../nssf
-  version: 0.2.0
+  version: 0.3.0
   condition: nssf.enabled
 
 - name: pcf
   repository: file://../pcf
-  version: 0.2.0
+  version: 0.3.0
   condition: pcf.enabled
 
 - name: udm
   repository: file://../udm
-  version: 0.2.0
+  version: 0.3.0
   condition: udm.enabled
 
 - name: udr
   repository: file://../udr
-  version: 0.2.0
+  version: 0.3.0
   condition: udr.enabled
 
 - name: amf
   repository: file://../amf
-  version: 0.2.0
+  version: 0.3.0
   condition: amf.enabled
 
 - name: smf
   repository: file://../smf
-  version: 0.2.0
+  version: 0.3.0
   condition: smf.enabled
 
 - name: upf
   repository: file://../upf
-  version: 0.2.0
+  version: 0.3.0
   condition: upf.enabled

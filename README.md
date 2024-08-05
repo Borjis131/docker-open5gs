@@ -26,8 +26,8 @@ The `.env` file is used to build the images using Make or Docker Compose, as wel
 
 `OPEN5GS_VERSION` is the version of Open5GS to use.
 - Accepted values are the tags, branches or commit IDs used in the Open5GS project
-- Default value: v2.7.1
-- Tested values: v2.5.5, v2.5.6, v2.5.8, v2.6.1, v2.6.2, v2.6.3, v2.6.4, v2.6.6, v2.7.0, v2.7.1
+- Default value: v2.7.2
+- Tested values: v2.5.5, v2.5.6, v2.5.8, v2.6.1, v2.6.2, v2.6.3, v2.6.4, v2.6.6, v2.7.0, v2.7.1, v2.7.2
 
 `UBUNTU_VERSION` is the version of the ubuntu Docker image used as base for the containers.
 - Accepted values are the tags used by Ubuntu in Docker Hub
@@ -134,9 +134,12 @@ docker compose -f compose-files/basic/docker-compose.yaml --env-file=.env down
 
 You can download the packaged charts from the repository or you can use the ones built by yourself.
 
+Current `CHART_VERSION` value for the Open5GS chart is 0.3.1, using `OPEN5GS_VERSION` v2.7.2 as default.
+The `CHART_VERSION` for individual charts is 0.3.0, using `OPEN5GS_VERSION` v2.7.2 as default.
+
 To download a chart:
 ```bash
-helm pull oci://registry-1.docker.io/borieher/<chart_name> --version <chart_version>
+helm pull oci://registry-1.docker.io/borieher/<chart_name> --version <CHART_VERSION>
 ```
 
 To install a chart run:
