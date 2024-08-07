@@ -1,0 +1,23 @@
+logger:
+  file:
+    path: /var/log/open5gs/nssf.log
+
+global:
+
+nssf:
+  sbi:
+    server:
+      - address: nssf.open5gs.org
+        port: 80
+    client:
+      nrf:
+        - uri: http://nrf.open5gs.org:80
+      scp:
+        - uri: http://scp.open5gs.org:80
+      nsi:
+        - uri: http://nrf.open5gs.org:80
+          s_nssai:
+            sst: 1
+            sd: 1
+  discovery:
+    delegated: no

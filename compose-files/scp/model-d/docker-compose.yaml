@@ -38,7 +38,7 @@ services:
       args:
         - OPEN5GS_VERSION=${OPEN5GS_VERSION}
         - UBUNTU_VERSION=${UBUNTU_VERSION}
-    #command: "-c /etc/open5gs/custom/scp.yaml"
+    command: "-c /etc/open5gs/custom/scp.yaml"
     networks:
       open5gs:
         aliases:
@@ -260,24 +260,24 @@ volumes:
 
 configs:
   nrf_config:
-    file: ../../configs/scp-model-d/nrf.yaml
+    file: ../../../configs/scp/model-d/nrf.yaml
   scp_config:
-    file: ../../configs/scp-model-d/scp.yaml
+    file: ../../../configs/scp/model-d/scp.yaml
   ausf_config:
-    file: ../../configs/scp-model-d/ausf.yaml
+    file: ../../../configs/scp/model-d/ausf.yaml
   udm_config:
-    file: ../../configs/scp-model-d/udm.yaml
+    file: ../../../configs/scp/model-d/udm.yaml
   udr_config:
-    file: ../../configs/scp-model-d/udr.yaml
+    file: ../../../configs/scp/model-d/udr.yaml
   nssf_config:
-    file: ../../configs/scp-model-d/nssf.yaml
+    file: ../../../configs/scp/model-d/nssf.yaml
   bsf_config:
-    file: ../../configs/scp-model-d/bsf.yaml
+    file: ../../../configs/scp/model-d/bsf.yaml
   pcf_config:
-    file: ../../configs/scp-model-d/pcf.yaml
+    file: ../../../configs/scp/model-d/pcf.yaml
   amf_config:
-    file: ../../configs/scp-model-d/amf.yaml
+    file: ../../../configs/scp/model-d/amf.yaml
   smf_config:
-    file: ../../configs/scp-model-d/smf.yaml
+    file: ../../../configs/scp/model-d/smf.yaml
   upf_config:
-    file: ../../configs/scp-model-d/upf.yaml
+    file: ../../../configs/scp/model-d/upf.yaml

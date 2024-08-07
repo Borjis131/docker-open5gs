@@ -1,0 +1,18 @@
+logger:
+  file:
+    path: /var/log/open5gs/udm.log
+
+global:
+
+udm:
+  sbi:
+    server:
+      - address: udm.open5gs.org
+        port: 80
+    client:
+      nrf:
+        - uri: http://nrf.open5gs.org:80
+      scp:
+        - uri: http://scp.open5gs.org:80
+  discovery:
+    delegated: no

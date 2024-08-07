@@ -1,0 +1,18 @@
+logger:
+  file:
+    path: /var/log/open5gs/upf.log
+
+global:
+
+upf:
+  pfcp:
+    server:
+      - address: upf.open5gs.org
+    client:
+  gtpu:
+    server:
+      - address: upf.open5gs.org
+        advertise: docker-host.external-ip
+  session:
+    - subnet: 10.45.0.0/16
+      gateway: 10.45.0.1
