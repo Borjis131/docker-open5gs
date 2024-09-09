@@ -97,7 +97,7 @@ services:
       args:
         - OPEN5GS_VERSION=${OPEN5GS_VERSION}
         - UBUNTU_VERSION=${UBUNTU_VERSION}
-    #command: "-c /etc/open5gs/custom/sepp.yaml"
+    command: "-c /etc/open5gs/custom/sepp.yaml"
     restart: unless-stopped
     networks:
       open5gs:
@@ -270,7 +270,7 @@ services:
       args:
         - OPEN5GS_VERSION=${OPEN5GS_VERSION}
         - UBUNTU_VERSION=${UBUNTU_VERSION}
-    #command: "-c /etc/open5gs/custom/sepp.yaml"
+    command: "-c /etc/open5gs/custom/sepp.yaml"
     restart: unless-stopped
     networks:
       open5gs:
