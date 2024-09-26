@@ -83,3 +83,39 @@ docker-compose -f misc/examples/basic-compose-file-v2.x/docker-compose.yaml up -
 # Tear down the basic deployment with docker-compose (V1) and Compose file version 2.x
 docker-compose -f misc/examples/basic-compose-file-v2.x/docker-compose.yaml down
 ```
+
+## How to use the UERANSIM container
+
+You can use the emulated UE connection by connecting to the UE container:
+```bash
+# connect to the UE container
+docker exec -it ue bash
+
+# Use the TUN interface to test the UE connection
+ping -I uesimtun0 8.8.8.8
+```
+
+## How to use the PacketRusher container
+
+You can use the emulated UE connection by using the VRF.
+
+Check the logs of the PacketRusher container to see the VRF identifier:
+```bash
+docker logs -f packetrusher
+...
+time="2024-09-26T10:46:32Z" level=info msg="[UE][GTP] Interface val1234567891 has successfully been configured for UE 10.45.0.2"
+time="2024-09-26T10:46:32Z" level=info msg="[UE][GTP] You can do traffic for this UE using VRF vrf1234567891, eg:"
+time="2024-09-26T10:46:32Z" level=info msg="[UE][GTP] sudo ip vrf exec vrf1234567891 iperf3 -c IPERF_SERVER -p PORT -t 9000"
+```
+
+Connect to the PacketRusher container and then to the VRF:
+```bash
+# connect to the PacketRusher container
+docker exec -it packetrusher bash
+
+# Use the VRF inside the PacketRusher container
+ip vrf exec vrf1234567891 bash
+
+# Test the UE connection
+ping 8.8.8.8
+```

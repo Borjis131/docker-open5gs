@@ -13,3 +13,5 @@ The `internal/packetrusher` deployment works with [PacketRusher](https://github.
 Check [docker-packetrusher](https://github.com/Borjis131/docker-packetrusher) and follow the section `Important notes` to use this image. This image depends on a kernel module being installed on the host machine, the `free5gc's gtp5g kernel module`.
 
 This deployment connects an emulated UE and gNB to the Open5GS 5G Core.
+
+Check the [FAQ/How to use the UERANSIM container](../FAQ.md) and [FAQ/How to use the PacketRusher container](../FAQ.md) to see how to use the emulated UEs.
