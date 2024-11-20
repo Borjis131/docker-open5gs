@@ -9,6 +9,8 @@ upf:
     server:
       - address: upf.open5gs.org
     client:
+      smf:
+        - address: smf.open5gs.org
   gtpu:
     server:
       - address: upf.open5gs.org

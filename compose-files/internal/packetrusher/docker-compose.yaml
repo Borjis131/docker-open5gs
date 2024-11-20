@@ -185,7 +185,6 @@ services:
         target: /etc/open5gs/custom/smf.yaml
     depends_on:
       - nrf
-      - upf
 
   upf:
     container_name: upf
@@ -206,11 +205,14 @@ services:
     privileged: true
     cap_add:
       - NET_ADMIN
+    depends_on:
+      - smf
 
   packetrusher:
     container_name: packetrusher
     image: "ghcr.io/borjis131/packetrusher:main"
     command: "--config /PacketRusher/config/packetrusher.yaml ue"
+    restart: unless-stopped
     networks:
       open5gs:
         aliases:
