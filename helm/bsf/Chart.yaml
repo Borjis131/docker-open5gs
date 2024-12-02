@@ -1,8 +1,8 @@
 apiVersion: v2
 
 name: bsf
-description: Open5GS BSF Helm chart for Kubernetes
-version: 0.3.0
+description: Open5GS BSF Helm chart
+version: 0.3.1
 type: application
 appVersion: "v2.7.2"
 

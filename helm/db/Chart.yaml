@@ -1,8 +1,8 @@
 apiVersion: v2
 
 name: db
-description: Open5GS DB Helm chart for ARMv8 Kubernetes
-version: 0.3.0
+description: Open5GS DB Helm chart
+version: 0.3.1
 type: application
 appVersion: "6.0.11"
 

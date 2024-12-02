@@ -9,6 +9,12 @@ upf:
     server:
       - dev: eth0
     client:
+      smf:
+        {{- if eq .Release.Name "smf" }}
+        - address: smf-service-pfcp
+        {{- else }}
+        - address: {{ .Release.Name }}-smf-service-pfcp
+        {{- end }}
   gtpu:
     server:
       - dev: eth0

@@ -134,8 +134,8 @@ docker compose -f compose-files/basic/docker-compose.yaml --env-file=.env down
 
 You can download the packaged charts from the repository or you can use the ones built by yourself.
 
-Current `CHART_VERSION` value for the Open5GS chart is 0.3.1, using `OPEN5GS_VERSION` v2.7.2 as default.
-The `CHART_VERSION` for individual charts is 0.3.0, using `OPEN5GS_VERSION` v2.7.2 as default.
+Current `CHART_VERSION` value for the Open5GS chart is 0.3.2, using `OPEN5GS_VERSION` v2.7.2 as default.
+The `CHART_VERSION` for individual charts is 0.3.1, using `OPEN5GS_VERSION` v2.7.2 as default.
 
 To download a chart:
 ```bash
