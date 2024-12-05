@@ -2,7 +2,7 @@ apiVersion: v2
 
 name: db
 description: Open5GS DB Helm chart
-version: 0.3.1
+version: 0.3.2
 type: application
 appVersion: "6.0.11"
 

@@ -2,7 +2,7 @@ apiVersion: v2
 
 name: nssf
 description: Open5GS NSSF Helm chart
-version: 0.3.1
+version: 0.3.2
 type: application
 appVersion: "v2.7.2"
 

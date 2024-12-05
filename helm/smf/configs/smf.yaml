@@ -19,6 +19,9 @@ smf:
   pfcp:
     server:
       - dev: eth0
+        {{- if eq .Values.services.pfcp.type "LoadBalancer" }}
+        advertise: {{ .Values.services.pfcp.loadBalancerIP }}
+        {{- end }}
     client:
   gtpu:
     server:

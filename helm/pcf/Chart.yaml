@@ -2,7 +2,7 @@ apiVersion: v2
 
 name: pcf
 description: Open5GS PCF Helm chart
-version: 0.3.1
+version: 0.3.2
 type: application
 appVersion: "v2.7.2"
 

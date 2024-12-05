@@ -2,7 +2,7 @@ apiVersion: v2
 
 name: open5gs
 description: Open5GS deployment Helm chart
-version: 0.3.2
+version: 0.3.3
 type: application
 appVersion: "v2.7.2"
 
@@ -11,60 +11,60 @@ icon: https://open5gs.org/assets/img/open5gs-logo.png
 dependencies:
 - name: db
   repository: file://../db
-  version: 0.3.1
+  version: 0.3.2
   condition: db.enabled
 
 - name: webui
   repository: file://../webui
-  version: 0.3.1
+  version: 0.3.2
   condition: webui.enabled
 
 - name: nrf
   repository: file://../nrf
-  version: 0.3.1
+  version: 0.3.2
   condition: nrf.enabled
 
 - name: ausf
   repository: file://../ausf
-  version: 0.3.1
+  version: 0.3.2
   condition: ausf.enabled
 
 - name: bsf
   repository: file://../bsf
-  version: 0.3.1
+  version: 0.3.2
   condition: bsf.enabled
 
 - name: nssf
   repository: file://../nssf
-  version: 0.3.1
+  version: 0.3.2
   condition: nssf.enabled
 
 - name: pcf
   repository: file://../pcf
-  version: 0.3.1
+  version: 0.3.2
   condition: pcf.enabled
 
 - name: udm
   repository: file://../udm
-  version: 0.3.1
+  version: 0.3.2
   condition: udm.enabled
 
 - name: udr
   repository: file://../udr
-  version: 0.3.1
+  version: 0.3.2
   condition: udr.enabled
 
 - name: amf
   repository: file://../amf
-  version: 0.3.1
+  version: 0.3.2
   condition: amf.enabled
 
 - name: smf
   repository: file://../smf
-  version: 0.3.1
+  version: 0.3.2
   condition: smf.enabled
 
 - name: upf
   repository: file://../upf
-  version: 0.3.1
+  version: 0.3.2
   condition: upf.enabled
