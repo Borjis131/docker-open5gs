@@ -18,29 +18,43 @@ variable "GITHUB_REGISTRY" {
   default = "ghcr.io/borjis131"
 }
 
+variable "FIVEG_MAG_REGISTRY" {
+  default = "ghcr.io/5g-mag"
+}
+
 group "default" {
   targets = ["base-open5gs", "amf", "ausf", "bsf", "nrf", "nssf",
               "pcf", "scp", "sepp", "smf", "udm", "udr", "upf", "webui"]
 }
 
 target "base-open5gs" {
+  args = {
+    UBUNTU_VERSION = "${UBUNTU_VERSION}"
+    OPEN5GS_VERSION = "${OPEN5GS_VERSION}"
+  }
   context = "./images/base-open5gs"
-  platforms = ["linux/amd64", "linux/arm64/v8"]
+  platforms = ["linux/amd64", "linux/arm64"]
   tags = ["base-open5gs:${OPEN5GS_VERSION}"]
   labels = {
     "org.opencontainers.image.source" = "https://github.com/Borjis131/docker-open5gs"
   }
+  output = ["type=image"]
 }
 
 target "amf" {
+  args = {
+    UBUNTU_VERSION = "${UBUNTU_VERSION}"
+    OPEN5GS_VERSION = "${OPEN5GS_VERSION}"
+  }
   context = "./images/amf"
   contexts = {
     "base-open5gs:${OPEN5GS_VERSION}" = "target:base-open5gs"
   }
-  platforms = ["linux/amd64", "linux/arm64/v8"]
+  platforms = ["linux/amd64", "linux/arm64"]
   tags = [
     "${DOCKER_REGISTRY}/amf:${OPEN5GS_VERSION}",
-    "${GITHUB_REGISTRY}/amf:${OPEN5GS_VERSION}"
+    "${GITHUB_REGISTRY}/amf:${OPEN5GS_VERSION}",
+    "${FIVEG_MAG_REGISTRY}/amf:${OPEN5GS_VERSION}"
   ]
   labels = {
     "org.opencontainers.image.source" = "https://github.com/Borjis131/docker-open5gs"
@@ -49,14 +63,19 @@ target "amf" {
 }
 
 target "ausf" {
+  args = {
+    UBUNTU_VERSION = "${UBUNTU_VERSION}"
+    OPEN5GS_VERSION = "${OPEN5GS_VERSION}"
+  }
   context = "./images/ausf"
   contexts = {
     "base-open5gs:${OPEN5GS_VERSION}" = "target:base-open5gs"
   }
-  platforms = ["linux/amd64", "linux/arm64/v8"]
+  platforms = ["linux/amd64", "linux/arm64"]
   tags = [
     "${DOCKER_REGISTRY}/ausf:${OPEN5GS_VERSION}",
-    "${GITHUB_REGISTRY}/ausf:${OPEN5GS_VERSION}"
+    "${GITHUB_REGISTRY}/ausf:${OPEN5GS_VERSION}",
+    "${FIVEG_MAG_REGISTRY}/ausf:${OPEN5GS_VERSION}"
   ]
   labels = {
     "org.opencontainers.image.source" = "https://github.com/Borjis131/docker-open5gs"
@@ -65,14 +84,19 @@ target "ausf" {
 }
 
 target "bsf" {
+  args = {
+    UBUNTU_VERSION = "${UBUNTU_VERSION}"
+    OPEN5GS_VERSION = "${OPEN5GS_VERSION}"
+  }
   context = "./images/bsf"
   contexts = {
     "base-open5gs:${OPEN5GS_VERSION}" = "target:base-open5gs"
   }
-  platforms = ["linux/amd64", "linux/arm64/v8"]
+  platforms = ["linux/amd64", "linux/arm64"]
   tags = [
     "${DOCKER_REGISTRY}/bsf:${OPEN5GS_VERSION}",
-    "${GITHUB_REGISTRY}/bsf:${OPEN5GS_VERSION}"
+    "${GITHUB_REGISTRY}/bsf:${OPEN5GS_VERSION}",
+    "${FIVEG_MAG_REGISTRY}/bsf:${OPEN5GS_VERSION}"
   ]
   labels = {
     "org.opencontainers.image.source" = "https://github.com/Borjis131/docker-open5gs"
@@ -81,14 +105,19 @@ target "bsf" {
 }
 
 target "nrf" {
+  args = {
+    UBUNTU_VERSION = "${UBUNTU_VERSION}"
+    OPEN5GS_VERSION = "${OPEN5GS_VERSION}"
+  }
   context = "./images/nrf"
   contexts = {
     "base-open5gs:${OPEN5GS_VERSION}" = "target:base-open5gs"
   }
-  platforms = ["linux/amd64", "linux/arm64/v8"]
+  platforms = ["linux/amd64", "linux/arm64"]
   tags = [
     "${DOCKER_REGISTRY}/nrf:${OPEN5GS_VERSION}",
-    "${GITHUB_REGISTRY}/nrf:${OPEN5GS_VERSION}"
+    "${GITHUB_REGISTRY}/nrf:${OPEN5GS_VERSION}",
+    "${FIVEG_MAG_REGISTRY}/nrf:${OPEN5GS_VERSION}"
   ]
   labels = {
     "org.opencontainers.image.source" = "https://github.com/Borjis131/docker-open5gs"
@@ -97,14 +126,19 @@ target "nrf" {
 }
 
 target "nssf" {
+  args = {
+    UBUNTU_VERSION = "${UBUNTU_VERSION}"
+    OPEN5GS_VERSION = "${OPEN5GS_VERSION}"
+  }
   context = "./images/nssf"
   contexts = {
     "base-open5gs:${OPEN5GS_VERSION}" = "target:base-open5gs"
   }
-  platforms = ["linux/amd64", "linux/arm64/v8"]
+  platforms = ["linux/amd64", "linux/arm64"]
   tags = [
     "${DOCKER_REGISTRY}/nssf:${OPEN5GS_VERSION}",
-    "${GITHUB_REGISTRY}/nssf:${OPEN5GS_VERSION}"
+    "${GITHUB_REGISTRY}/nssf:${OPEN5GS_VERSION}",
+    "${FIVEG_MAG_REGISTRY}/nssf:${OPEN5GS_VERSION}"
   ]
   labels = {
     "org.opencontainers.image.source" = "https://github.com/Borjis131/docker-open5gs"
@@ -113,14 +147,19 @@ target "nssf" {
 }
 
 target "pcf" {
+  args = {
+    UBUNTU_VERSION = "${UBUNTU_VERSION}"
+    OPEN5GS_VERSION = "${OPEN5GS_VERSION}"
+  }
   context = "./images/pcf"
   contexts = {
     "base-open5gs:${OPEN5GS_VERSION}" = "target:base-open5gs"
   }
-  platforms = ["linux/amd64", "linux/arm64/v8"]
+  platforms = ["linux/amd64", "linux/arm64"]
   tags = [
     "${DOCKER_REGISTRY}/pcf:${OPEN5GS_VERSION}",
-    "${GITHUB_REGISTRY}/pcf:${OPEN5GS_VERSION}"
+    "${GITHUB_REGISTRY}/pcf:${OPEN5GS_VERSION}",
+    "${FIVEG_MAG_REGISTRY}/pcf:${OPEN5GS_VERSION}"
   ]
   labels = {
     "org.opencontainers.image.source" = "https://github.com/Borjis131/docker-open5gs"
@@ -129,14 +168,19 @@ target "pcf" {
 }
 
 target "scp" {
+  args = {
+    UBUNTU_VERSION = "${UBUNTU_VERSION}"
+    OPEN5GS_VERSION = "${OPEN5GS_VERSION}"
+  }
   context = "./images/scp"
   contexts = {
     "base-open5gs:${OPEN5GS_VERSION}" = "target:base-open5gs"
   }
-  platforms = ["linux/amd64", "linux/arm64/v8"]
+  platforms = ["linux/amd64", "linux/arm64"]
   tags = [
     "${DOCKER_REGISTRY}/scp:${OPEN5GS_VERSION}",
-    "${GITHUB_REGISTRY}/scp:${OPEN5GS_VERSION}"
+    "${GITHUB_REGISTRY}/scp:${OPEN5GS_VERSION}",
+    "${FIVEG_MAG_REGISTRY}/scp:${OPEN5GS_VERSION}"
   ]
   labels = {
     "org.opencontainers.image.source" = "https://github.com/Borjis131/docker-open5gs"
@@ -145,14 +189,19 @@ target "scp" {
 }
 
 target "sepp" {
+  args = {
+    UBUNTU_VERSION = "${UBUNTU_VERSION}"
+    OPEN5GS_VERSION = "${OPEN5GS_VERSION}"
+  }
   context = "./images/sepp"
   contexts = {
     "base-open5gs:${OPEN5GS_VERSION}" = "target:base-open5gs"
   }
-  platforms = ["linux/amd64", "linux/arm64/v8"]
+  platforms = ["linux/amd64", "linux/arm64"]
   tags = [
     "${DOCKER_REGISTRY}/sepp:${OPEN5GS_VERSION}",
-    "${GITHUB_REGISTRY}/sepp:${OPEN5GS_VERSION}"
+    "${GITHUB_REGISTRY}/sepp:${OPEN5GS_VERSION}",
+    "${FIVEG_MAG_REGISTRY}/sepp:${OPEN5GS_VERSION}"
   ]
   labels = {
     "org.opencontainers.image.source" = "https://github.com/Borjis131/docker-open5gs"
@@ -161,14 +210,19 @@ target "sepp" {
 }
 
 target "smf" {
+  args = {
+    UBUNTU_VERSION = "${UBUNTU_VERSION}"
+    OPEN5GS_VERSION = "${OPEN5GS_VERSION}"
+  }
   context = "./images/smf"
   contexts = {
     "base-open5gs:${OPEN5GS_VERSION}" = "target:base-open5gs"
   }
-  platforms = ["linux/amd64", "linux/arm64/v8"]
+  platforms = ["linux/amd64", "linux/arm64"]
   tags = [
     "${DOCKER_REGISTRY}/smf:${OPEN5GS_VERSION}",
-    "${GITHUB_REGISTRY}/smf:${OPEN5GS_VERSION}"
+    "${GITHUB_REGISTRY}/smf:${OPEN5GS_VERSION}",
+    "${FIVEG_MAG_REGISTRY}/smf:${OPEN5GS_VERSION}"
   ]
   labels = {
     "org.opencontainers.image.source" = "https://github.com/Borjis131/docker-open5gs"
@@ -177,14 +231,19 @@ target "smf" {
 }
 
 target "udm" {
+  args = {
+    UBUNTU_VERSION = "${UBUNTU_VERSION}"
+    OPEN5GS_VERSION = "${OPEN5GS_VERSION}"
+  }
   context = "./images/udm"
   contexts = {
     "base-open5gs:${OPEN5GS_VERSION}" = "target:base-open5gs"
   }
-  platforms = ["linux/amd64", "linux/arm64/v8"]
+  platforms = ["linux/amd64", "linux/arm64"]
   tags = [
     "${DOCKER_REGISTRY}/udm:${OPEN5GS_VERSION}",
-    "${GITHUB_REGISTRY}/udm:${OPEN5GS_VERSION}"
+    "${GITHUB_REGISTRY}/udm:${OPEN5GS_VERSION}",
+    "${FIVEG_MAG_REGISTRY}/udm:${OPEN5GS_VERSION}"
   ]
   labels = {
     "org.opencontainers.image.source" = "https://github.com/Borjis131/docker-open5gs"
@@ -193,14 +252,19 @@ target "udm" {
 }
 
 target "udr" {
+  args = {
+    UBUNTU_VERSION = "${UBUNTU_VERSION}"
+    OPEN5GS_VERSION = "${OPEN5GS_VERSION}"
+  }
   context = "./images/udr"
   contexts = {
     "base-open5gs:${OPEN5GS_VERSION}" = "target:base-open5gs"
   }
-  platforms = ["linux/amd64", "linux/arm64/v8"]
+  platforms = ["linux/amd64", "linux/arm64"]
   tags = [
     "${DOCKER_REGISTRY}/udr:${OPEN5GS_VERSION}",
-    "${GITHUB_REGISTRY}/udr:${OPEN5GS_VERSION}"
+    "${GITHUB_REGISTRY}/udr:${OPEN5GS_VERSION}",
+    "${FIVEG_MAG_REGISTRY}/udr:${OPEN5GS_VERSION}"
   ]
   labels = {
     "org.opencontainers.image.source" = "https://github.com/Borjis131/docker-open5gs"
@@ -209,14 +273,19 @@ target "udr" {
 }
 
 target "upf" {
+  args = {
+    UBUNTU_VERSION = "${UBUNTU_VERSION}"
+    OPEN5GS_VERSION = "${OPEN5GS_VERSION}"
+  }
   context = "./images/upf"
   contexts = {
     "base-open5gs:${OPEN5GS_VERSION}" = "target:base-open5gs"
   }
-  platforms = ["linux/amd64", "linux/arm64/v8"]
+  platforms = ["linux/amd64", "linux/arm64"]
   tags = [
     "${DOCKER_REGISTRY}/upf:${OPEN5GS_VERSION}",
-    "${GITHUB_REGISTRY}/upf:${OPEN5GS_VERSION}"
+    "${GITHUB_REGISTRY}/upf:${OPEN5GS_VERSION}",
+    "${FIVEG_MAG_REGISTRY}/upf:${OPEN5GS_VERSION}"
   ]
   labels = {
     "org.opencontainers.image.source" = "https://github.com/Borjis131/docker-open5gs"
@@ -225,11 +294,16 @@ target "upf" {
 }
 
 target "webui" {
+  args = {
+    NODE_VERSION = "${NODE_VERSION}"
+    OPEN5GS_VERSION = "${OPEN5GS_VERSION}"
+  }
   context = "./images/webui"
-  platforms = ["linux/amd64", "linux/arm64/v8"]
+  platforms = ["linux/amd64", "linux/arm64"]
   tags = [
     "${DOCKER_REGISTRY}/webui:${OPEN5GS_VERSION}",
-    "${GITHUB_REGISTRY}/webui:${OPEN5GS_VERSION}"
+    "${GITHUB_REGISTRY}/webui:${OPEN5GS_VERSION}",
+    "${FIVEG_MAG_REGISTRY}/webui:${OPEN5GS_VERSION}"
   ]
   labels = {
     "org.opencontainers.image.source" = "https://github.com/Borjis131/docker-open5gs"

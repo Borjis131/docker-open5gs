@@ -12,9 +12,11 @@ ARG DEBIAN_FRONTEND="noninteractive"
 # install dependencies
 RUN apt-get update && apt-get install git -y
 
-# clone the specific open5gs version and install webui
-RUN git clone --depth 1 --branch=${OPEN5GS_VERSION} https://github.com/open5gs/open5gs \
-    && cd open5gs/webui && npm ci && npm run build
+# clone the specific open5gs version
+RUN git clone --depth 1 --branch=${OPEN5GS_VERSION} https://github.com/open5gs/open5gs
+
+# install webui
+RUN cd open5gs/webui && npm ci && npm run build
 
 FROM node:${NODE_VERSION}-bookworm-slim
 

@@ -16,12 +16,20 @@ group "default" {
 }
 
 target "base-open5gs" {
+  args = {
+    UBUNTU_VERSION = "${UBUNTU_VERSION}"
+    OPEN5GS_VERSION = "${OPEN5GS_VERSION}"
+  }
   context = "./images/base-open5gs"
   tags = ["base-open5gs:${OPEN5GS_VERSION}"]
   output = ["type=image"]
 }
 
 target "amf" {
+  args = {
+    UBUNTU_VERSION = "${UBUNTU_VERSION}"
+    OPEN5GS_VERSION = "${OPEN5GS_VERSION}"
+  }
   context = "./images/amf"
   contexts = {
     "base-open5gs:${OPEN5GS_VERSION}" = "target:base-open5gs"
@@ -31,6 +39,10 @@ target "amf" {
 }
 
 target "ausf" {
+  args = {
+    UBUNTU_VERSION = "${UBUNTU_VERSION}"
+    OPEN5GS_VERSION = "${OPEN5GS_VERSION}"
+  }
   context = "./images/ausf"
   contexts = {
     "base-open5gs:${OPEN5GS_VERSION}" = "target:base-open5gs"
@@ -40,6 +52,10 @@ target "ausf" {
 }
 
 target "bsf" {
+  args = {
+    UBUNTU_VERSION = "${UBUNTU_VERSION}"
+    OPEN5GS_VERSION = "${OPEN5GS_VERSION}"
+  }
   context = "./images/bsf"
   contexts = {
     "base-open5gs:${OPEN5GS_VERSION}" = "target:base-open5gs"
@@ -49,6 +65,10 @@ target "bsf" {
 }
 
 target "nrf" {
+  args = {
+    UBUNTU_VERSION = "${UBUNTU_VERSION}"
+    OPEN5GS_VERSION = "${OPEN5GS_VERSION}"
+  }
   context = "./images/nrf"
   contexts = {
     "base-open5gs:${OPEN5GS_VERSION}" = "target:base-open5gs"
@@ -58,6 +78,10 @@ target "nrf" {
 }
 
 target "nssf" {
+  args = {
+    UBUNTU_VERSION = "${UBUNTU_VERSION}"
+    OPEN5GS_VERSION = "${OPEN5GS_VERSION}"
+  }
   context = "./images/nssf"
   contexts = {
     "base-open5gs:${OPEN5GS_VERSION}" = "target:base-open5gs"
@@ -67,6 +91,10 @@ target "nssf" {
 }
 
 target "pcf" {
+  args = {
+    UBUNTU_VERSION = "${UBUNTU_VERSION}"
+    OPEN5GS_VERSION = "${OPEN5GS_VERSION}"
+  }
   context = "./images/pcf"
   contexts = {
     "base-open5gs:${OPEN5GS_VERSION}" = "target:base-open5gs"
@@ -76,6 +104,10 @@ target "pcf" {
 }
 
 target "scp" {
+  args = {
+    UBUNTU_VERSION = "${UBUNTU_VERSION}"
+    OPEN5GS_VERSION = "${OPEN5GS_VERSION}"
+  }
   context = "./images/scp"
   contexts = {
     "base-open5gs:${OPEN5GS_VERSION}" = "target:base-open5gs"
@@ -85,6 +117,10 @@ target "scp" {
 }
 
 target "sepp" {
+  args = {
+    UBUNTU_VERSION = "${UBUNTU_VERSION}"
+    OPEN5GS_VERSION = "${OPEN5GS_VERSION}"
+  }
   context = "./images/sepp"
   contexts = {
     "base-open5gs:${OPEN5GS_VERSION}" = "target:base-open5gs"
@@ -94,6 +130,10 @@ target "sepp" {
 }
 
 target "smf" {
+  args = {
+    UBUNTU_VERSION = "${UBUNTU_VERSION}"
+    OPEN5GS_VERSION = "${OPEN5GS_VERSION}"
+  }
   context = "./images/smf"
   contexts = {
     "base-open5gs:${OPEN5GS_VERSION}" = "target:base-open5gs"
@@ -103,6 +143,10 @@ target "smf" {
 }
 
 target "udm" {
+  args = {
+    UBUNTU_VERSION = "${UBUNTU_VERSION}"
+    OPEN5GS_VERSION = "${OPEN5GS_VERSION}"
+  }
   context = "./images/udm"
   contexts = {
     "base-open5gs:${OPEN5GS_VERSION}" = "target:base-open5gs"
@@ -112,6 +156,10 @@ target "udm" {
 }
 
 target "udr" {
+  args = {
+    UBUNTU_VERSION = "${UBUNTU_VERSION}"
+    OPEN5GS_VERSION = "${OPEN5GS_VERSION}"
+  }
   context = "./images/udr"
   contexts = {
     "base-open5gs:${OPEN5GS_VERSION}" = "target:base-open5gs"
@@ -121,6 +169,10 @@ target "udr" {
 }
 
 target "upf" {
+  args = {
+    UBUNTU_VERSION = "${UBUNTU_VERSION}"
+    OPEN5GS_VERSION = "${OPEN5GS_VERSION}"
+  }
   context = "./images/upf"
   contexts = {
     "base-open5gs:${OPEN5GS_VERSION}" = "target:base-open5gs"
@@ -130,6 +182,10 @@ target "upf" {
 }
 
 target "webui" {
+  args = {
+    NODE_VERSION = "${NODE_VERSION}"
+    OPEN5GS_VERSION = "${OPEN5GS_VERSION}"
+  }
   context = "./images/webui"
   tags = ["webui:${OPEN5GS_VERSION}"]
   output = ["type=image"]
