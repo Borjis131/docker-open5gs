@@ -56,7 +56,7 @@ target "amf" {
   platforms = ["linux/amd64", "linux/arm64"]
   tags = [
     "${DOCKER_REGISTRY}/amf:${OPEN5GS_VERSION}",
-    "${DOCKER_REGISTRY}/amf:latest"
+    "${DOCKER_REGISTRY}/amf:latest",
     "${GITHUB_REGISTRY}/amf:${OPEN5GS_VERSION}",
     "${GITHUB_REGISTRY}/amf:latest",
     "${FIVEG_MAG_REGISTRY}/amf:${OPEN5GS_VERSION}",
