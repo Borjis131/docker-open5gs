@@ -6,9 +6,13 @@ This repository contains the Dockerfiles, Docker Compose files and Helm charts t
 
 The repository uses the same release version tags as Open5GS, so to use an specific Open5GS version just select the appropiate tag.
 
-The Docker images are available for `amd64/x86-64` and `arm64/v8`:
+The Docker images are available for `amd64/x86-64` and `arm64`:
 - in DockerHub `borieher/<nf_name>:<open5gs_version>`
 - in GitHub Container Registry `ghcr.io/borjis131/<nf_name>:<open5gs_version>`
+
+> [!TIP]
+> You can use the tag `latest` to download the latest docker-open5gs version available.
+> Currently latest tag points to `v2.7.2`
 
 The Helm charts are available:
 - in DockerHub `registry-1.docker.io/borieher/<chart_name> --version <chart_version>`
