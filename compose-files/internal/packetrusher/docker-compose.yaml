@@ -225,6 +225,9 @@ services:
       - ALL
     depends_on:
       - amf
+      - smf
+      - pcf
+      - udr
 
 networks:
   open5gs:

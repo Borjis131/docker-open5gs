@@ -200,6 +200,9 @@ services:
         target: /UERANSIM/config/gnb.yaml
     depends_on:
       - amf
+      - smf
+      - pcf
+      - udr
 
   ue1:
     container_name: ue1

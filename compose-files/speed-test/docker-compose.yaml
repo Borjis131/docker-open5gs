@@ -223,6 +223,9 @@ services:
       - ALL
     depends_on:
       - amf
+      - smf
+      - pcf
+      - udr
 
   iperf:
     container_name: iperf

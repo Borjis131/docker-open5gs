@@ -298,6 +298,9 @@ services:
       - ALL
     depends_on:
       - v-amf
+      - v-smf
+      - v-pcf
+      - h-udr
 
 networks:
   open5gs:
