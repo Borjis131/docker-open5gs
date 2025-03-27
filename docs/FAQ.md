@@ -97,6 +97,14 @@ ping -I uesimtun0 8.8.8.8
 
 ## How to use the PacketRusher container
 
+### gtp5g kernel dependency
+
+The project uses [PacketRusher](https://github.com/HewlettPackard/PacketRusher) using the packetrusher image from [docker-packetrusher](https://github.com/Borjis131/docker-packetrusher).
+
+Check [docker-packetrusher](https://github.com/Borjis131/docker-packetrusher) and follow the section `Important notes` to use this image. This image depends on a kernel module being installed on the host machine, the `free5gc's gtp5g kernel module`.
+
+### Using the UE's connection
+
 You can use the emulated UE connection by using the VRF.
 
 Check the logs of the PacketRusher container to see the VRF identifier:

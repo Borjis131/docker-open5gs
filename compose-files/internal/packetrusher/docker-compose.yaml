@@ -210,7 +210,7 @@ services:
 
   packetrusher:
     container_name: packetrusher
-    image: "ghcr.io/borjis131/packetrusher:main"
+    image: "ghcr.io/borjis131/packetrusher:20250225"
     command: "--config /PacketRusher/config/packetrusher.yaml ue"
     restart: unless-stopped
     networks:
