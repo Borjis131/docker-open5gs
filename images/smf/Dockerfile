@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 
 # global build-time arguments for FROM statements
-ARG OPEN5GS_VERSION="v2.7.2"
+ARG OPEN5GS_VERSION="v2.7.4"
 ARG UBUNTU_VERSION="jammy"
 
 FROM base-open5gs:${OPEN5GS_VERSION} AS builder
@@ -13,7 +13,7 @@ ARG DEBIAN_FRONTEND="noninteractive"
 
 # install dependencies
 RUN apt-get update && apt-get install libgnutls28-dev libgcrypt-dev libtalloc-dev \
-    libnghttp2-dev libmicrohttpd-dev libcurl4-gnutls-dev libyaml-dev libsctp-dev libidn11-dev -y
+    libnghttp2-dev libmicrohttpd-dev libcurl4-gnutls-dev libyaml-dev libsctp-dev libidn-dev -y
 
 # copy executable, default config and libs
 COPY --from=builder /open5gs/install/bin/open5gs-smfd /usr/local/bin/open5gs-smfd

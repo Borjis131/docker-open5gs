@@ -1,5 +1,5 @@
 variable "OPEN5GS_VERSION" {
-  default = "v2.7.2"
+  default = "v2.7.4"
 }
 
 variable "UBUNTU_VERSION" {

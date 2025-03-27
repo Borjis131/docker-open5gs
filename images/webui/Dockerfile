@@ -6,7 +6,7 @@ ARG NODE_VERSION="20"
 FROM node:${NODE_VERSION}-bookworm AS builder
 
 # build-time arguments for builder
-ARG OPEN5GS_VERSION="v2.7.2"
+ARG OPEN5GS_VERSION="v2.7.4"
 ARG DEBIAN_FRONTEND="noninteractive"
 
 # install dependencies
