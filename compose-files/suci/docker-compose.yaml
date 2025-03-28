@@ -1,0 +1,276 @@
+services:
+  db:
+    container_name: db
+    image: "mongo:${MONGODB_VERSION}"
+    command: "mongod --bind_ip 0.0.0.0 --port 27017"
+    networks:
+      open5gs:
+        aliases:
+          - db.open5gs.org
+    volumes:
+      - db_data:/data/db
+      - db_config:/data/configdb
+    ports:
+      - "0.0.0.0:27017:27017/tcp"
+
+  nrf:
+    container_name: nrf
+    image: "nrf:${OPEN5GS_VERSION}"
+    build:
+      context: ../../images/nrf
+      args:
+        - OPEN5GS_VERSION=${OPEN5GS_VERSION}
+        - UBUNTU_VERSION=${UBUNTU_VERSION}
+    command: "-c /etc/open5gs/custom/nrf.yaml"
+    networks:
+      open5gs:
+        aliases:
+          - nrf.open5gs.org
+    configs:
+      - source: nrf_config
+        target: /etc/open5gs/custom/nrf.yaml
+
+  ausf:
+    container_name: ausf
+    image: "ausf:${OPEN5GS_VERSION}"
+    build:
+      context: ../../images/ausf
+      args:
+        - OPEN5GS_VERSION=${OPEN5GS_VERSION}
+        - UBUNTU_VERSION=${UBUNTU_VERSION}
+    command: "-c /etc/open5gs/custom/ausf.yaml"
+    networks:
+      open5gs:
+        aliases:
+          - ausf.open5gs.org
+    configs:
+      - source: ausf_config
+        target: /etc/open5gs/custom/ausf.yaml
+    depends_on:
+      - nrf
+
+  udm:
+    container_name: udm
+    image: "udm:${OPEN5GS_VERSION}"
+    build:
+      context: ../../images/udm
+      args:
+        - OPEN5GS_VERSION=${OPEN5GS_VERSION}
+        - UBUNTU_VERSION=${UBUNTU_VERSION}
+    command: "-c /etc/open5gs/custom/udm.yaml"
+    networks:
+      open5gs:
+        aliases:
+          - udm.open5gs.org
+    configs:
+      - source: udm_config
+        target: /etc/open5gs/custom/udm.yaml
+    volumes:
+      - ../../configs/suci/hnet:/hnet:ro
+    depends_on:
+      - nrf
+
+  udr:
+    container_name: udr
+    image: "udr:${OPEN5GS_VERSION}"
+    build:
+      context: ../../images/udr
+      args:
+        - OPEN5GS_VERSION=${OPEN5GS_VERSION}
+        - UBUNTU_VERSION=${UBUNTU_VERSION}
+    command: "-c /etc/open5gs/custom/udr.yaml"
+    restart: unless-stopped
+    networks:
+      open5gs:
+        aliases:
+          - udr.open5gs.org
+    configs:
+      - source: udr_config
+        target: /etc/open5gs/custom/udr.yaml
+    depends_on:
+      - db
+      - nrf
+
+  nssf:
+    container_name: nssf
+    image: "nssf:${OPEN5GS_VERSION}"
+    build:
+      context: ../../images/nssf
+      args:
+        - OPEN5GS_VERSION=${OPEN5GS_VERSION}
+        - UBUNTU_VERSION=${UBUNTU_VERSION}
+    command: "-c /etc/open5gs/custom/nssf.yaml"
+    networks:
+      open5gs:
+        aliases:
+          - nssf.open5gs.org
+    configs:
+      - source: nssf_config
+        target: /etc/open5gs/custom/nssf.yaml
+    depends_on:
+      - nrf
+
+  bsf:
+    container_name: bsf
+    image: "bsf:${OPEN5GS_VERSION}"
+    build:
+      context: ../../images/bsf
+      args:
+        - OPEN5GS_VERSION=${OPEN5GS_VERSION}
+        - UBUNTU_VERSION=${UBUNTU_VERSION}
+    command: "-c /etc/open5gs/custom/bsf.yaml"
+    networks:
+      open5gs:
+        aliases:
+          - bsf.open5gs.org
+    configs:
+      - source: bsf_config
+        target: /etc/open5gs/custom/bsf.yaml
+    depends_on:
+      - nrf
+
+  pcf:
+    container_name: pcf
+    image: "pcf:${OPEN5GS_VERSION}"
+    build:
+      context: ../../images/pcf
+      args:
+        - OPEN5GS_VERSION=${OPEN5GS_VERSION}
+        - UBUNTU_VERSION=${UBUNTU_VERSION}
+    command: "-c /etc/open5gs/custom/pcf.yaml"
+    restart: unless-stopped
+    networks:
+      open5gs:
+        aliases:
+          - pcf.open5gs.org
+    configs:
+      - source: pcf_config
+        target: /etc/open5gs/custom/pcf.yaml
+    depends_on:
+      - db
+      - nrf
+
+  amf:
+    container_name: amf
+    image: "amf:${OPEN5GS_VERSION}"
+    build:
+      context: ../../images/amf
+      args:
+        - OPEN5GS_VERSION=${OPEN5GS_VERSION}
+        - UBUNTU_VERSION=${UBUNTU_VERSION}
+    command: "-c /etc/open5gs/custom/amf.yaml"
+    networks:
+      open5gs:
+        aliases:
+          - amf.open5gs.org
+    configs:
+      - source: amf_config
+        target: /etc/open5gs/custom/amf.yaml
+    depends_on:
+      - nrf
+
+  smf:
+    container_name: smf
+    image: "smf:${OPEN5GS_VERSION}"
+    build:
+      context: ../../images/smf
+      args:
+        - OPEN5GS_VERSION=${OPEN5GS_VERSION}
+        - UBUNTU_VERSION=${UBUNTU_VERSION}
+    command: "-c /etc/open5gs/custom/smf.yaml"
+    networks:
+      open5gs:
+        aliases:
+          - smf.open5gs.org
+    configs:
+      - source: smf_config
+        target: /etc/open5gs/custom/smf.yaml
+    depends_on:
+      - nrf
+
+  upf:
+    container_name: upf
+    image: "upf:${OPEN5GS_VERSION}"
+    build:
+      context: ../../images/upf
+      args:
+        - OPEN5GS_VERSION=${OPEN5GS_VERSION}
+        - UBUNTU_VERSION=${UBUNTU_VERSION}
+    command: "-c /etc/open5gs/custom/upf.yaml"
+    networks:
+      open5gs:
+        aliases:
+          - upf.open5gs.org
+    configs:
+      - source: upf_config
+        target: /etc/open5gs/custom/upf.yaml
+    privileged: true
+    cap_add:
+      - NET_ADMIN
+    depends_on:
+      - smf
+
+  packetrusher:
+    container_name: packetrusher
+    image: "ghcr.io/borjis131/packetrusher:20250225"
+    command: "--config /PacketRusher/config/packetrusher.yaml ue"
+    restart: unless-stopped
+    networks:
+      open5gs:
+        aliases:
+          - gnb.packetrusher.org
+    configs:
+      - source: packetrusher_config
+        target: /PacketRusher/config/packetrusher.yaml
+    privileged: true
+    cap_add:
+      - ALL
+    depends_on:
+      - amf
+      - smf
+      - pcf
+      - udr
+
+networks:
+  open5gs:
+    name: open5gs
+    driver: bridge
+    driver_opts:
+      com.docker.network.bridge.name: br-ogs
+    ipam:
+      config:
+        - subnet: 10.33.33.0/24
+
+volumes:
+  db_data:
+    name: open5gs_db_data
+    labels:
+      org.open5gs.mongodb_version: ${MONGODB_VERSION}
+  db_config:
+    name: open5gs_db_config
+    labels:
+      org.open5gs.mongodb_version: ${MONGODB_VERSION}
+
+configs:
+  nrf_config:
+    file: ../../configs/suci/nrf.yaml
+  ausf_config:
+    file: ../../configs/suci/ausf.yaml
+  udm_config:
+    file: ../../configs/suci/udm.yaml
+  udr_config:
+    file: ../../configs/suci/udr.yaml
+  nssf_config:
+    file: ../../configs/suci/nssf.yaml
+  bsf_config:
+    file: ../../configs/suci/bsf.yaml
+  pcf_config:
+    file: ../../configs/suci/pcf.yaml
+  amf_config:
+    file: ../../configs/suci/amf.yaml
+  smf_config:
+    file: ../../configs/suci/smf.yaml
+  upf_config:
+    file: ../../configs/suci/upf.yaml
+  packetrusher_config:
+    file: ../../configs/suci/packetrusher.yaml

@@ -1,0 +1,16 @@
+db_uri: mongodb://db.open5gs.org/open5gs
+
+logger:
+  file:
+    path: /var/log/open5gs/udr.log
+
+global:
+
+udr:
+  sbi:
+    server:
+      - address: udr.open5gs.org
+        port: 80
+    client:
+      nrf:
+        - uri: http://nrf.open5gs.org:80

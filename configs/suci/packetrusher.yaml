@@ -1,0 +1,49 @@
+gnodeb:
+  controlif:
+    ip: "gnb.packetrusher.org"
+    port: 38412
+  dataif:
+    ip: "gnb.packetrusher.org"
+    port: 2152
+  plmnlist:
+    mcc: "001"
+    mnc: "01"
+    tac: "000001"
+    gnbid: "000008"
+  slicesupportlist:
+    sst: "01"
+    sd: "000001"
+
+ue:
+  hplmn:
+    mcc: "001"
+    mnc: "01"
+  msin: "1234567891"
+  key: "00000000000000000000000000000000"
+  opc: "00000000000000000000000000000000"
+  dnn: "internet"
+  snssai:
+    sst: 01
+    sd: "000001"
+  amf: "8000"
+  sqn: "00000000"
+  routingindicator: "0000"
+  protectionScheme: 1
+  homeNetworkPublicKeyID: 1
+  homeNetworkPublicKey: "e421686f6fb2d70e3fa28d940494095686c3179fef53514667a6ed106b8a7d3d"
+  integrity:
+    nia0: false
+    nia1: false
+    nia2: true
+    nia3: false
+  ciphering:
+    nea0: true
+    nea1: false
+    nea2: true
+    nea3: false
+
+amfif:
+  - ip: "amf.open5gs.org"
+    port: 38412
+logs:
+  level: 4

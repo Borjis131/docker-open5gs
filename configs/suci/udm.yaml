@@ -1,0 +1,33 @@
+logger:
+  file:
+    path: /var/log/open5gs/udm.log
+
+global:
+
+udm:
+  hnet:
+    - id: 1
+      scheme: 1
+      key: /hnet/curve25519-1.key
+    - id: 2
+      scheme: 2
+      key: /hnet/secp256r1-2.key
+    - id: 3
+      scheme: 1
+      key: /hnet/curve25519-3.key
+    - id: 4
+      scheme: 2
+      key: /hnet/secp256r1-4.key
+    - id: 5
+      scheme: 1
+      key: /hnet/curve25519-5.key
+    - id: 6
+      scheme: 2
+      key: /hnet/secp256r1-6.key
+  sbi:
+    server:
+      - address: udm.open5gs.org
+        port: 80
+    client:
+      nrf:
+        - uri: http://nrf.open5gs.org:80
