@@ -209,7 +209,7 @@ services:
 
   gnb:
     container_name: gnb
-    image: "ghcr.io/borjis131/gnb:v3.2.6"
+    image: "ghcr.io/borjis131/gnb:v3.2.7"
     command: "-c /UERANSIM/config/gnb.yaml"
     networks:
       open5gs:
@@ -226,7 +226,7 @@ services:
 
   ue:
     container_name: ue
-    image: "ghcr.io/borjis131/ue:v3.2.6"
+    image: "ghcr.io/borjis131/ue:v3.2.7"
     command: "-c /UERANSIM/config/ue.yaml"
     networks:
       open5gs:

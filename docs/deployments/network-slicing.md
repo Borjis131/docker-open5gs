@@ -24,7 +24,7 @@ sst: 1
 sd: 000002
 ```
 
-When this configuration is received in the 5G Core, the AMF uses it to select the appropiate SMF. 
+When this configuration is received in the 5G Core, the AMF uses it to select the appropiate SMF.
 
 SMF1 is configured to serve the `sst: 1` and `sd: 000001`.
 
