@@ -12,7 +12,7 @@ The Docker images are available for `amd64/x86-64` and `arm64`:
 
 > [!TIP]
 > You can use the tag `latest` to download the latest docker-open5gs version available.
-> Currently latest tag points to `v2.7.4`
+> Currently latest tag points to `v2.7.5`
 
 The Helm charts are available:
 - in DockerHub `registry-1.docker.io/borieher/<chart_name> --version <chart_version>`
@@ -31,7 +31,7 @@ The `.env` file is used to build the images using Make or Docker Compose, as wel
 `OPEN5GS_VERSION` is the version of Open5GS to use.
 - Accepted values are the tags, branches or commit IDs used in the Open5GS project
 - Default value: v2.7.4
-- Tested values: v2.5.5, v2.5.6, v2.5.8, v2.6.1, v2.6.2, v2.6.3, v2.6.4, v2.6.6, v2.7.0, v2.7.1, v2.7.2, v2.7.4
+- Tested values: v2.5.5, v2.5.6, v2.5.8, v2.6.1, v2.6.2, v2.6.3, v2.6.4, v2.6.6, v2.7.0, v2.7.1, v2.7.2, v2.7.5
 
 `UBUNTU_VERSION` is the version of the ubuntu Docker image used as base for the containers.
 - Accepted values are the tags used by Ubuntu in Docker Hub

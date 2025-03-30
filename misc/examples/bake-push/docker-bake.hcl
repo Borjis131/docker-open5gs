@@ -1,5 +1,5 @@
 variable "OPEN5GS_VERSION" {
-  default = "v2.7.4"
+  default = "v2.7.5"
 }
 
 variable "UBUNTU_VERSION" {
@@ -36,7 +36,7 @@ target "base-open5gs" {
   platforms = ["linux/amd64", "linux/arm64"]
   tags = [
     "base-open5gs:${OPEN5GS_VERSION}",
-    "base-open5gs:latest"
+    #"base-open5gs:latest"
   ]
   labels = {
     "org.opencontainers.image.source" = "https://github.com/Borjis131/docker-open5gs"
@@ -60,7 +60,7 @@ target "amf" {
     "${GITHUB_REGISTRY}/amf:${OPEN5GS_VERSION}",
     "${GITHUB_REGISTRY}/amf:latest",
     "${FIVEG_MAG_REGISTRY}/amf:${OPEN5GS_VERSION}",
-    "${FIVEG_MAG_REGISTRY}/amf:latest"
+    #"${FIVEG_MAG_REGISTRY}/amf:latest"
   ]
   labels = {
     "org.opencontainers.image.source" = "https://github.com/Borjis131/docker-open5gs"
@@ -84,7 +84,7 @@ target "ausf" {
     "${GITHUB_REGISTRY}/ausf:${OPEN5GS_VERSION}",
     "${GITHUB_REGISTRY}/ausf:latest",
     "${FIVEG_MAG_REGISTRY}/ausf:${OPEN5GS_VERSION}",
-    "${FIVEG_MAG_REGISTRY}/ausf:latest"
+    #"${FIVEG_MAG_REGISTRY}/ausf:latest"
   ]
   labels = {
     "org.opencontainers.image.source" = "https://github.com/Borjis131/docker-open5gs"
@@ -108,7 +108,7 @@ target "bsf" {
     "${GITHUB_REGISTRY}/bsf:${OPEN5GS_VERSION}",
     "${GITHUB_REGISTRY}/bsf:latest",
     "${FIVEG_MAG_REGISTRY}/bsf:${OPEN5GS_VERSION}",
-    "${FIVEG_MAG_REGISTRY}/bsf:latest"
+    #"${FIVEG_MAG_REGISTRY}/bsf:latest"
   ]
   labels = {
     "org.opencontainers.image.source" = "https://github.com/Borjis131/docker-open5gs"
@@ -132,7 +132,7 @@ target "nrf" {
     "${GITHUB_REGISTRY}/nrf:${OPEN5GS_VERSION}",
     "${GITHUB_REGISTRY}/nrf:latest",
     "${FIVEG_MAG_REGISTRY}/nrf:${OPEN5GS_VERSION}",
-    "${FIVEG_MAG_REGISTRY}/nrf:latest"
+    #"${FIVEG_MAG_REGISTRY}/nrf:latest"
   ]
   labels = {
     "org.opencontainers.image.source" = "https://github.com/Borjis131/docker-open5gs"
@@ -156,7 +156,7 @@ target "nssf" {
     "${GITHUB_REGISTRY}/nssf:${OPEN5GS_VERSION}",
     "${GITHUB_REGISTRY}/nssf:latest",
     "${FIVEG_MAG_REGISTRY}/nssf:${OPEN5GS_VERSION}",
-    "${FIVEG_MAG_REGISTRY}/nssf:latest"
+    #"${FIVEG_MAG_REGISTRY}/nssf:latest"
   ]
   labels = {
     "org.opencontainers.image.source" = "https://github.com/Borjis131/docker-open5gs"
@@ -180,7 +180,7 @@ target "pcf" {
     "${GITHUB_REGISTRY}/pcf:${OPEN5GS_VERSION}",
     "${GITHUB_REGISTRY}/pcf:latest",
     "${FIVEG_MAG_REGISTRY}/pcf:${OPEN5GS_VERSION}",
-    "${FIVEG_MAG_REGISTRY}/pcf:latest"
+    #"${FIVEG_MAG_REGISTRY}/pcf:latest"
   ]
   labels = {
     "org.opencontainers.image.source" = "https://github.com/Borjis131/docker-open5gs"
@@ -204,7 +204,7 @@ target "scp" {
     "${GITHUB_REGISTRY}/scp:${OPEN5GS_VERSION}",
     "${GITHUB_REGISTRY}/scp:latest",
     "${FIVEG_MAG_REGISTRY}/scp:${OPEN5GS_VERSION}",
-    "${FIVEG_MAG_REGISTRY}/scp:latest"
+    #"${FIVEG_MAG_REGISTRY}/scp:latest"
   ]
   labels = {
     "org.opencontainers.image.source" = "https://github.com/Borjis131/docker-open5gs"
@@ -228,7 +228,7 @@ target "sepp" {
     "${GITHUB_REGISTRY}/sepp:${OPEN5GS_VERSION}",
     "${GITHUB_REGISTRY}/sepp:latest",
     "${FIVEG_MAG_REGISTRY}/sepp:${OPEN5GS_VERSION}",
-    "${FIVEG_MAG_REGISTRY}/sepp:latest"
+    #"${FIVEG_MAG_REGISTRY}/sepp:latest"
   ]
   labels = {
     "org.opencontainers.image.source" = "https://github.com/Borjis131/docker-open5gs"
@@ -252,7 +252,7 @@ target "smf" {
     "${GITHUB_REGISTRY}/smf:${OPEN5GS_VERSION}",
     "${GITHUB_REGISTRY}/smf:latest",
     "${FIVEG_MAG_REGISTRY}/smf:${OPEN5GS_VERSION}",
-    "${FIVEG_MAG_REGISTRY}/smf:latest"
+    #"${FIVEG_MAG_REGISTRY}/smf:latest"
   ]
   labels = {
     "org.opencontainers.image.source" = "https://github.com/Borjis131/docker-open5gs"
@@ -276,7 +276,7 @@ target "udm" {
     "${GITHUB_REGISTRY}/udm:${OPEN5GS_VERSION}",
     "${GITHUB_REGISTRY}/udm:latest",
     "${FIVEG_MAG_REGISTRY}/udm:${OPEN5GS_VERSION}",
-    "${FIVEG_MAG_REGISTRY}/udm:latest"
+    #"${FIVEG_MAG_REGISTRY}/udm:latest"
   ]
   labels = {
     "org.opencontainers.image.source" = "https://github.com/Borjis131/docker-open5gs"
@@ -300,7 +300,7 @@ target "udr" {
     "${GITHUB_REGISTRY}/udr:${OPEN5GS_VERSION}",
     "${GITHUB_REGISTRY}/udr:latest",
     "${FIVEG_MAG_REGISTRY}/udr:${OPEN5GS_VERSION}",
-    "${FIVEG_MAG_REGISTRY}/udr:latest"
+    #"${FIVEG_MAG_REGISTRY}/udr:latest"
   ]
   labels = {
     "org.opencontainers.image.source" = "https://github.com/Borjis131/docker-open5gs"
@@ -324,7 +324,7 @@ target "upf" {
     "${GITHUB_REGISTRY}/upf:${OPEN5GS_VERSION}",
     "${GITHUB_REGISTRY}/upf:latest",
     "${FIVEG_MAG_REGISTRY}/upf:${OPEN5GS_VERSION}",
-    "${FIVEG_MAG_REGISTRY}/upf:latest"
+    #"${FIVEG_MAG_REGISTRY}/upf:latest"
   ]
   labels = {
     "org.opencontainers.image.source" = "https://github.com/Borjis131/docker-open5gs"
@@ -345,7 +345,7 @@ target "webui" {
     "${GITHUB_REGISTRY}/webui:${OPEN5GS_VERSION}",
     "${GITHUB_REGISTRY}/webui:latest",
     "${FIVEG_MAG_REGISTRY}/webui:${OPEN5GS_VERSION}",
-    "${FIVEG_MAG_REGISTRY}/webui:latest"
+    #"${FIVEG_MAG_REGISTRY}/webui:latest"
   ]
   labels = {
     "org.opencontainers.image.source" = "https://github.com/Borjis131/docker-open5gs"
