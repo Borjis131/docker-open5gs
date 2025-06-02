@@ -2,9 +2,9 @@ apiVersion: v2
 
 name: udm
 description: Open5GS UDM Helm chart
-version: 0.3.2
+version: 0.3.3
 type: application
-appVersion: "v2.7.2"
+appVersion: "v2.7.5"
 
 icon: https://open5gs.org/assets/img/open5gs-logo.png
 

@@ -3,7 +3,7 @@
 image:
   registry: ghcr.io
   repository: borjis131/smf
-  tag: "v2.7.2"
+  tag: "v2.7.5"
   pullPolicy: IfNotPresent
 
 services:
@@ -16,6 +16,8 @@ services:
 config: {}
 
 global:
+  networkFunctions:
+    upf: []
   containerPorts:
     sbi: 80
   mobileNetwork:

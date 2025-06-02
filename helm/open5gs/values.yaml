@@ -85,6 +85,8 @@
       #dataNetwork:
 
 global:
+  networkFunctions:
+    upf: []
   containerPorts:
     db: 27017
     sbi: 80

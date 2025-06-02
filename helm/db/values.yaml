@@ -3,7 +3,7 @@
 image:
   registry: docker.io
   repository: mongo
-  tag: "6.0"
+  tag: "8.0"
   pullPolicy: IfNotPresent
 
 services:

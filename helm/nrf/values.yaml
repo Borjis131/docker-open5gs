@@ -3,7 +3,7 @@
 image:
   registry: ghcr.io
   repository: borjis131/nrf
-  tag: "v2.7.2"
+  tag: "v2.7.5"
   pullPolicy: IfNotPresent
 
 config: {}

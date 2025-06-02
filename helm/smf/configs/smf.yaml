@@ -23,6 +23,13 @@ smf:
         advertise: {{ .Values.services.pfcp.loadBalancerIP }}
         {{- end }}
     client:
+      {{- $upf := .Values.global.networkFunctions.upf | default list }}
+      {{- if $upf }}
+      upf:
+        {{- range $upf }}
+        - address: {{ . }}
+        {{- end }}
+      {{- end }}
   gtpu:
     server:
       - dev: eth0
