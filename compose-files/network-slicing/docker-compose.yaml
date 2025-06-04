@@ -200,7 +200,8 @@ services:
         target: /UERANSIM/config/gnb.yaml
     depends_on:
       - amf
-      - smf
+      - smf1
+      - smf2
       - pcf
       - udr
 
