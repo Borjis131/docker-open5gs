@@ -21,6 +21,8 @@ smf:
       - dev: eth0
         {{- if eq .Values.services.pfcp.type "LoadBalancer" }}
         advertise: {{ .Values.services.pfcp.loadBalancerIP }}
+        {{- else if eq .Values.services.pfcp.type "ClusterIP" }}
+        advertise: {{ include "common.names.fullname" . }}-service-pfcp
         {{- end }}
     client:
       {{- $upf := .Values.global.networkFunctions.upf | default list }}

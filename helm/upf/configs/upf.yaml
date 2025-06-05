@@ -8,6 +8,9 @@ upf:
   pfcp:
     server:
       - dev: eth0
+        {{- if eq .Values.services.pfcp.type "ClusterIP" }}
+        advertise: {{ include "common.names.fullname" . }}-service-pfcp
+        {{- end }}
     client:
       smf:
         {{- if eq .Release.Name "smf" }}
