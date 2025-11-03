@@ -116,14 +116,14 @@ services:
       args:
         - OPEN5GS_VERSION=${OPEN5GS_VERSION}
         - UBUNTU_VERSION=${UBUNTU_VERSION}
-    command: "-c /open5gs/config/bsf.yaml"
+    command: "-c /etc/open5gs/custom/bsf.yaml"
     networks:
       open5gs:
         aliases:
           - bsf.open5gs.org
     configs:
       - source: bsf_config
-        target: /open5gs/config/bsf.yaml
+        target: /etc/open5gs/custom/bsf.yaml
     depends_on:
       - nrf
 
